@@ -4,8 +4,6 @@
  *
  * Runs on port 8081 - serves marketing/preorder pages
  * Launches Valentine's Day 2026
- *
- * FOR THE KIDS! 💛
  */
 
 import express from 'express';
@@ -65,7 +63,6 @@ app.listen(PORT, () => {
    👑 Royalty Cards: $1,000 (Only 4 available!)
    🃏 Joker: Random drawing from ALL pre-orders
 
-   💛 FOR THE KIDS! - 60% to Shriners Children's Hospital
 💕 ═══════════════════════════════════════════════════════════════ 💕
   `);
 });

@@ -4,8 +4,6 @@
  *
  * Run from dating-platform/backend: node ../marketing/preorder/server.js
  * OR: cd marketing/preorder && npm start
- *
- * FOR THE KIDS! 💛
  */
 
 import express from 'express';
@@ -45,7 +43,6 @@ app.listen(PORT, () => {
    👑 Royalty Cards: $1,000 (Only 4 available!)
    🃏 Joker: Random drawing from ALL pre-orders
 
-   💛 FOR THE KIDS!
 💕 ═══════════════════════════════════════════════════════════════ 💕
   `);
 });

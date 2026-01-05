@@ -1,5 +1,5 @@
 /**
- * 🛡️ PRODUCTION AGE-GATING MIDDLEWARE - FOR THE KIDS
+ * 🛡️ PRODUCTION AGE-GATING MIDDLEWARE
  *
  * ZERO-TOLERANCE POLICY:
  * - Default to SAFE mode if any doubt

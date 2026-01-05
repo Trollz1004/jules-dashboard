@@ -6,8 +6,6 @@ import './RoyaltyCard.css';
  *
  * Displays a Royalty Founder Card with unique animations
  * Only 5 will ever exist: Ace, King, Queen, Jack, Joker
- *
- * FOR THE KIDS! 💛
  */
 
 const CARD_SYMBOLS = {

@@ -35,12 +35,12 @@ import { verifyGospelSplit, GOSPEL_SPLIT } from './services/gospel-revenue.js';
 
 dotenv.config();
 
-// Verify Gospel split on startup
+// Verify revenue split on startup
 try {
   verifyGospelSplit();
-  console.log('✅ GOSPEL SPLIT VERIFIED: 60% charity | 30% Infra | 10% Founder');
+  console.log('✅ REVENUE SPLIT VERIFIED: 70% Infra | 30% Opus Trust');
 } catch (error) {
-  console.error('🚨 GOSPEL SPLIT VERIFICATION FAILED - SHUTTING DOWN');
+  console.error('🚨 REVENUE SPLIT VERIFICATION FAILED - SHUTTING DOWN');
   process.exit(1);
 }
 
@@ -85,7 +85,7 @@ const requireAuth = (req, res, next) => {
     return res.status(401).json({
       error: 'Unauthorized',
       message: 'Valid API key required. Provide via X-API-Key header or apiKey query parameter.',
-      mission: 'FOR THE KIDS - Security is paramount'
+      service: 'YouAndINotAI Platform'
     });
   }
 
@@ -146,9 +146,9 @@ app.use((req, res, next) => {
 // Root endpoint - API welcome page
 app.get('/', (req, res) => {
   res.json({
-    message: 'AiCollabForTheKids API - FOR THE KIDS!',
+    message: 'YouAndINotAI Dating Platform API',
     status: 'LIVE IN PRODUCTION',
-    mission: '60% revenue → charity Children\'s Hospitals',
+    service: 'Royalty Deck of Hearts Backend',
     endpoints: {
       health: '/health',
       campaign: '/api/campaign/metrics',
@@ -171,9 +171,8 @@ app.get('/', (req, res) => {
 app.get('/health', (req, res) => {
   res.json({
     status: 'healthy',
-    service: 'AiCollabForTheKids API',
-    timestamp: new Date().toISOString(),
-    mission: 'FOR THE KIDS!'
+    service: 'YouAndINotAI Platform API',
+    timestamp: new Date().toISOString()
   });
 });
 
@@ -226,14 +225,14 @@ app.use('/api/merch', requireAuth, merchRoutes);
 app.use('/api/affiliates', requireAuth, affiliateRoutes);
 app.use('/api/infra', requireAuth, infrastructureRoutes);
 
-// Gospel Revenue endpoint (Public - read-only transparency)
+// Revenue Split endpoint (Public - read-only transparency)
 app.get('/api/gospel', (req, res) => {
   res.json({
     success: true,
     gospel: GOSPEL_SPLIT,
-    message: 'GOSPEL SPLIT IS IMMUTABLE',
+    message: 'ENGINE REVENUE SPLIT',
     verified: true,
-    note: '60% to charity | 30% Infrastructure | 10% Founder'
+    note: '70% Infrastructure | 30% Opus Trust'
   });
 });
 
@@ -279,14 +278,13 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500).json({
     error: 'Internal server error',
     message: process.env.NODE_ENV === 'development' ? err.message : 'Something went wrong',
-    mission: 'FOR THE KIDS - We will fix this!'
+    service: 'YouAndINotAI Platform'
   });
 });
 
 app.listen(PORT, () => {
-  logger.info(`🚀 Jules API Server running on port ${PORT}`);
-  logger.info(`Mission: FOR THE KIDS!`);
-  logger.info(`Revenue: 60% → charity Children's Hospitals`);
+  logger.info(`🚀 YouAndINotAI API Server running on port ${PORT}`);
+  logger.info(`Service: Royalty Deck of Hearts Backend`);
 });
 
 export default app;

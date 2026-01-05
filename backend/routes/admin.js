@@ -47,7 +47,7 @@ router.use(requireAdmin);
 
 // GET /api/admin/status
 router.get('/status', async (req, res) => {
-  res.json({ success: true, status: 'operational', mission: 'FOR THE KIDS' });
+  res.json({ success: true, status: 'operational', service: 'YouAndINotAI Platform' });
 });
 
 // GET /api/admin/security - Security audit status endpoint
@@ -91,7 +91,7 @@ router.get('/security', async (req, res) => {
       coppa: 'compliant',
       fosta_sesta: 'compliant'
     },
-    mission: 'FOR THE KIDS - 60% to charity'
+    service: 'YouAndINotAI Dating Platform'
   });
 });
 

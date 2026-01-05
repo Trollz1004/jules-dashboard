@@ -1,6 +1,6 @@
-# FOR THE KIDS - Production API Dockerfile
-# GOSPEL V1.3: 60/30/10
-# Cache bust: 2025-12-15-v5-gemini3pro-sdk-update
+# YouAndINotAI Dating Platform - Production API Dockerfile
+# Royalty Deck of Hearts Backend
+# Cache bust: 2026-01-05
 
 FROM node:20-slim
 
