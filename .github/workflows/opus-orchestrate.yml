@@ -1,0 +1,97 @@
+# OPUS Fleet Orchestration Workflow
+# T5500 Command Center - #forthekids
+name: OPUS Orchestrate
+
+on:
+  workflow_dispatch:
+    inputs:
+      task:
+        description: 'Task to run (health, cross-ollama, sync-env, compliance-sweep)'
+        required: true
+        default: 'health'
+        type: choice
+        options:
+          - health
+          - cross-ollama
+          - sync-env
+          - compliance-sweep
+          - full-sweep
+
+env:
+  SABERTOOTH_HOST: ${{ secrets.SABERTOOTH_HOST }}
+  NODE9020_HOST: ${{ secrets.NODE9020_HOST }}
+  DUALXEON_HOST: ${{ secrets.DUALXEON_HOST }}
+
+jobs:
+  health-check:
+    if: ${{ github.event.inputs.task == 'health' || github.event.inputs.task == 'full-sweep' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fleet Health Check
+        run: |
+          echo "=== OPUS FLEET HEALTH CHECK ==="
+          echo "Sabertooth: $SABERTOOTH_HOST"
+          echo "9020: $NODE9020_HOST"
+          echo "DualXeon: $DUALXEON_HOST"
+          echo ""
+          echo "Note: Direct LAN access requires self-hosted runner"
+          echo "Configure runners on Sabertooth/9020 for full fleet access"
+
+  cross-ollama:
+    if: ${{ github.event.inputs.task == 'cross-ollama' || github.event.inputs.task == 'full-sweep' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cross-Node Ollama Test Info
+        run: |
+          echo "=== CROSS-NODE OLLAMA TEST ==="
+          echo "This test requires self-hosted runners on fleet nodes"
+          echo ""
+          echo "Fleet topology:"
+          echo "  - Sabertooth (192.168.0.104:11434): mistral, llama3.2, codellama:7b"
+          echo "  - 9020 (192.168.0.103:11434): llama3.2:3b, phi3"
+          echo "  - DualXeon (192.168.0.105:11434): pending setup"
+
+  sync-env:
+    if: ${{ github.event.inputs.task == 'sync-env' || github.event.inputs.task == 'full-sweep' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Sync Environment Variables
+        run: |
+          echo "=== ENV SYNC ==="
+          echo "Verifying .env.example exists..."
+          if [ -f ".env.example" ]; then
+            echo "Found .env.example"
+            grep -E "^[A-Z_]+=" .env.example | cut -d= -f1 | sort
+          else
+            echo "No .env.example found"
+          fi
+
+  compliance-sweep:
+    if: ${{ github.event.inputs.task == 'compliance-sweep' || github.event.inputs.task == 'full-sweep' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Gospel V2.0 Compliance Sweep
+        run: |
+          echo "=== GOSPEL V2.0 COMPLIANCE SWEEP ==="
+          echo "Checking for forbidden terms in FOR-PROFIT repo..."
+          echo ""
+
+          # Forbidden terms for FOR-PROFIT (YouAndINotAI)
+          FORBIDDEN="charity|pediatric|100% to|for the kids|donation|nonprofit"
+
+          echo "Scanning for violations..."
+          VIOLATIONS=$(grep -r -i -E "$FORBIDDEN" --include="*.js" --include="*.ts" --include="*.tsx" --include="*.html" --include="*.md" . 2>/dev/null | grep -v node_modules | grep -v ".git" | head -50 || true)
+
+          if [ -n "$VIOLATIONS" ]; then
+            echo "VIOLATIONS FOUND:"
+            echo "$VIOLATIONS"
+            echo ""
+            echo "Total: $(echo "$VIOLATIONS" | wc -l) files with forbidden terms"
+          else
+            echo "NO VIOLATIONS - Repo is compliant"
+          fi
+
+          echo ""
+          echo "Allowed terms: DAO Treasury, Revenue, Subscription, Human-Verified"
