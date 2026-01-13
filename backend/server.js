@@ -30,6 +30,7 @@ import affiliateRoutes from './routes/affiliates.js';
 import infrastructureRoutes from './routes/infrastructure.js';
 import aiStoreWebhookRoutes from './routes/ai-store-webhook.js';
 import plaidIdentityRoutes from './routes/plaid-identity.js';
+import treasuryRoutes from './routes/treasury.js';
 
 // Services
 import { DAO_REVENUE_CONFIG } from './services/dao-revenue.js';
@@ -206,6 +207,7 @@ app.use('/api/verify-human', humanVerificationRoutes);
 app.use('/api/webhooks', webhookRoutes); // Has own signature validation
 app.use('/api/ai-store-webhook', aiStoreWebhookRoutes); // AI Solutions Store webhook handler
 app.use('/api/plaid-identity', plaidIdentityRoutes); // Plaid identity verification
+treasuryRoutes(app);
 
 // PROTECTED ROUTES - Require API key authentication
 app.use('/api/jules', requireAuth, julesRoutes);

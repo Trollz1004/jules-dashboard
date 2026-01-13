@@ -1,0 +1,14 @@
+name: youandinotai
+services:
+  - name: youandinotai-api
+    path: "."
+    startCommand: "npm run start:prod"
+    healthCheckPath: "/health"
+    env:
+      - key: NODE_ENV
+        value: production
+      - key: DAO_TREASURY_PERCENT
+        value: "0.05"
+      - key: LEDGER_PATH
+        value: "./data/payments_ledger.json"
+# Stripe/Plaid secrets are set in Railway project variables (live).

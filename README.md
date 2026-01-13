@@ -87,23 +87,23 @@ A comprehensive, production-ready dating platform solution designed for entrepre
 
 ```
 dating-platform/
-├── frontend/           # Landing pages and static assets
-├── backend/            # Node.js API server
-│   ├── routes/         # API route handlers
-│   ├── services/       # Business logic
-│   ├── middleware/     # Auth, validation, etc.
-│   └── prisma/         # Database schema
-├── admin/              # React admin dashboard
-│   ├── src/
-│   │   ├── components/ # UI components
-│   │   ├── pages/      # Dashboard views
-│   │   └── services/   # API integration
-├── database/
-│   ├── prisma/         # Schema definitions
-│   ├── migrations/     # Database migrations
-│   └── seed.js         # Sample data
-├── docker-compose.yml  # Container orchestration
-└── docs/               # Documentation
+|- frontend/           # Landing pages and static assets
+|- backend/            # Node.js API server
+|  |- routes/          # API route handlers
+|  |- services/        # Business logic
+|  |- middleware/      # Auth, validation, etc.
+|  |- prisma/          # Database schema
+|- admin/              # React admin dashboard
+|  |- src/
+|     |- components/   # UI components
+|     |- pages/        # Dashboard views
+|     |- services/     # API integration
+|- database/
+|  |- prisma/          # Schema definitions
+|  |- migrations/      # Database migrations
+|  |- seed.js          # Sample data
+|- docker-compose.yml  # Container orchestration
+|- docs/               # Documentation
 ```
 
 ## Documentation
