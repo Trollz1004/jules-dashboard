@@ -1,11 +1,11 @@
 /**
  * ═══════════════════════════════════════════════════════════════════════════════
- * MERCH STORE API ROUTES - FOR THE KIDS
+ * MERCH STORE API ROUTES - DAO Treasury
  * ═══════════════════════════════════════════════════════════════════════════════
  *
  * Anti-AI Merchandise Store with Gospel-Compliant Revenue Split
  *
- * 60% → Verified Pediatric Charities (CHARITY_EIN=PENDING_VERIFICATION)
+ * 100% DAO Treasury
  * 30% → Infrastructure & Operations
  * 10% → Founder
  *
@@ -20,7 +20,7 @@
 import express from 'express';
 import crypto from 'crypto';
 import prisma from '../prisma/client.js';
-import { calculateGospelSplit, GOSPEL_SPLIT, recordTransaction } from '../services/gospel-revenue.js';
+import { calculateRevenueAllocation, DAO_REVENUE_CONFIG, recordTransaction } from '../services/dao-revenue.js';
 
 const router = express.Router();
 
@@ -65,11 +65,10 @@ router.get('/products', async (req, res) => {
       success: true,
       count: formattedProducts.length,
       products: formattedProducts,
-      mission: 'FOR THE KIDS',
-      gospelSplit: {
-        charity: GOSPEL_SPLIT.CHARITY_PERCENTAGE,
-        charityName: GOSPEL_SPLIT.CHARITY_NAME,
-        charityEIN: GOSPEL_SPLIT.CHARITY_EIN
+      daoModel: '100% DAO Treasury',
+      daoRevenue: {
+        treasury: DAO_REVENUE_CONFIG.TREASURY_PERCENTAGE,
+        platformName: DAO_REVENUE_CONFIG.PLATFORM_NAME
       }
     });
 
@@ -129,7 +128,7 @@ router.get('/products/:id', async (req, res) => {
           inStock: variant.stockQuantity > 0
         }))
       },
-      mission: 'FOR THE KIDS'
+      daoModel: '100% DAO Treasury'
     };
 
     res.json(response);
@@ -155,7 +154,7 @@ router.post('/checkout', async (req, res) => {
     error: 'Stripe checkout deprecated - Migrated to Square (December 2025)',
     message: 'Please use Square checkout links directly from ai-solutions.store',
     alternative: '/api/merch/square-checkout',
-    mission: 'FOR THE KIDS'
+    daoModel: '100% DAO Treasury'
   });
 });
 
@@ -169,7 +168,7 @@ router.post('/webhook', async (req, res) => {
     success: false,
     error: 'Stripe webhook deprecated - Migrated to Square (December 2025)',
     alternative: '/api/ai-store-webhook',
-    mission: 'FOR THE KIDS'
+    daoModel: '100% DAO Treasury'
   });
 });
 
@@ -237,7 +236,7 @@ router.get('/session/:sessionId', async (req, res) => {
     success: false,
     error: 'Stripe session lookup deprecated - Migrated to Square (December 2025)',
     message: 'Square payments use direct checkout links, no session lookup needed',
-    mission: 'FOR THE KIDS'
+    daoModel: '100% DAO Treasury'
   });
 });
 
@@ -253,10 +252,8 @@ router.get('/config', (req, res) => {
       locationId: process.env.SQUARE_MERCH_LOCATION_ID,
       environment: 'production'
     },
-    gospel: {
-      charityPercentage: 60,
-      infrastructurePercentage: 30,
-      founderPercentage: 10
+    daoRevenue: {
+      treasuryPercentage: 100
     }
   });
 });
@@ -310,7 +307,7 @@ router.post('/square-checkout', async (req, res) => {
       const totalAmount = Number(payment.amountMoney.amount) / 100;
 
       // Calculate Gospel split
-      const split = calculateGospelSplit(totalAmount);
+      const allocation = calculateRevenueAllocation(totalAmount);
 
       // Record transaction
       const transaction = await prisma.transaction.create({
@@ -319,9 +316,9 @@ router.post('/square-checkout', async (req, res) => {
           source: 'SQUARE_MERCH',
           projectType: 'EXISTING',
           description: `Merch Purchase: ${productName}`,
-          charityAmount: split.charity.amount.toString(),
-          opsAmount: split.infrastructure.amount.toString(),
-          founderAmount: split.founder.amount.toString(),
+          treasuryAmount: allocation.treasury.amount.toString(),
+          opsAmount: allocation.treasury.amount.toString(),
+          founderAmount: allocation.treasury.amount.toString(),
           metadata: {
             paymentId: payment.id,
             productName,
@@ -336,10 +333,10 @@ router.post('/square-checkout', async (req, res) => {
         paymentId: payment.id,
         product: productName,
         total: `$${totalAmount.toFixed(2)}`,
-        charity: `$${split.charity.amount}`,
+        charity: `$${allocation.treasury.amount}`,
         email: customer.email,
         transactionId: transaction.id,
-        mission: 'FOR THE KIDS'
+        daoModel: '100% DAO Treasury'
       });
 
       res.json({
@@ -347,14 +344,14 @@ router.post('/square-checkout', async (req, res) => {
         paymentId: payment.id,
         receiptUrl: payment.receiptUrl,
         total: totalAmount.toFixed(2),
-        gospelSplit: {
-          charity: split.charity.amount.toString(),
-          charityPercentage: split.charity.percentage,
-          infrastructure: split.infrastructure.amount.toString(),
-          founder: split.founder.amount.toString()
+        daoRevenue: {
+          charity: allocation.treasury.amount.toString(),
+          treasuryPercentage: allocation.treasury.percentage,
+          infrastructure: allocation.treasury.amount.toString(),
+          founder: allocation.treasury.amount.toString()
         },
         transactionId: transaction.id,
-        message: `Thank you! $${split.charity.amount} going to kids!`
+        message: `Thank you! $${allocation.treasury.amount} going to kids!`
       });
 
     } else {

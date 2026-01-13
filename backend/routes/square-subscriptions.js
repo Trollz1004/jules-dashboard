@@ -10,19 +10,19 @@
  * ✅ Webhook processing - ACTIVE (for existing transactions)
  * ❌ Dating checkout - DISABLED
  * 
- * FOR THE KIDS - Protecting the 60% Verified Pediatric Charities allocation
+ * DAO Treasury
  * Created: ${new Date().toISOString()}
  */
 
 import express from 'express';
 import { PrismaClient } from '@prisma/client';
-import { calculateGospelSplit, recordTransaction, GOSPEL_SPLIT, verifyGospelSplit } from '../services/gospel-revenue.js';
+import { calculateRevenueAllocation, recordTransaction, DAO_REVENUE_CONFIG } from '../services/dao-revenue.js';
 
 const router = express.Router();
 const prisma = new PrismaClient();
 
 // Verify Gospel split on route load
-verifyGospelSplit();
+// DAO revenue model - no verification needed;
 
 // Square API configuration - GETTER FUNCTIONS
 const getSquareBaseUrl = () => process.env.SQUARE_ENVIRONMENT === 'production'
@@ -50,10 +50,10 @@ router.post('/create-checkout', async (req, res) => {
       reason: 'Securing compliant high-risk processor (PaymentCloud)',
       eta: '2-3 weeks',
       alternative: 'Visit ai-solutions.store for AI tools and merchandise',
-      mission: '60% of ALL revenue still goes to Verified Pediatric Charities'
+      mission: '100% DAO Treasury
     },
     support: 'admin@yourplatform.com',
-    forTheKids: true
+    daoRevenue: true
   });
 });
 
@@ -82,7 +82,7 @@ router.get('/status', async (req, res) => {
           tier: subscription.tier,
           status: subscription.status,
           expiresAt: subscription.expiresAt,
-          gospelSplit: GOSPEL_SPLIT
+          daoRevenue: DAO_REVENUE_CONFIG
         }
       });
     }
@@ -133,7 +133,7 @@ router.post('/webhook', express.raw({ type: 'application/json' }), async (req, r
       const amountCents = payment.amount_money.amount;
       
       // Calculate Gospel Split
-      const split = calculateGospelSplit(amountCents);
+      const split = calculateRevenueAllocation(amountCents);
       
       // Record transaction
       await recordTransaction({
@@ -150,7 +150,7 @@ router.post('/webhook', express.raw({ type: 'application/json' }), async (req, r
       console.log('✅ Legacy payment processed:', {
         paymentId: payment.id,
         total: amountCents,
-        charity: split.charity.amount
+        charity: allocation.treasury.amount
       });
     }
     
@@ -190,8 +190,8 @@ router.get('/health', (req, res) => {
     dating: 'DISABLED',
     merch: 'ACTIVE',
     stripe: 'ACTIVE',
-    gospelSplit: GOSPEL_SPLIT,
-    forTheKids: true
+    daoRevenue: DAO_REVENUE_CONFIG,
+    daoRevenue: true
   });
 });
 

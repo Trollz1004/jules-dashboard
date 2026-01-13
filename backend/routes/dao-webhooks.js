@@ -7,13 +7,13 @@
  * 2. Ai-Solutions.Store Marketplace DAO (AIMARKET token)
  * 3. Self-Host Marketplace DAO (Stripe subscriptions)
  *
- * GOSPEL V1.3: 60/30/10 IMMUTABLE
- * FOR THE KIDS. ALWAYS.
+ * DAO Revenue Model: 100% DAO Treasury
+ * DAO Treasury
  */
 
 import express from 'express';
 import crypto from 'crypto';
-import { recordTransaction, GOSPEL_SPLIT } from '../services/gospel-revenue.js';
+import { recordTransaction, DAO_REVENUE_CONFIG, calculateRevenueAllocation } from '../services/dao-revenue.js';
 import sgMail from '@sendgrid/mail';
 
 const router = express.Router();
@@ -108,13 +108,11 @@ async function handleDatingPayment(payment) {
     await sendAIStoreDeliveryEmail(payment, aiStoreProduct);
   }
 
-  // Record revenue with Gospel split
-  const split = calculateGospelSplit(amount);
+  // Record revenue to DAO Treasury
+  const allocation = calculateRevenueAllocation(amount);
 
-  console.log(`[PAYMENT] Payment received: $${amount}`);
-  console.log(`  - To Kids: $${split.charity}`);
-  console.log(`  - Infrastructure: $${split.infra}`);
-  console.log(`  - Founder: $${split.founder}`);
+  console.log(`[PAYMENT] Payment received: ${amount}`);
+  console.log(`  - DAO Treasury: ${allocation.treasury.amount}`);
 
   // Forward to Dating DAO service
   try {
@@ -330,8 +328,8 @@ async function handleStripeInvoice(invoice) {
 
   console.log(`[SELF-HOST] Invoice paid: $${amount}`);
 
-  const split = calculateGospelSplit(amount);
-  console.log(`  - To Kids: $${split.charity}`);
+  const allocation = calculateRevenueAllocation(amount);
+  console.log(`  - DAO Treasury: ${allocation.treasury.amount}`);
 
   await recordTransaction({
     amount,
@@ -375,7 +373,7 @@ async function sendAIStoreDeliveryEmail(payment, product) {
     </ol>
   </div>
   <p>Product: ${product.name}<br>Amount: $${amount}<br>Order ID: ${orderId}</p>
-  <hr><p style="font-size: 12px; color: #666;"><em>60% of this purchase supports Verified Pediatric Charities.</em></p>
+  <hr><p style="font-size: 12px; color: #666;"><em>100% DAO Treasury
 </body></html>`;
 
   } else if (product.type === 'consultation') {
@@ -397,7 +395,7 @@ async function sendAIStoreDeliveryEmail(payment, product) {
     </ul>
   </div>
   <p>Order ID: ${orderId} | Amount: $${amount}</p>
-  <hr><p style="font-size: 12px; color: #666;"><em>60% of this purchase supports Verified Pediatric Charities.</em></p>
+  <hr><p style="font-size: 12px; color: #666;"><em>100% DAO Treasury
 </body></html>`;
 
   } else {
@@ -450,7 +448,7 @@ cp .env.example .env</pre>
 
   <hr style="margin: 30px 0;">
   <p style="font-size: 12px; color: #666;">Order: ${product.name} | $${amount} | ${orderId} | ${date}</p>
-  <p style="font-size: 12px; color: #666;"><em>60% of this purchase supports Verified Pediatric Charities. FOR THE KIDS!</em></p>
+  <p style="font-size: 12px; color: #666;"><em>100% DAO Treasury
 </body></html>`;
   }
 
@@ -507,13 +505,7 @@ async function notifyOwnerViaTwilio(customerEmail, product, orderId) {
 // HELPER FUNCTIONS
 // ═══════════════════════════════════════════════════════════════════════════════
 
-function calculateGospelSplit(amount) {
-  return {
-    charity: Math.round(amount * 0.60 * 100) / 100,
-    infra: Math.round(amount * 0.30 * 100) / 100,
-    founder: Math.round(amount * 0.10 * 100) / 100
-  };
-}
+// Using imported calculateRevenueAllocation from dao-revenue.js
 
 function verifySquareSignature(body, signature, secret) {
   if (!signature || !secret) return true; // Skip in dev
@@ -539,13 +531,11 @@ router.get('/health', (req, res) => {
       'POST /webhook/square-merch',
       'POST /webhook/stripe'
     ],
-    gospel: {
-      version: 'V1.3',
-      split: '60/30/10',
-      charity: '60%',
-      immutable: true
+    daoRevenue: {
+      model: '100% DAO Treasury',
+      version: 'V2.0'
     },
-    forTheKids: true
+    daoRevenue: true
   });
 });
 

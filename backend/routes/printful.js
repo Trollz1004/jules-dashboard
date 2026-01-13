@@ -1,6 +1,6 @@
 /**
  * ═══════════════════════════════════════════════════════════════════════════════
- * PRINTFUL WEBHOOK HANDLER - FOR THE KIDS
+ * PRINTFUL WEBHOOK HANDLER - DAO Treasury
  * ═══════════════════════════════════════════════════════════════════════════════
  *
  * Handles Printful order fulfillment events and integrates with Gospel split
@@ -11,8 +11,8 @@
  * - order_put_hold → Log alert
  * - stock_updated → Log inventory change
  *
- * Gospel Compliance: All fulfillment fees are split 60/30/10
- * - 60% → charity Children's Hospitals (CHARITY_EIN=PENDING_VERIFICATION)
+ * DAO Revenue Model: 100% DAO Treasury
+ * - 100% DAO Treasury
  * - 30% → Infrastructure & Operations
  * - 10% → Founder
  *
@@ -23,7 +23,7 @@
 import express from 'express';
 import crypto from 'crypto';
 import prisma from '../prisma/client.js';
-import { calculateGospelSplit, recordTransaction } from '../services/gospel-revenue.js';
+import { calculateRevenueAllocation, recordTransaction } from '../services/dao-revenue.js';
 
 const router = express.Router();
 
@@ -102,7 +102,7 @@ async function handlePackageShipped(event) {
       printfulOrderId: order_id,
       carrier: carrier,
       trackingNumber: tracking_number,
-      mission: 'FOR THE KIDS'
+      mission: 'DAO Treasury'
     });
 
     return updatedOrder;
@@ -368,7 +368,7 @@ router.post('/', express.json(), async (req, res) => {
     res.json({
       received: true,
       event: type,
-      mission: 'FOR THE KIDS'
+      mission: 'DAO Treasury'
     });
 
   } catch (error) {
@@ -423,7 +423,7 @@ router.post('/fulfillment-fee', express.json(), async (req, res) => {
     }
 
     // Calculate Gospel split for fulfillment fee
-    const split = calculateGospelSplit(fee);
+    const allocation = calculateRevenueAllocation(fee);
 
     // Create transaction record
     const transaction = await prisma.transaction.create({
@@ -432,9 +432,9 @@ router.post('/fulfillment-fee', express.json(), async (req, res) => {
         source: 'PRINTFUL_FULFILLMENT',
         projectType: 'EXISTING',
         description: `Printful Fulfillment Fee for Order ${orderId}`,
-        charityAmount: split.charity.amount.toString(),
-        opsAmount: split.infrastructure.amount.toString(),
-        founderAmount: split.founder.amount.toString(),
+        treasuryAmount: allocation.treasury.amount.toString(),
+        opsAmount: allocation.treasury.amount.toString(),
+        founderAmount: allocation.treasury.amount.toString(),
         metadata: {
           orderId: order.id,
           orderVisibleId: order.visibleId,
@@ -444,7 +444,7 @@ router.post('/fulfillment-fee', express.json(), async (req, res) => {
       }
     });
 
-    // Record in gospel ledger
+    // Record in DAO ledger
     recordTransaction(
       fee,
       'PRINTFUL_FULFILLMENT',
@@ -457,10 +457,10 @@ router.post('/fulfillment-fee', express.json(), async (req, res) => {
     console.log('💰 FULFILLMENT FEE RECORDED:', {
       orderId: order.visibleId,
       fee: `$${fee.toFixed(2)}`,
-      charityAmount: `$${split.charity.amount}`,
-      charityName: split.charity.recipient,
+      treasuryAmount: `$${allocation.treasury.amount}`,
+      treasuryName: allocation.treasury.recipient,
       transactionId: transaction.id,
-      mission: 'FOR THE KIDS'
+      mission: 'DAO Treasury'
     });
 
     res.json({
@@ -468,13 +468,13 @@ router.post('/fulfillment-fee', express.json(), async (req, res) => {
       transactionId: transaction.id,
       orderId: order.visibleId,
       fee: fee.toFixed(2),
-      gospelSplit: {
-        charity: split.charity.amount.toString(),
-        charityName: split.charity.recipient,
-        infrastructure: split.infrastructure.amount.toString(),
-        founder: split.founder.amount.toString()
+      daoRevenue: {
+        charity: allocation.treasury.amount.toString(),
+        treasuryName: allocation.treasury.recipient,
+        infrastructure: allocation.treasury.amount.toString(),
+        founder: allocation.treasury.amount.toString()
       },
-      mission: 'FOR THE KIDS'
+      mission: 'DAO Treasury'
     });
 
   } catch (error) {
@@ -505,24 +505,17 @@ router.get('/test', async (req, res) => {
 
 router.get('/health', async (req, res) => {
   try {
-    // Verify Gospel split is still intact
-    const gspel = (await import('../services/gospel-revenue.js')).verifyGospelSplit();
-
     res.json({
       status: 'healthy',
       service: 'printful-webhook',
       timestamp: new Date().toISOString(),
-      gospelSplit: {
-        verified: gspel,
-        charity: '60%',
-        infrastructure: '30%',
-        founder: '10%'
-      },
-      mission: 'FOR THE KIDS'
+      daoRevenue: {
+        model: '100% DAO Treasury'
+      }
     });
 
   } catch (error) {
-    console.error('❌ HEALTH CHECK FAILED:', error);
+    console.error('HEALTH CHECK FAILED:', error);
     res.status(500).json({
       status: 'error',
       service: 'printful-webhook',
