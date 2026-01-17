@@ -178,20 +178,21 @@ router.post('/joker-drawing', async (req, res) => {
 
 /**
  * GET /api/preorder/revenue-split
- * Show the Gospel V1.3 revenue split
+ * Show the Gospel V1.4.1 SURVIVAL MODE revenue split
  */
 router.get('/revenue-split', async (req, res) => {
   res.json({
     success: true,
     data: {
       split: {
-        shrinersChildrensHospital: '60%',
-        platformInfrastructure: '30%',
-        founderSustainability: '10%'
+        verifiedPediatricCharities: '100%',
+        platformInfrastructure: '0%',
+        founderSustainability: '0%'
       },
       mission: 'FOR THE KIDS!',
       governance: 'All allocations governed by HeartDAO',
-      transparency: 'Every transaction on-chain and auditable'
+      transparency: 'Every transaction on-chain and auditable',
+      gospel: 'V1.4.1 SURVIVAL MODE'
     }
   });
 });

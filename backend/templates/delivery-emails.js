@@ -4,7 +4,7 @@
  * Production email system for digital product delivery
  * Each template includes detailed setup instructions and support links
  *
- * Gospel V1.3: 60% charity | 30% infrastructure | 10% founder
+ * Gospel V1.4.1 SURVIVAL MODE: 100% to verified pediatric charities
  * FOR THE KIDS. ALWAYS.
  */
 

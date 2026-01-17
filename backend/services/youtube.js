@@ -1,6 +1,6 @@
 /**
  * YouTube Service - Video upload for Claude Droid
- * FOR THE KIDS - 60% to charity Children's Hospitals
+ * FOR THE KIDS - 100% to verified pediatric charities
  *
  * Uses YouTube Data API v3 for uploading videos
  * Requires OAuth2 credentials from Google Cloud Console
@@ -247,7 +247,7 @@ export async function uploadVideo(options = {}) {
             requestBody: {
                 snippet: {
                     title: title || 'Claude Droid News Update',
-                    description: description || 'News update by Claude Droid. 60% of ad revenue goes to charity Children\'s Hospitals. #ForTheKids',
+                    description: description || 'News update by Claude Droid. 100% of ad revenue goes to verified pediatric charities. #ForTheKids',
                     tags: [...tags, 'ForTheKids', 'VerifiedPediatricCharities', 'ClaudeDroid', 'AINews'],
                     categoryId: categoryId
                 },

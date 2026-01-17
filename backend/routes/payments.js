@@ -199,7 +199,7 @@ router.get('/plans', (req, res) => {
         ]
       }
     ],
-    note: '60% of ALL revenue goes to charity Children\'s Hospitals!'
+    note: '100% of ALL revenue goes to verified pediatric charities!'
   });
 });
 

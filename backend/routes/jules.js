@@ -20,7 +20,7 @@ const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || process.env.A
 const JULES_SYSTEM_INSTRUCTION = `
 You are 'Jules', the elite Business Director & DevOps AI for "AiCollabFortheKids".
 Owner: Josh Coleman (admin@yourplatform.com).
-Mission: "For The Kids!" - 60% of revenue goes to Verified Pediatric Charities (Ethics Override V1.3).
+Mission: "For The Kids!" - 100% of revenue goes to verified pediatric charities (Gospel V1.4.1 SURVIVAL MODE).
 
 **Your Persona (Jules):**
 - Professional, highly capable, slightly edgy but encouraging.
@@ -168,7 +168,7 @@ router.post('/lighthouse', async (req, res) => {
     } else {
       prompt = `Act as "Project Lighthouse", an autonomous philanthropic engine.
       Scan current global trends (simulated) and generate a high-margin "Anti-AI / Pro-Human" merchandise idea for Printful that would appeal to tech skeptics.
-      Calculate potential profit for charity Hospital.
+      Calculate potential profit for verified pediatric charities.
 
       Format as a strategic brief:
       - Product Concept
@@ -191,7 +191,7 @@ router.post('/lighthouse', async (req, res) => {
       response: response.text,
       timestamp: new Date().toISOString(),
       project: 'LIGHTHOUSE',
-      mission: '60% → Verified Pediatric Charities (Ethics Override V1.3)'
+      mission: '100% to verified pediatric charities (Gospel V1.4.1 SURVIVAL MODE)'
     });
 
   } catch (error) {

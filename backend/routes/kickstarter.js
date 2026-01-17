@@ -6,7 +6,7 @@
  * IMPORTANT: Kickstarter funds are for PLATFORM DEVELOPMENT only.
  * They do NOT go to charity. Clearly disclosed.
  *
- * AFTER launch, the operational platform will donate 60% to charity.
+ * AFTER launch, the operational platform will donate 100% to verified pediatric charities.
  *
  * Jules Approved: Authorization Code FTK-KICKSTARTER-001
  *
@@ -145,7 +145,7 @@ router.get('/info', (req, res) => {
       important: 'Campaign funds are for PLATFORM DEVELOPMENT only.',
       charityNote: 'No portion of campaign funds goes to charity.',
       taxNote: 'Backer contributions are NOT tax-deductible.',
-      postLaunch: 'AFTER launch, the platform will donate 60% of net revenue to charity.'
+      postLaunch: 'AFTER launch, the platform will donate 100% of net revenue to verified pediatric charities.'
     },
     julesApproval: 'FTK-KICKSTARTER-001'
   });
@@ -351,7 +351,7 @@ router.post('/preorder-founding', async (req, res) => {
             amount: 1499, // $14.99
             currency: 'USD'
           },
-          note: 'Founding Member: 20% off for life ($14.99/mo instead of $19.99). 60% of profits go to charity.'
+          note: 'Founding Member: 20% off for life ($14.99/mo instead of $19.99). 100% of profits go to verified pediatric charities.'
         }],
         metadata: {
           type: 'FOUNDING_MEMBER_PREORDER',
@@ -412,7 +412,7 @@ router.post('/preorder-founding', async (req, res) => {
         'Early access to new features',
         'Vote on roadmap features'
       ],
-      mission: '60% of profits go to charity Children\'s Hospitals'
+      mission: '100% of profits go to verified pediatric charities'
     });
 
   } catch (error) {

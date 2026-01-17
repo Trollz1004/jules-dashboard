@@ -11,7 +11,7 @@ import crypto from 'crypto';
 // Contract ABIs (simplified for essential functions)
 const HEART_DAO_ABI = [
   "function distributeRevenue() external payable",
-  "function donateToShriners(string message) external payable",
+  "function donateToCharity(string message) external payable",
   "function isRoyaltyFounder(address) view returns (bool)",
   "function getRoyaltyStatus(address) view returns (bool, string)",
   "event RevenueDistributed(uint256 totalAmount, uint256 charityAmount, uint256 infraAmount, uint256 founderAmount, uint256 timestamp)"
@@ -100,9 +100,9 @@ class DAOService {
     const total = parseFloat(totalAmount);
     return {
       total,
-      charity: (total * 0.60).toFixed(2),      // 60% Shriners
-      infrastructure: (total * 0.30).toFixed(2), // 30% Platform
-      founder: (total * 0.10).toFixed(2)        // 10% Founder
+      charity: (total * 1.0).toFixed(2),      // 100% to verified pediatric charities
+      infrastructure: (0).toFixed(2), // 0% Platform (SURVIVAL MODE)
+      founder: (0).toFixed(2)        // 0% Founder (SURVIVAL MODE)
     };
   }
 }

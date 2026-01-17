@@ -81,8 +81,8 @@ async function sendWelcomeEmail(userEmail, userName = 'Friend') {
 
       <div class="mission-box">
         <h3>🎯 Our Mission: FOR THE KIDS</h3>
-        <p><strong>60% of every dollar we earn goes directly to verified pediatric charities.</strong></p>
-        <p>That's not marketing. That's Gospel V1.3 - our immutable law.</p>
+        <p><strong>100% of every dollar we earn goes directly to verified pediatric charities.</strong></p>
+        <p>That's not marketing. That's Gospel V1.4.1 SURVIVAL MODE - our immutable law.</p>
       </div>
 
       <p>Here's what you can do right now:</p>
@@ -95,7 +95,7 @@ async function sendWelcomeEmail(userEmail, userName = 'Friend') {
 
       <a href="https://jules-dashboard.pages.dev" class="button">Launch Dashboard</a>
 
-      <p>Every interaction you have with our platform generates revenue for children's hospitals. You're not just a user - you're a hero.</p>
+      <p>Every interaction you have with our platform generates revenue for verified pediatric charities. You're not just a user - you're a hero.</p>
 
       <p>Let's do this. <strong>FOR THE KIDS.</strong></p>
 
@@ -149,7 +149,7 @@ async function sendThankYouEmail(userEmail, userName = 'Hero', purchaseDetails =
       <p>Your purchase just triggered something beautiful:</p>
 
       <div class="impact-box">
-        <div class="stats">${charityAmount ? `$${charityAmount}` : '60%'}</div>
+        <div class="stats">${charityAmount ? `$${charityAmount}` : '100%'}</div>
         <p>Donated to Verified Pediatric Charities</p>
         <p><strong>Automatically. Transparently. Immutably.</strong></p>
       </div>
@@ -159,13 +159,13 @@ async function sendThankYouEmail(userEmail, userName = 'Hero', purchaseDetails =
         <h3>Purchase Details</h3>
         <p><strong>Item:</strong> ${item}</p>
         ${amount ? `<p><strong>Amount:</strong> $${amount}</p>` : ''}
-        ${charityAmount ? `<p><strong>To Charity:</strong> $${charityAmount} (60%)</p>` : ''}
+        ${charityAmount ? `<p><strong>To Charity:</strong> $${charityAmount} (100%)</p>` : ''}
       </div>
       ` : ''}
 
-      <p>This isn't just commerce. This is <strong>Gospel V1.3</strong> in action:</p>
+      <p>This isn't just commerce. This is <strong>Gospel V1.4.1 SURVIVAL MODE</strong> in action:</p>
       <ul>
-        <li>✅ 60% sent to children's hospitals (up from 50% in V1.2)</li>
+        <li>✅ 100% to verified pediatric charities</li>
         <li>✅ Founder took LESS so kids get MORE</li>
         <li>✅ Every transaction logged immutably on blockchain</li>
         <li>✅ Public receipts on S3 (coming soon)</li>
@@ -234,13 +234,13 @@ async function sendKickstarterPledgeEmail(userEmail, userName = 'Backer', pledge
         ${amount ? `<p><strong>Amount:</strong> $${amount}</p>` : ''}
         ${reward ? `<p><strong>Reward:</strong> ${reward}</p>` : ''}
         ${estimatedDelivery ? `<p><strong>Estimated Delivery:</strong> ${estimatedDelivery}</p>` : ''}
-        <p><strong>60% to Charity:</strong> ${amount ? `$${(amount * 0.6).toFixed(2)}` : 'Calculated at campaign end'}</p>
+        <p><strong>100% to Charity:</strong> ${amount ? `$${(amount * 1.0).toFixed(2)}` : 'Calculated at campaign end'}</p>
       </div>
 
       <h3>What Happens Next?</h3>
       <ol>
         <li><strong>Campaign Ends:</strong> We hit our goal (or die trying)</li>
-        <li><strong>Funds Released:</strong> 60% auto-sent to verified pediatric charities</li>
+        <li><strong>Funds Released:</strong> 100% to verified pediatric charities</li>
         <li><strong>Rewards Shipped:</strong> You get your merch/perks</li>
         <li><strong>Public Receipts:</strong> Every dollar tracked on blockchain</li>
       </ol>
@@ -252,7 +252,7 @@ async function sendKickstarterPledgeEmail(userEmail, userName = 'Backer', pledge
 
       <div class="social">
         <p><strong>Share on:</strong></p>
-        <a href="https://twitter.com/intent/tweet?text=I%20just%20backed%20AI%20Collab%20For%20The%20Kids%20-%2060%25%20to%20charity!">Twitter</a> |
+        <a href="https://twitter.com/intent/tweet?text=I%20just%20backed%20AI%20Collab%20For%20The%20Kids%20-%20100%25%20to%20charity!">Twitter</a> |
         <a href="https://www.facebook.com/sharer/sharer.php?u=https://kickstarter.com/projects/aicollabforthekids">Facebook</a> |
         <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://kickstarter.com/projects/aicollabforthekids">LinkedIn</a>
       </div>
@@ -272,7 +272,7 @@ async function sendKickstarterPledgeEmail(userEmail, userName = 'Backer', pledge
     </div>
     <div class="footer">
       <p>AI Does It All | Kickstarter Campaign</p>
-      <p>Gospel V1.3: 60% to Pediatric Charities</p>
+      <p>Gospel V1.4.1 SURVIVAL MODE: 100% to verified pediatric charities</p>
       <p><a href="https://kickstarter.com/projects/aicollabforthekids">View Campaign</a></p>
     </div>
   </div>
@@ -313,7 +313,7 @@ async function sendLaunchEmail(userEmail, userName = 'Friend', referralCode = ''
 <body>
   <div class="container">
     <div class="header">
-      <h1>We're Live: 60% Goes to Kids</h1>
+      <h1>We're Live: 100% Goes to Kids</h1>
     </div>
 
     <div style="padding: 30px 20px;">
@@ -330,9 +330,7 @@ async function sendLaunchEmail(userEmail, userName = 'Friend', referralCode = ''
       <h2>THE MISSION (SIMPLE):</h2>
 
       <div class="stats">
-        <p>💙 <strong>60%</strong> of every dollar we earn → Verified Pediatric Charities</p>
-        <p>🛠️ <strong>30%</strong> → Infrastructure (keeps the platform running)</p>
-        <p>👤 <strong>10%</strong> → Founder (Joshua Coleman)</p>
+        <p>💙 <strong>100%</strong> of every dollar we earn → Verified Pediatric Charities</p>
       </div>
 
       <p><strong>This isn't a promise. It's code.</strong></p>
@@ -348,11 +346,11 @@ async function sendLaunchEmail(userEmail, userName = 'Friend', referralCode = ''
       </div>
 
       <p><strong>2. BACK OUR KICKSTARTER</strong> ($5-$500)<br>
-      60% to Shriners Children's Hospital<br>
+      100% to verified pediatric charities<br>
       👉 <a href="https://kickstarter.com/projects/aicollabforthekids">View Kickstarter</a></p>
 
       <p><strong>3. BUY MERCH</strong> ($20-$50)<br>
-      T-shirts, hoodies, stickers • 60% of profit helps kids<br>
+      T-shirts, hoodies, stickers • 100% of profit helps kids<br>
       👉 <a href="https://square.link/u/9pCOK8aG">Shop Merch</a></p>
 
       <p><strong>4. SHARE WITH 3 FRIENDS</strong><br>
@@ -360,13 +358,13 @@ async function sendLaunchEmail(userEmail, userName = 'Friend', referralCode = ''
 
       <div class="divider"></div>
 
-      <h2>WHY 60% INSTEAD OF 50%?</h2>
+      <h2>WHY 100%?</h2>
 
       <p>On December 13, 2025, we upgraded to Gospel V1.4.1 SURVIVAL MODE - 100% to verified pediatric charities.</p>
 
-      <p><strong>The founder took 10% LESS so kids could get 10% MORE.</strong></p>
+      <p><strong>The founder took NOTHING so kids could get EVERYTHING.</strong></p>
 
-      <p>This is called "Ethics Override V1.3" - and it's permanent.</p>
+      <p>This is Gospel V1.4.1 SURVIVAL MODE - and it's permanent.</p>
 
       <div class="divider"></div>
 
@@ -374,7 +372,7 @@ async function sendLaunchEmail(userEmail, userName = 'Friend', referralCode = ''
 
       <p>We're asking you to use our AI platform, buy our merch, back our Kickstarter, or share our mission.</p>
 
-      <p>You're not giving to charity. You're purchasing products/services from a company that allocates 60% of profits to kids.</p>
+      <p>You're not giving to charity. You're purchasing products/services from a company that allocates 100% of profits to kids.</p>
 
       <p><strong>That's the difference.</strong></p>
 
@@ -387,7 +385,7 @@ async function sendLaunchEmail(userEmail, userName = 'Friend', referralCode = ''
       🏢 Trash or Treasure Online Recycler LLC<br>
       📧 EIN: 33-4655313</p>
 
-      <p style="font-size: 13px; color: #666;"><em>P.S. Every action you take generates revenue for children's hospitals. Choose one. Do it today.</em></p>
+      <p style="font-size: 13px; color: #666;"><em>P.S. Every action you take generates revenue for verified pediatric charities. Choose one. Do it today.</em></p>
     </div>
 
     <div class="footer">
@@ -400,7 +398,7 @@ async function sendLaunchEmail(userEmail, userName = 'Friend', referralCode = ''
       <p><a href="https://aidoesitall.website/privacy">Privacy Policy</a></p>
 
       <p style="font-size: 10px;">This is a marketing email. You received this because you signed up at aidoesitall.website.<br>
-      Gospel V1.3: 60% of all profits allocated to Verified Pediatric Charities.</p>
+      Gospel V1.4.1 SURVIVAL MODE: 100% to verified pediatric charities.</p>
 
       <p style="font-size: 10px;">FOR THE KIDS. ALWAYS.</p>
 
@@ -413,7 +411,7 @@ async function sendLaunchEmail(userEmail, userName = 'Friend', referralCode = ''
 
   return sendEmail({
     to: userEmail,
-    subject: "We're live: 60% of everything goes to kids",
+    subject: "We're live: 100% of everything goes to kids",
     html
   });
 }
