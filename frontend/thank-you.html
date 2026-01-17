@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome, Founding Member! - YouAndINotAI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 50px 40px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .badge {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #f5576c, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .subtitle {
+            font-size: 1.3em;
+            color: #a0a0a0;
+            margin-bottom: 30px;
+        }
+        .confirmation-box {
+            background: rgba(80, 200, 120, 0.1);
+            border: 1px solid rgba(80, 200, 120, 0.3);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        .confirmation-box h3 {
+            color: #50c878;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        .price-locked {
+            font-size: 2em;
+            font-weight: bold;
+            color: #f5576c;
+            margin: 10px 0;
+        }
+        .features {
+            text-align: left;
+            margin: 30px 0;
+        }
+        .features li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .features li:last-child {
+            border-bottom: none;
+        }
+        .check {
+            color: #50c878;
+            font-size: 1.2em;
+        }
+        .next-steps {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+        .next-steps h3 {
+            margin-bottom: 15px;
+            color: #f093fb;
+        }
+        .next-steps p {
+            color: #a0a0a0;
+            line-height: 1.6;
+        }
+        .home-link {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #f5576c, #f093fb);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .home-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(245, 87, 108, 0.3);
+        }
+        footer {
+            margin-top: 40px;
+            color: #666;
+            font-size: 0.9em;
+        }
+        footer a {
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="badge">🎉</div>
+        <h1>Welcome, Founding Member!</h1>
+        <p class="subtitle">You're one of the first 100 verified humans.</p>
+
+        <div class="confirmation-box">
+            <h3>Payment Confirmed</h3>
+            <p>Your founding member rate is locked in:</p>
+            <div class="price-locked">$14.99/mo forever</div>
+            <p style="color: #888; font-size: 0.9em;">Regular price: $19.99/mo - You save $60/year</p>
+        </div>
+
+        <ul class="features">
+            <li><span class="check">✓</span> Founding Member Badge (1-100)</li>
+            <li><span class="check">✓</span> Early Access to All Features</li>
+            <li><span class="check">✓</span> Price Locked for Life</li>
+            <li><span class="check">✓</span> Priority Human Verification</li>
+            <li><span class="check">✓</span> Direct Input on New Features</li>
+            <li><span class="check">✓</span> Founding Members Discord Channel</li>
+        </ul>
+
+        <div class="next-steps">
+            <h3>What Happens Next?</h3>
+            <p>Check your email for your confirmation and founding member badge number.
+               We'll notify you the moment the app launches (Valentine's Day 2026) so you
+               can be among the first to start making real human connections.</p>
+        </div>
+
+        <a href="/" class="home-link">Return Home</a>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 YouAndINotAI - Operated by Trash or Treasure Online Recycler LLC</p>
+        <p style="margin-top: 10px;">
+            <a href="/terms.html">Terms</a> |
+            <a href="/privacy.html">Privacy</a> |
+            <a href="mailto:support@youandinotai.com">Contact</a>
+        </p>
+    </footer>
+</body>
+</html>
