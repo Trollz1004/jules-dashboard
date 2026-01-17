@@ -4,7 +4,7 @@
  * ═══════════════════════════════════════════════════════════════════════════════
  *
  * The first 100% human-verified, zero-AI dating app.
- * 60% of profits go to charity Children's Hospitals.
+ * 100% of profits go to verified pediatric charities (SURVIVAL MODE).
  *
  * Features:
  * - Human verification before matching
@@ -607,7 +607,8 @@ router.get('/founding-members/status', (req, res) => {
     remaining: MAX_FOUNDING_MEMBERS - foundingMemberCount,
     price: 14.99,
     regularPrice: 19.99,
-    discount: '20% off for life'
+    discount: '20% off for life',
+    mission: '100% of profits go to verified pediatric charities'
   });
 });
 

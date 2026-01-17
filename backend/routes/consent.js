@@ -332,7 +332,7 @@ router.get('/policy', (req, res) => {
       email: 'privacy@aidoesitall.website',
       dataProtectionOfficer: 'dpo@aidoesitall.website'
     },
-    mission: 'FOR THE KIDS - 60% revenue to charity Children\'s Hospital',
+    mission: 'FOR THE KIDS - 100% to verified pediatric charities',
     reviewedBy: 'Jules (Gemini 3 Pro)',
     architect: 'Claude.ai'
   });

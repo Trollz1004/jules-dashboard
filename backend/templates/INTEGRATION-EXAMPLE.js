@@ -4,7 +4,7 @@
  * This shows how to integrate delivery email templates with Square checkout
  * Add this logic to your Square webhook handler
  *
- * Gospel V1.3: 60% charity | 30% infrastructure | 10% founder
+ * Gospel V1.4.1 SURVIVAL MODE: 100% to verified pediatric charities
  * FOR THE KIDS. ALWAYS.
  */
 

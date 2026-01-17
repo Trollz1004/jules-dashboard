@@ -1,15 +1,13 @@
 /**
  * Square Payment Webhooks Handler
  * Automatically executes Profit Allocation (Gospel V1.4.1 SURVIVAL MODE) to:
- * - 60% → Verified Pediatric Charities (charity@yourplatform.com)
- * - 30% → Infrastructure (admin@yourplatform.com)
- * - 10% → Founder (admin@yourplatform.com)
+ * - 100% → verified pediatric charities (charity@yourplatform.com)
  *
  * IMMUTABLE LEDGER: Each allocation creates cryptographic hash chain
  * FOR THE KIDS - FOREVER
  *
  * NOTE: This is "Profit Allocation" NOT "Escrow"
- * Gospel V1.3 - Ethics Override - DAO Sovereign Mode
+ * Gospel V1.4.1 SURVIVAL MODE - Ethics Override - DAO Sovereign Mode
  */
 
 import express from 'express';
@@ -150,9 +148,9 @@ async function executeProfitAllocation(payment, transaction, previousHash) {
 
   // Calculate immutable split - GOSPEL RULE #2 - Gospel V1.4.1 SURVIVAL MODE
   const splits = {
-    charityAmount: (grossAmount * 0.60).toFixed(2),
-    infrastructureAmount: (grossAmount * 0.30).toFixed(2),
-    founderAmount: (grossAmount * 0.10).toFixed(2)
+    charityAmount: (grossAmount * 1.0).toFixed(2),
+    infrastructureAmount: (grossAmount * 0).toFixed(2),
+    founderAmount: (grossAmount * 0).toFixed(2)
   };
 
   // Create ProfitAllocation record with PENDING status
@@ -179,7 +177,7 @@ async function executeProfitAllocation(payment, transaction, previousHash) {
       }
     });
 
-    // Execute 60% allocation to charity account (Ethics Override V1.3)
+    // Execute 100% allocation to charity account (Gospel V1.4.1 SURVIVAL MODE)
     console.log('🏥 charity ALLOCATION:', {
       amount: splits.charityAmount,
       account: process.env.SQUARE_ACCOUNT_B || 'charity@yourplatform.com',
@@ -313,9 +311,9 @@ router.post('/square', express.json(), async (req, res) => {
           source: 'DATING_APP',
           projectType: 'FOR_THE_KIDS',
           description: `Square payment ${payment.id}`,
-          charityAmount: (parseFloat(payment.amount_money.amount) / 100) * 0.60,
-          opsAmount: (parseFloat(payment.amount_money.amount) / 100) * 0.30,
-          founderAmount: (parseFloat(payment.amount_money.amount) / 100) * 0.10,
+          charityAmount: (parseFloat(payment.amount_money.amount) / 100) * 1.0,
+          opsAmount: (parseFloat(payment.amount_money.amount) / 100) * 0,
+          founderAmount: (parseFloat(payment.amount_money.amount) / 100) * 0,
           metadata: {
             squarePaymentId: payment.id,
             orderId: payment.order_id,
@@ -441,9 +439,9 @@ router.post('/ai-store', express.json(), async (req, res) => {
           source: 'AI_SOLUTIONS_STORE',
           projectType: 'FOR_THE_KIDS',
           description: `AI Store - Square payment ${payment.id}`,
-          charityAmount: (parseFloat(payment.amount_money.amount) / 100) * 0.60,
-          opsAmount: (parseFloat(payment.amount_money.amount) / 100) * 0.30,
-          founderAmount: (parseFloat(payment.amount_money.amount) / 100) * 0.10,
+          charityAmount: (parseFloat(payment.amount_money.amount) / 100) * 1.0,
+          opsAmount: (parseFloat(payment.amount_money.amount) / 100) * 0,
+          founderAmount: (parseFloat(payment.amount_money.amount) / 100) * 0,
           metadata: {
             squarePaymentId: payment.id,
             orderId: payment.order_id,

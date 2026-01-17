@@ -11,29 +11,30 @@
  * Only NET PROFIT gets the revenue allocation split.
  * This protects founder from subsidizing charity with personal funds.
  *
- * SPLIT: 60% Verified Pediatric Charities | 30% Infrastructure | 10% Founder
+ * SPLIT: 100% to verified pediatric charities (Gospel V1.4.1 SURVIVAL MODE)
  *
  * Created by Claude (Opus 4.5) - December 27, 2025
- * Gospel V1.3 Ethics Override - NET PROFIT VERSION
+ * Gospel V1.4.1 SURVIVAL MODE - NET PROFIT VERSION
  * ═══════════════════════════════════════════════════════════════════════════════
  */
 
 import crypto from 'crypto';
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// GOSPEL SPLIT - IMMUTABLE (V1.3 Ethics Override)
+// GOSPEL SPLIT - IMMUTABLE (V1.4.1 SURVIVAL MODE)
 // ═══════════════════════════════════════════════════════════════════════════════
 
 export const GOSPEL_SPLIT = Object.freeze({
-  CHARITY_PERCENTAGE: 60,
-  INFRASTRUCTURE_PERCENTAGE: 30,
-  FOUNDER_PERCENTAGE: 10,
+  CHARITY_PERCENTAGE: 100,
+  INFRASTRUCTURE_PERCENTAGE: 0,
+  FOUNDER_PERCENTAGE: 0,
   CHARITY_NAME: "Verified Pediatric Charities",
   CHARITY_EIN: "PENDING_VERIFICATION",
-  VERSION: "1.3.1",  // Updated for NET profit calculation
+  VERSION: "1.4.1",  // Gospel V1.4.1 SURVIVAL MODE
   LOCKED_DATE: "2025-12-27T00:00:00Z",
   ETHICS_OVERRIDE: true,
-  NET_PROFIT_MODE: true  // NEW: Confirms COGS deduction
+  NET_PROFIT_MODE: true,  // NEW: Confirms COGS deduction
+  SURVIVAL_MODE: true  // 100% to charity
 });
 
 // Payment processor fees
@@ -197,9 +198,9 @@ export function getProductCOGS(sku) {
 
 export function verifyGospelSplit() {
   const isValid = (
-    GOSPEL_SPLIT.CHARITY_PERCENTAGE === 60 &&
-    GOSPEL_SPLIT.INFRASTRUCTURE_PERCENTAGE === 30 &&
-    GOSPEL_SPLIT.FOUNDER_PERCENTAGE === 10 &&
+    GOSPEL_SPLIT.CHARITY_PERCENTAGE === 100 &&
+    GOSPEL_SPLIT.INFRASTRUCTURE_PERCENTAGE === 0 &&
+    GOSPEL_SPLIT.FOUNDER_PERCENTAGE === 0 &&
     GOSPEL_SPLIT.CHARITY_PERCENTAGE +
     GOSPEL_SPLIT.INFRASTRUCTURE_PERCENTAGE +
     GOSPEL_SPLIT.FOUNDER_PERCENTAGE === 100
@@ -219,31 +220,26 @@ export function verifyGospelSplit() {
 
 /**
  * Example: $30 T-Shirt with $12 COGS, $5 shipping
- * 
- * OLD (BROKEN):
- *   $30 → $18 charity, $9 infra, $3 founder
- *   Printful charges $17 → FOUNDER LOSES $17
- * 
- * NEW (CORRECT):
+ *
+ * Gospel V1.4.1 SURVIVAL MODE:
  *   $30 - $12 COGS - $5 ship - $0.88 Square = $12.12 NET
- *   $12.12 → $7.27 charity, $3.64 infra, $1.21 founder
- *   Everyone covered, founder doesn't subsidize
+ *   $12.12 → 100% to verified pediatric charities
  */
 
 // Test on module load
 try {
   verifyGospelSplit();
-  
+
   // Verify example calculation
   const example = calculateGospelSplitNet(30.00, 12.00, 5.00, 'square');
-  console.log('✅ GOSPEL V1.3.1 NET PROFIT MODE VERIFIED');
+  console.log('✅ GOSPEL V1.4.1 SURVIVAL MODE NET PROFIT VERIFIED');
   console.log('   Example $30 sale:');
   console.log(`   - Gross: $${example.grossSale}`);
   console.log(`   - Costs: $${example.costs.total} (prod: $${example.costs.production}, ship: $${example.costs.shipping}, fees: $${example.costs.processing})`);
   console.log(`   - Net Profit: $${example.netProfit}`);
-  console.log(`   - Charity (60%): $${example.split.charity.amount}`);
-  console.log(`   - Infra (30%): $${example.split.infrastructure.amount}`);
-  console.log(`   - Founder (10%): $${example.split.founder.amount}`);
+  console.log(`   - Charity (100%): $${example.split.charity.amount}`);
+  console.log(`   - Infra (0%): $${example.split.infrastructure.amount}`);
+  console.log(`   - Founder (0%): $${example.split.founder.amount}`);
 } catch (error) {
   console.error('🚨 CRITICAL: Gospel verification failed!', error);
   process.exit(1);

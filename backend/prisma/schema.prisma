@@ -1,5 +1,5 @@
 // Prisma Schema for AiCollabForTheKids
-// Mission: FOR THE KIDS - 60% to Verified Pediatric Charities (Ethics Override V1.3)
+// Mission: FOR THE KIDS - 100% to verified pediatric charities (Gospel V1.4.1 SURVIVAL MODE)
 
 generator client {
   provider = "prisma-client-js"
@@ -15,8 +15,8 @@ datasource db {
 // ============================================
 
 enum ProjectType {
-  EXISTING // 60% Verified Pediatric Charities, 30% Ops, 10% Josh (Ethics Override V1.3)
-  NEW // 100% Children's Hospitals (rotating)
+  EXISTING // 100% to verified pediatric charities (Gospel V1.4.1 SURVIVAL MODE)
+  NEW // 100% to verified pediatric charities (rotating)
 }
 
 enum RevenueSource {
@@ -38,9 +38,9 @@ model Transaction {
   description String?
 
   // Automatic revenue split
-  charityAmount Decimal @db.Decimal(10, 2) // 60% or 100%
-  opsAmount     Decimal @db.Decimal(10, 2) // 30% or 0%
-  founderAmount Decimal @db.Decimal(10, 2) // 10% or 0%
+  charityAmount Decimal @db.Decimal(10, 2) // 100% (Gospel V1.4.1 SURVIVAL MODE)
+  opsAmount     Decimal @db.Decimal(10, 2) // 0% (survival mode)
+  founderAmount Decimal @db.Decimal(10, 2) // 0% (survival mode)
 
   // Distribution tracking
   distribution CharityDistribution?
@@ -397,9 +397,9 @@ model EscrowSplit {
   transaction   Transaction @relation(fields: [transactionId], references: [id])
 
   // Split Details (IMMUTABLE - Gospel V1.4.1 SURVIVAL MODE)
-  charityAmount        Decimal @db.Decimal(10, 2) // 60%
-  infrastructureAmount Decimal @db.Decimal(10, 2) // 30%
-  ownerAmount          Decimal @db.Decimal(10, 2) // 10%
+  charityAmount        Decimal @db.Decimal(10, 2) // 100% to verified pediatric charities
+  infrastructureAmount Decimal @db.Decimal(10, 2) // 0% (survival mode)
+  ownerAmount          Decimal @db.Decimal(10, 2) // 0% (survival mode)
 
   // Destination Accounts
   charityAccount        String @default("charity@yourplatform.com")
@@ -1102,8 +1102,8 @@ model AffiliateCommission {
   commissionRate  Decimal     @db.Decimal(5, 2)  // % earned (snapshot at time)
   commissionAmount Decimal    @db.Decimal(10, 2) // Actual commission
 
-  // Gospel V1.3 tracking (commission comes from infrastructure 30%)
-  charityImpact   Decimal     @db.Decimal(10, 2) // 60% still went to charity
+  // Gospel V1.4.1 SURVIVAL MODE tracking (100% to verified pediatric charities)
+  charityImpact   Decimal     @db.Decimal(10, 2) // 100% to verified pediatric charities
 
   // Payout tracking
   payoutId    String?

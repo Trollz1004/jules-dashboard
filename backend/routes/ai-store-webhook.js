@@ -12,7 +12,7 @@
  * - custom-consult ($99): Calendar booking link for 30-min call
  * - Merch (tee, hoodie, mug, stickers, bundle): Printful auto-fulfillment
  *
- * FOR THE KIDS - 60% to Verified Pediatric Charities (Gospel V1.3)
+ * FOR THE KIDS - 100% to verified pediatric charities (Gospel V1.4.1 SURVIVAL MODE)
  * Created: 2025-12-21
  */
 
@@ -239,7 +239,7 @@ npm install</pre>
     </p>
 
     <p style="font-size: 12px; color: #666; margin-top: 20px;">
-      <em>60% of this purchase supports Verified Pediatric Charities. Thank you for making a difference!</em>
+      <em>100% of this purchase supports verified pediatric charities. Thank you for making a difference!</em>
     </p>
   </div>
 </body>
@@ -295,7 +295,7 @@ npm install</pre>
     </p>
 
     <p style="font-size: 12px; color: #666; margin-top: 20px;">
-      <em>60% of this purchase supports Verified Pediatric Charities. FOR THE KIDS!</em>
+      <em>100% of this purchase supports verified pediatric charities. FOR THE KIDS!</em>
     </p>
   </div>
 </body>
@@ -365,7 +365,7 @@ npm start</pre>
     </p>
 
     <p style="font-size: 12px; color: #666; margin-top: 20px;">
-      <em>60% of this purchase supports Verified Pediatric Charities. Thank you!</em>
+      <em>100% of this purchase supports verified pediatric charities. Thank you!</em>
     </p>
   </div>
 </body>
@@ -443,7 +443,7 @@ npm run deploy</pre>
     </p>
 
     <p style="font-size: 12px; color: #666; margin-top: 20px;">
-      <em>60% of this purchase supports Verified Pediatric Charities. FOR THE KIDS!</em>
+      <em>100% of this purchase supports verified pediatric charities. FOR THE KIDS!</em>
     </p>
   </div>
 </body>
@@ -515,7 +515,7 @@ npm run deploy</pre>
     </p>
 
     <p style="font-size: 12px; color: #666; margin-top: 20px;">
-      <em>60% of this purchase supports Verified Pediatric Charities. Thank you!</em>
+      <em>100% of this purchase supports verified pediatric charities. Thank you!</em>
     </p>
   </div>
 </body>
@@ -618,7 +618,7 @@ npm run deploy</pre>
     </p>
 
     <p style="font-size: 12px; color: #666; margin-top: 20px;">
-      <em>60% of this purchase ($${((parseFloat(payment.amount_money.amount) / 100) * 0.6).toFixed(2)}) supports Verified Pediatric Charities. FOR THE KIDS!</em>
+      <em>100% of this purchase ($${(parseFloat(payment.amount_money.amount) / 100).toFixed(2)}) supports verified pediatric charities. FOR THE KIDS!</em>
     </p>
   </div>
 </body>
@@ -687,7 +687,7 @@ npm run deploy</pre>
     </p>
 
     <p style="font-size: 12px; color: #666; margin-top: 20px;">
-      <em>60% of this purchase supports Verified Pediatric Charities. Thank you!</em>
+      <em>100% of this purchase supports verified pediatric charities. Thank you!</em>
     </p>
   </div>
 </body>
@@ -734,7 +734,7 @@ npm run deploy</pre>
     </p>
 
     <p style="font-size: 12px; color: #666; margin-top: 20px;">
-      <em>60% of this purchase supports Verified Pediatric Charities. FOR THE KIDS!</em>
+      <em>100% of this purchase supports verified pediatric charities. FOR THE KIDS!</em>
     </p>
   </div>
 </body>
@@ -768,7 +768,7 @@ npm run deploy</pre>
     <hr style="border: none; border-top: 1px solid #ddd; margin: 30px 0;">
 
     <p style="font-size: 12px; color: #666; margin-top: 20px;">
-      <em>60% of this purchase supports Verified Pediatric Charities. FOR THE KIDS!</em>
+      <em>100% of this purchase supports verified pediatric charities. FOR THE KIDS!</em>
     </p>
   </div>
 </body>
@@ -951,7 +951,7 @@ router.get('/health', (req, res) => {
     status: 'healthy',
     service: 'AI Solutions Store Webhook Handler',
     timestamp: new Date().toISOString(),
-    mission: 'FOR THE KIDS - 60% to Verified Pediatric Charities'
+    mission: 'FOR THE KIDS - 100% to verified pediatric charities'
   });
 });
 

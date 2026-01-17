@@ -41,7 +41,7 @@ async function onPurchaseComplete(email, name, orderData) {
     await sendThankYouEmail(email, name, {
       amount: orderData.total,
       item: orderData.productName,
-      charityAmount: (orderData.total * 0.6).toFixed(2) // 60% to charity
+      charityAmount: (orderData.total * 1.0).toFixed(2) // 100% to verified pediatric charities
     });
     console.log('Thank you email sent successfully');
   } catch (error) {

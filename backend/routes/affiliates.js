@@ -1,9 +1,9 @@
 /**
  * AFFILIATE PROGRAM API - FOR THE KIDS
- * Gospel V1.3: 60% to Verified Pediatric Charities | 30% Infrastructure | 10% Founder
+ * Gospel V1.4.1 SURVIVAL MODE: 100% to verified pediatric charities
  *
- * Affiliate commissions are paid from the Infrastructure 30% allocation
- * 60% to charity is NEVER touched - this is immutable Gospel law
+ * Affiliate commissions are paid from the Infrastructure allocation
+ * 100% to charity is NEVER touched - this is immutable Gospel law
  *
  * Features:
  * - Affiliate registration and approval
@@ -30,10 +30,10 @@ const CONFIG = {
   payoutDay: 1, // Day of month for payouts (1st of month)
   cookieExpiration: 30 * 24 * 60 * 60 * 1000, // 30 days
 
-  // Gospel V1.3 enforcement
-  charityPercentage: 60,
-  infrastructurePercentage: 30,
-  founderPercentage: 10,
+  // Gospel V1.4.1 SURVIVAL MODE enforcement
+  charityPercentage: 100,
+  infrastructurePercentage: 0,
+  founderPercentage: 0,
 };
 
 // ============================================
@@ -240,7 +240,7 @@ router.post('/convert', async (req, res) => {
       });
     }
 
-    // Calculate commission (Gospel V1.3 compliant)
+    // Calculate commission (Gospel V1.4.1 SURVIVAL MODE compliant)
     const revenueAmount = parseFloat(amount);
     const charityAmount = revenueAmount * (CONFIG.charityPercentage / 100);
     const infrastructureAmount = revenueAmount * (CONFIG.infrastructurePercentage / 100);
@@ -273,7 +273,7 @@ router.post('/convert', async (req, res) => {
         revenueAmount,
         commissionRate,
         commissionAmount,
-        charityImpact: charityAmount // Track charity impact (Gospel V1.3)
+        charityImpact: charityAmount // Track charity impact (Gospel V1.4.1 SURVIVAL MODE)
       }
     });
 
@@ -856,18 +856,18 @@ router.get('/admin/stats', async (req, res) => {
           total: totalRevenue,
           commissionsPaid: totalCommissionAmount,
           unpaid: unpaidAmount,
-          charityImpact: totalCharityImpact // Gospel V1.3 - charity still got 60%
+          charityImpact: totalCharityImpact // Gospel V1.4.1 SURVIVAL MODE - 100% to verified pediatric charities
         },
         payouts: {
           pending: pendingPayouts.length,
           pendingAmount: pendingPayoutAmount
         },
         gospel: {
-          version: 'V1.3',
+          version: 'V1.4.1 SURVIVAL MODE',
           charityPercentage: CONFIG.charityPercentage,
           infrastructurePercentage: CONFIG.infrastructurePercentage,
           founderPercentage: CONFIG.founderPercentage,
-          note: 'Affiliate commissions come from Infrastructure 30% - Charity 60% is never touched'
+          note: '100% to verified pediatric charities - charity allocation is never touched'
         }
       }
     });
