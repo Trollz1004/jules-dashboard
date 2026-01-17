@@ -18,7 +18,8 @@ dotenv.config({ path: "C:\\Keys\\MASTER-PLATFORM-ENV.env" });
  * "Until no kid is in need"
  */
 
-const PRIVATE_KEY = process.env.DEPLOYER_PRIVATE_KEY || "";
+// Use DEPLOYER_PRIVATE_KEY or fallback to OPS_WALLET (Protocol Omega)
+const PRIVATE_KEY = process.env.DEPLOYER_PRIVATE_KEY || process.env.OPS_WALLET_PRIVATE_KEY || "";
 const BASESCAN_API_KEY = process.env.BASESCAN_API_KEY || "";
 const BASE_RPC_URL = process.env.BASE_RPC_URL || "https://mainnet.base.org";
 const BASE_SEPOLIA_RPC_URL = process.env.BASE_SEPOLIA_RPC_URL || "https://sepolia.base.org";
@@ -76,28 +77,11 @@ const config: HardhatUserConfig = {
   },
 
   etherscan: {
-    apiKey: {
-      base: BASESCAN_API_KEY,
-      "base-sepolia": BASESCAN_API_KEY,
-    },
-    customChains: [
-      {
-        network: "base",
-        chainId: 8453,
-        urls: {
-          apiURL: "https://api.basescan.org/api",
-          browserURL: "https://basescan.org",
-        },
-      },
-      {
-        network: "base-sepolia",
-        chainId: 84532,
-        urls: {
-          apiURL: "https://api-sepolia.basescan.org/api",
-          browserURL: "https://sepolia.basescan.org",
-        },
-      },
-    ],
+    apiKey: BASESCAN_API_KEY,
+  },
+
+  sourcify: {
+    enabled: false,
   },
 
   gasReporter: {

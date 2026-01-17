@@ -1,0 +1,239 @@
+{
+  "manifestVersion": "3.2",
+  "proxies": [
+    {
+      "address": "0x373bEbFB6cbBa123d27490D0Dc91eA507F086844",
+      "txHash": "0xe023e24ac29668ad865cd025acb16e777a7512fcd92a435cb58ac788af44da0e",
+      "kind": "uups"
+    },
+    {
+      "address": "0x1512012677fd2dA1Eb9a00DAEff17c56303d9614",
+      "txHash": "0xf29166c39220a3803fa418522a7d4dfbcfc759ab95207a4b9c86954e1233b6d6",
+      "kind": "uups"
+    }
+  ],
+  "impls": {
+    "35fc9c7ac58543f5787d431f96d5e09bd7f39fa8d68bea2fb64b8bdd7d584942": {
+      "address": "0x7c523c503Af2D4f60F2093e869884C7367A3d2b9",
+      "txHash": "0x0c15ebcb3620f5daf06831175359185335baa5ef9b167d4a434eb7a779e8720e",
+      "layout": {
+        "solcVersion": "0.8.24",
+        "storage": [
+          {
+            "label": "currentPhase",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_enum(Phase)3417",
+            "contract": "DatingRevenueRouter",
+            "src": "contracts\\DatingRevenueRouter.sol:71"
+          },
+          {
+            "label": "founderWallet",
+            "offset": 1,
+            "slot": "0",
+            "type": "t_address",
+            "contract": "DatingRevenueRouter",
+            "src": "contracts\\DatingRevenueRouter.sol:74"
+          },
+          {
+            "label": "daoTreasury",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_address",
+            "contract": "DatingRevenueRouter",
+            "src": "contracts\\DatingRevenueRouter.sol:77"
+          },
+          {
+            "label": "charitySafe",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_address",
+            "contract": "DatingRevenueRouter",
+            "src": "contracts\\DatingRevenueRouter.sol:80"
+          },
+          {
+            "label": "pctFounder",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_uint256",
+            "contract": "DatingRevenueRouter",
+            "src": "contracts\\DatingRevenueRouter.sol:83"
+          },
+          {
+            "label": "pctDao",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_uint256",
+            "contract": "DatingRevenueRouter",
+            "src": "contracts\\DatingRevenueRouter.sol:86"
+          },
+          {
+            "label": "pctCharity",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_uint256",
+            "contract": "DatingRevenueRouter",
+            "src": "contracts\\DatingRevenueRouter.sol:89"
+          },
+          {
+            "label": "scheduledPctFounder",
+            "offset": 0,
+            "slot": "6",
+            "type": "t_uint256",
+            "contract": "DatingRevenueRouter",
+            "src": "contracts\\DatingRevenueRouter.sol:94"
+          },
+          {
+            "label": "scheduledPctDao",
+            "offset": 0,
+            "slot": "7",
+            "type": "t_uint256",
+            "contract": "DatingRevenueRouter",
+            "src": "contracts\\DatingRevenueRouter.sol:97"
+          },
+          {
+            "label": "scheduledPctCharity",
+            "offset": 0,
+            "slot": "8",
+            "type": "t_uint256",
+            "contract": "DatingRevenueRouter",
+            "src": "contracts\\DatingRevenueRouter.sol:100"
+          },
+          {
+            "label": "scheduledSplitTime",
+            "offset": 0,
+            "slot": "9",
+            "type": "t_uint256",
+            "contract": "DatingRevenueRouter",
+            "src": "contracts\\DatingRevenueRouter.sol:103"
+          },
+          {
+            "label": "splitScheduled",
+            "offset": 0,
+            "slot": "10",
+            "type": "t_bool",
+            "contract": "DatingRevenueRouter",
+            "src": "contracts\\DatingRevenueRouter.sol:106"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_bytes32": {
+            "label": "bytes32",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_address,t_bool)": {
+            "label": "mapping(address => bool)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_bytes32,t_struct(RoleData)26_storage)": {
+            "label": "mapping(bytes32 => struct AccessControlUpgradeable.RoleData)",
+            "numberOfBytes": "32"
+          },
+          "t_struct(AccessControlStorage)36_storage": {
+            "label": "struct AccessControlUpgradeable.AccessControlStorage",
+            "members": [
+              {
+                "label": "_roles",
+                "type": "t_mapping(t_bytes32,t_struct(RoleData)26_storage)",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(InitializableStorage)147_storage": {
+            "label": "struct Initializable.InitializableStorage",
+            "members": [
+              {
+                "label": "_initialized",
+                "type": "t_uint64",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_initializing",
+                "type": "t_bool",
+                "offset": 8,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(RoleData)26_storage": {
+            "label": "struct AccessControlUpgradeable.RoleData",
+            "members": [
+              {
+                "label": "hasRole",
+                "type": "t_mapping(t_address,t_bool)",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "adminRole",
+                "type": "t_bytes32",
+                "offset": 0,
+                "slot": "1"
+              }
+            ],
+            "numberOfBytes": "64"
+          },
+          "t_uint64": {
+            "label": "uint64",
+            "numberOfBytes": "8"
+          },
+          "t_enum(Phase)3417": {
+            "label": "enum DatingRevenueRouter.Phase",
+            "members": [
+              "SURVIVAL",
+              "TRANSITION",
+              "PERMANENT"
+            ],
+            "numberOfBytes": "1"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          }
+        },
+        "namespaces": {
+          "erc7201:openzeppelin.storage.AccessControl": [
+            {
+              "contract": "AccessControlUpgradeable",
+              "label": "_roles",
+              "type": "t_mapping(t_bytes32,t_struct(RoleData)26_storage)",
+              "src": "@openzeppelin\\contracts-upgradeable\\access\\AccessControlUpgradeable.sol:62",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Initializable": [
+            {
+              "contract": "Initializable",
+              "label": "_initialized",
+              "type": "t_uint64",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:69",
+              "offset": 0,
+              "slot": "0"
+            },
+            {
+              "contract": "Initializable",
+              "label": "_initializing",
+              "type": "t_bool",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:73",
+              "offset": 8,
+              "slot": "0"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

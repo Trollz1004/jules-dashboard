@@ -52,10 +52,12 @@ async function main() {
   const balance = await ethers.provider.getBalance(deployerAddr);
   console.log(`\nDeployer ETH Balance: ${ethers.formatEther(balance)} ETH`);
 
-  if (balance < ethers.parseEther("0.01")) {
-    console.error(`\n❌ Insufficient balance for deployment. Need at least 0.01 ETH.`);
+  if (balance < ethers.parseEther("0.001")) {
+    console.error(`\n❌ Insufficient balance for deployment. Need at least 0.001 ETH.`);
     process.exit(1);
   }
+
+  console.log(`✅ Balance sufficient for deployment.`);
 
   // Deploy UUPS proxy
   console.log(`\n📦 Deploying DatingRevenueRouter (UUPS Proxy)...`);

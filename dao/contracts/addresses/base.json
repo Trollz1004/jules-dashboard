@@ -12,8 +12,8 @@
       "verified": true
     },
     "DatingRevenueRouter": {
-      "proxy": "PENDING_DEPLOY",
-      "implementation": "PENDING_DEPLOY",
+      "proxy": "0x1512012677fd2dA1Eb9a00DAEff17c56303d9614",
+      "implementation": "0x7c523c503Af2D4f60F2093e869884C7367A3d2b9",
       "type": "uups-upgradeable",
       "currentMode": "SURVIVAL",
       "currentSplit": {
@@ -21,8 +21,9 @@
         "dao": 0,
         "charity": 0
       },
-      "basescan": null,
-      "verified": false
+      "basescan": "https://basescan.org/address/0x1512012677fd2dA1Eb9a00DAEff17c56303d9614",
+      "verified": true,
+      "deployedAt": "2026-01-17T06:12:00Z"
     }
   },
   "tokens": {
