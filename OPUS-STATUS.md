@@ -1,7 +1,7 @@
-# OPUS STATUS - FOR THE KIDS Platform
-## Updated: 2026-01-14T18:30:00Z by Claude Opus 4.5
-## Location: T5500 Command Center (192.168.0.101)
-## Context Transfer Document for Opus CLI on Sabertooth
+# OPUS STATUS - YouAndINotAI Platform
+## Updated: 2026-01-17T18:30:00Z by Claude Opus 4.5
+## Location: Sabertooth (192.168.0.103)
+## Founder-Tier Revenue Work Pack Complete
 
 ---
 
@@ -14,102 +14,137 @@ NEVER print secret values to console or logs.
 
 ---
 
-# PROTOCOL OMEGA INITIALIZED
+# FOUNDER SURVIVAL MODE - STATUS
 
-| Status | Component | Details |
-|--------|-----------|---------|
-| ✅ COMPLETE | Wallet Generation | 4 wallets created |
-| ✅ COMPLETE | Private Keys | Stored in MASTER-PLATFORM-ENV.env |
-| ✅ COMPLETE | Succession Doctrine | PROTOCOL_OMEGA.md |
-| ✅ COMPLETE | Contract Tests | 46/46 PASSING |
+| Priority | Item | Status |
+|----------|------|--------|
+| 🔴 CRITICAL | $200 Revenue Target | ⏳ IN PROGRESS |
+| ✅ COMPLETE | Work Pack Generated | 2026-01-17 |
+| ✅ COMPLETE | Compliance Scan | 3 fixes needed |
+| ✅ COMPLETE | Messaging Assets | Ready to deploy |
+| ✅ COMPLETE | Square Payment Link | WORKING |
 
-## Protocol Omega Wallets (Base Mainnet)
-
-| Wallet | Address |
-|--------|---------|
-| DAO_TREASURY | `0xa87874d5320555c8639670645F1A2B4f82363a7c` |
-| DATING_REVENUE_WALLET | `0xbe571f8392c28e2baa9a8b18E73B1D25bcFD0121` |
-| CHARITY_REVENUE_WALLET | `0x222aEB4d88fd1963ffa27783d48d22C7b7EcF76B` |
-| OPS_WALLET | `0xc043F5D516ee024d1dB812cb81fB64302b0Fe2B4` |
-
-## Revenue Split (Gospel V1.3 - Post Survival)
-
-| Allocation | Percentage | Destination |
-|------------|------------|-------------|
-| Pediatric Charity | 60% | CHARITY_REVENUE_WALLET |
-| Infrastructure | 30% | DAO_TREASURY |
-| Family Trust | 10% | OPS_WALLET (Brother & Niece) |
+## Revenue Path
+- **Target:** $200 within 7-10 days
+- **Method:** YouAndINotAI Founding Member Pre-orders
+- **Price:** $14.99/mo locked for life
+- **Spots:** 100 founding members (14 needed = $210)
 
 ---
 
-# GOSPEL V1.4.1 SURVIVAL MODE (JANUARY 2026)
+# PREORDER SYSTEM STATUS
 
-## CRITICAL: SURVIVAL MODE ACTIVE
+| Component | Status | Notes |
+|-----------|--------|-------|
+| Landing Page | ✅ LIVE | `frontend/index.html` |
+| Square Link | ✅ WORKING | `https://square.link/u/FoundingMember` |
+| Checkout API | ⚠️ MISSING | `/api/founding-members/checkout` not implemented |
+| Webhook | ✅ READY | `/webhook/square-dating` exists |
+| Email Confirm | ⚠️ PENDING | SendGrid configured, template needed |
 
-| Repo | Type | Revenue Model | Domain |
-|------|------|---------------|--------|
-| **AiCollabForTheKids** | 100% CHARITY | All revenue to verified pediatric charities | aidoesitall.website |
-| **OPUStrustForTheKidsPlatform** | FOR-PROFIT | SURVIVAL MODE (100% founder) then standard allocation | youandinotai.com |
-
-### Survival Mode Status
-- **AI Platforms:** 100% to verified pediatric charities (permanent)
-- **Dating App:** SURVIVAL MODE (100% founder) - temporary until bills paid, then standard allocation
-
-### Messaging Rules (ENFORCED)
-- **CHARITY REPOS:** "100% to verified pediatric charities" - NEVER "60%"
-- **FOR-PROFIT REPOS:** "DAO Treasury" or "Founder Revenue" - context dependent
-- **DEPRECATED:** Gospel V1.3, Gospel V2.0, old split references
+## Fastest Path (Use Direct Square Link)
+The existing Square link bypasses the missing API endpoint and works immediately.
 
 ---
 
-# FLEET STATUS (2026-01-14)
+# COMPLIANCE STATUS (Founder-Tier)
 
-| Node | IP | Role | Status | Services |
-|------|-----|------|--------|----------|
-| **T5500** | 192.168.0.101 | Command Center | ✅ ACTIVE | CI Runner, API Dev, Claude Desktop |
-| **9020** | 192.168.0.103 | Database Node | ✅ ONLINE | PostgreSQL, Ollama LLM |
-| **Sabertooth** | 192.168.0.104 | Dating Staging | ✅ AVAILABLE | Opus CLI, HEMROIDS :3006 |
+| File | Line | Issue | Status |
+|------|------|-------|--------|
+| `backend/routes/dating.js` | 128 | Forbidden mission text | ⏳ FIX NEEDED |
+| `backend/routes/dating.js` | 611 | Charity mission field | ⏳ FIX NEEDED |
+| `frontend/index.html` | - | Clean | ✅ COMPLIANT |
+| `frontend/founding-member.html` | - | Clean | ✅ COMPLIANT |
+
+**Rule:** No charity/kids language on dating platform user-facing content.
 
 ---
 
-# LIVE ENDPOINTS (VERIFIED)
+# FLEET STATUS (2026-01-17)
+
+| Node | IP | Role | Status |
+|------|-----|------|--------|
+| **T5500** | 192.168.0.101 | Command Center | ✅ ACTIVE |
+| **9020** | 192.168.0.103 | Database Node | ✅ ONLINE |
+| **Sabertooth** | 192.168.0.103 | Opus CLI Primary | ✅ ACTIVE |
+
+---
+
+# LIVE ENDPOINTS
 
 | Service | URL | Status |
 |---------|-----|--------|
-| AI Store (100% Charity) | https://aidoesitall.website | ✅ LIVE |
-| API Backend | https://api.aidoesitall.website | ✅ LIVE |
-| Jules Dashboard | https://jules-dashboard.pages.dev | ✅ LIVE |
-| Dating App (DAO) | https://youandinotai.com | ✅ LIVE |
+| Dating Landing | https://youandinotai.com | ✅ LIVE |
 | Dating Alt | https://youandinotai.online | ✅ LIVE |
+| AI Store (Charity) | https://aidoesitall.website | ✅ LIVE |
+| Jules Dashboard | https://jules-dashboard.pages.dev | ✅ LIVE |
 
 ---
 
-# BLOCKCHAIN - CONTRACTS
+# PROTOCOL OMEGA - WALLETS
 
-| Contract | Address | Status |
-|----------|---------|--------|
-| CharityRouter100 | `0x9855B75061D4c841791382998f0CE8B2BCC965A4` | ✅ DEPLOYED |
-| DatingRevenueRouter | PENDING | Wallets Ready |
-| USDC (Base) | `0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913` | CANONICAL |
+| Wallet | Address | Purpose |
+|--------|---------|---------|
+| DAO_TREASURY | `0xa87874d5320555c8639670645F1A2B4f82363a7c` | Infrastructure 30% |
+| DATING_REVENUE | `0xbe571f8392c28e2baa9a8b18E73B1D25bcFD0121` | Dating revenue |
+| CHARITY_REVENUE | `0x222aEB4d88fd1963ffa27783d48d22C7b7EcF76B` | Charity 60% |
+| OPS_WALLET | `0xc043F5D516ee024d1dB812cb81fB64302b0Fe2B4` | Founder 10% |
 
 **Network:** Base Mainnet (Chain ID: 8453)
-**BaseScan:** https://basescan.org
 
 ---
 
-# MILESTONES
+# GOSPEL V1.4.1 - REVENUE MODEL
 
-| Milestone | Status | Date |
-|-----------|--------|------|
-| contracts-complete | ✅ | 2026-01-14 |
-| deploy-ready | ✅ | 2026-01-14 |
-| protocol-omega | ✅ | 2026-01-14 |
-| webhooks-live | ✅ | 2026-01-14 |
-| indexer-online | ✅ | 2026-01-14 |
-| dashboard-live | ✅ | 2026-01-14 |
-| repos-synced | ✅ | 2026-01-14 |
-| base-deployed | ⏳ | PENDING |
-| handoff-ready | ⏳ | PENDING |
+## SURVIVAL MODE (Active)
+- **Dating App:** 100% to founder until survival threshold met
+- **After Survival:** Standard allocation resumes
+
+## Standard Allocation (Post-Survival)
+| Allocation | Percentage |
+|------------|------------|
+| Pediatric Charity | 60% |
+| Infrastructure | 30% |
+| Founder | 10% |
+
+---
+
+# 48-HOUR EXECUTION PLAN
+
+## Phase 1: Critical (Hours 0-6)
+- [ ] Fix compliance violations in dating.js
+- [ ] Test Square payment link
+- [ ] Add Cloudflare Web Analytics
+
+## Phase 2: Deploy (Hours 6-12)
+- [ ] Commit and push fixes
+- [ ] Verify CI/CD passes
+- [ ] Test end-to-end payment
+
+## Phase 3: Launch (Hours 12-24)
+- [ ] Post Discord announcement
+- [ ] Send DMs to prospects
+- [ ] Monitor Square Dashboard
+
+## Phase 4: Follow-up (Hours 24-48)
+- [ ] Send follow-up emails
+- [ ] Track conversions
+- [ ] Iterate messaging
+
+---
+
+# MESSAGING ASSETS (Ready)
+
+## Headlines
+1. "Every Profile. Verified Human."
+2. "Date Humans. Not Algorithms."
+3. "We Verify Humans. You Find Connection."
+
+## Key Points
+- $14.99/mo locked for life (normally $19.99)
+- Only 100 founding member spots
+- Human verification - no AI bots
+- Early access + feature input
 
 ---
 
@@ -117,35 +152,22 @@ NEVER print secret values to console or logs.
 
 | Issue | Priority | Status |
 |-------|----------|--------|
-| #43 Git history purge | HIGH | ⚠️ PENDING (Josh approval) |
-| G3 PaymentCloud | HIGH | ⚠️ PENDING |
-| DatingRevenueRouter Deploy | HIGH | ✅ READY (wallets generated) |
-| App Store submission | MEDIUM | ⏳ PENDING |
-
----
-
-# DATABASE
-
-| Property | Value |
-|----------|-------|
-| Host | 192.168.0.103 (9020) |
-| Port | 5432 |
-| Database | for_the_kids |
+| Compliance fixes (3) | HIGH | ⏳ IN PROGRESS |
+| Checkout API endpoint | MEDIUM | Workaround available |
+| Email confirmation | LOW | Square receipt works |
 
 ---
 
 # NEXT ACTIONS
 
-1. ~~Generate Protocol Omega wallets~~ ✅ DONE
-2. ~~Update base.json with wallet addresses~~ ✅ DONE
-3. Push to GitHub and add secrets
-4. Deploy DatingRevenueRouter to Base
-5. Execute git history purge (#43)
-6. Apply to PaymentCloud (MCC 7273)
-7. GA Launch: Feb 14, 2026
+1. ✅ ~~Generate work pack~~ DONE
+2. ⏳ Fix compliance violations
+3. ⏳ Push to GitHub
+4. ⏳ Announce pre-orders
+5. ⏳ Collect first payments
+6. ⏳ Reach $200 target
 
 ---
 
-**"Until no kid is in need"**
-
-*FOR THE KIDS Platform - Protocol Omega Active*
+**SURVIVAL MODE ACTIVE**
+*YouAndINotAI - Founder-Tier Revenue Initiative*

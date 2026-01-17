@@ -125,7 +125,7 @@ router.post('/verify-age', authMiddleware, (req, res) => {
     if (age < 18) {
       return res.status(403).json({
         error: 'You must be 18 or older to use this app',
-        message: 'FOR THE KIDS means protecting kids too.'
+        message: 'Age verification is required for all users.'
       });
     }
 
@@ -607,8 +607,7 @@ router.get('/founding-members/status', (req, res) => {
     remaining: MAX_FOUNDING_MEMBERS - foundingMemberCount,
     price: 14.99,
     regularPrice: 19.99,
-    discount: '20% off for life',
-    mission: '60% of profits go to charity Children\'s Hospitals'
+    discount: '20% off for life'
   });
 });
 
