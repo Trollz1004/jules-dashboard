@@ -64,9 +64,23 @@ The checkout page now supports Google Pay for one-tap pre-orders. manual `mailto
 
 | Node | IP | Role | Status |
 |------|-----|------|--------|
-| **T5500** | 192.168.0.101 | Command Center | ✅ ACTIVE |
+| **T5500** | 192.168.0.101 | Command Center | ⚠️ KEYS PENDING ROTATION CHECK |
 | **9020** | 192.168.0.103 | Database Node | ✅ ONLINE |
 | **Sabertooth** | 192.168.0.103 | Opus CLI Primary | ✅ ACTIVE |
+
+---
+
+# MARKETING ENGINE STATUS
+
+| Component | Status | Notes |
+|-----------|--------|-------|
+| Engine Core | ✅ DEPLOYED | `c:\AntiAI_DAO_Master_Launch\OpusTrust\marketing-engine` |
+| Dependencies | ✅ INSTALLED | Node modules ready |
+| Environment | ⚠️ PARTIAL | OpenAI 401 Error (Key Rotation Needed) |
+| Models | ✅ CONFIG | Gemini 1.5 Pro / Flash Fallback Active |
+| Scope | ✅ LOCKED | YouAndINotAI Only (TOS Compliant) |
+
+**Next Action:** Sync fresh keys from T5500 to resolve authentication errors.
 
 ---
 
