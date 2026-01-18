@@ -22,7 +22,7 @@ NEVER print secret values to console or logs.
 | ✅ COMPLETE | Work Pack Generated | 2026-01-17 |
 | ✅ COMPLETE | Compliance Scan | 3 fixes needed |
 | ✅ COMPLETE | Messaging Assets | Ready to deploy |
-| ✅ COMPLETE | Payment Processing | MANUAL (Mailto) |
+| ✅ COMPLETE | Payment Processing | API + Google Pay |
 
 ## Revenue Path
 - **Target:** $200 within 7-10 days
@@ -37,13 +37,13 @@ NEVER print secret values to console or logs.
 | Component | Status | Notes |
 |-----------|--------|-------|
 | Landing Page | ✅ LIVE | `frontend/index.html` ($14.99 Price Updated) |
-| Payment Link | ✅ WORKING | Mailto -> Manual Processing |
-| Checkout API | ❌ DISABLED | Bypassed for reliability |
-| Webhook | ❌ DISABLED | Manual processing active |
-| Email Confirm | ⚠️ MANUAL | Sales team to confirm via email |
+| Payment Processing | ✅ ENABLED | API + Google Pay Support |
+| Checkout API | ✅ ACTIVE | `/api/payments/preorder/*` endpoints live |
+| Webhook | ⚠️ PENDING | Order confirmation via email |
+| Email Confirm | ⚠️ PENDING | Automated receipt sent by Square |
 
-## Fastest Path (Use Direct Square Link)
-The existing Square link has been replaced with `mailto:` links to ensure order capture during Survival Mode.
+## Fastest Path (Use Google Pay)
+The checkout page now supports Google Pay for one-tap pre-orders. manual `mailto` links remain as a failsafe.
 
 ---
 

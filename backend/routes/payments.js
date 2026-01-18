@@ -107,6 +107,90 @@ router.post('/create-checkout', async (req, res) => {
   }
 });
 
+// POST /api/payments/preorder/founding-member
+// Process $14.99 Founding Member pre-order
+router.post('/preorder/founding-member', async (req, res) => {
+  try {
+    const { sourceId, email, name } = req.body;
+    const { Client, Environment } = await import('square');
+
+    const client = new Client({
+      accessToken: process.env.SQUARE_ACCESS_TOKEN,
+      environment: Environment.Production
+    });
+
+    const paymentResponse = await client.paymentsApi.createPayment({
+      sourceId: sourceId,
+      idempotencyKey: `founding-${email}-${Date.now()}`,
+      amountMoney: {
+        amount: BigInt(1499), // $14.99
+        currency: 'USD'
+      },
+      locationId: process.env.SQUARE_LOCATION_ID,
+      note: `Founding Member Pre-order - ${email}`,
+      buyerEmailAddress: email
+    });
+
+    if (paymentResponse.result.payment) {
+        return res.json({
+            success: true,
+            transactionId: paymentResponse.result.payment.id,
+            status: paymentResponse.result.payment.status
+        });
+    }
+
+    throw new Error('Payment creation failed');
+  } catch (error) {
+    console.error('Founding Member checkout error:', error);
+    res.status(500).json({
+      error: 'Failed to process pre-order',
+      message: error.message
+    });
+  }
+});
+
+// POST /api/payments/preorder/royalty
+// Process $1,000 Royalty Card pre-order
+router.post('/preorder/royalty', async (req, res) => {
+  try {
+    const { sourceId, email, name, cardType } = req.body;
+    const { Client, Environment } = await import('square');
+
+    const client = new Client({
+      accessToken: process.env.SQUARE_ACCESS_TOKEN,
+      environment: Environment.Production
+    });
+
+    const paymentResponse = await client.paymentsApi.createPayment({
+      sourceId: sourceId,
+      idempotencyKey: `royalty-${cardType}-${Date.now()}`,
+      amountMoney: {
+        amount: BigInt(100000), // $1,000.00
+        currency: 'USD'
+      },
+      locationId: process.env.SQUARE_LOCATION_ID,
+      note: `Royalty Card (${cardType}) - ${email}`,
+      buyerEmailAddress: email
+    });
+
+    if (paymentResponse.result.payment) {
+        return res.json({
+            success: true,
+            transactionId: paymentResponse.result.payment.id,
+            status: paymentResponse.result.payment.status
+        });
+    }
+
+    throw new Error('Payment creation failed');
+  } catch (error) {
+    console.error('Royalty Card checkout error:', error);
+    res.status(500).json({
+      error: 'Failed to process royalty card',
+      message: error.message
+    });
+  }
+});
+
 // POST /api/payments/verify
 // Verify payment completed successfully
 router.post('/verify', async (req, res) => {

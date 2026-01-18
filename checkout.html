@@ -324,38 +324,69 @@
         </div>
     </div>
 
+    <style>
+        /* ... existing styles ... */
+        #google-pay-button {
+            height: 48px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="checkout-container">
+        <!-- ... header ... -->
+
+        <div id="checkout-form">
+            <div class="product-summary" id="product-summary">
+                <!-- Populated by JS -->
+            </div>
+
+            <div class="error-message" id="error-message"></div>
+
+            <!-- Card Type Selector ... -->
+
+            <!-- Google Pay Button -->
+            <div id="google-pay-button"></div>
+            <div style="text-align: center; margin: 10px 0; color: #666;">- OR -</div>
+
+            <form class="payment-form" id="payment-form">
+                <!-- ... existing form fields ... -->
+            </form>
+            <!-- ... -->
+    </div>
+
     <!-- Square Web Payments SDK -->
-    <script src="https://sandbox.web.squarecdn.com/v1/square.js"></script>
+    <script src="https://web.squarecdn.com/v1/square.js"></script>
 
     <script>
-        // Configuration
+        // Configuration - Production Location ID from OPUS-STATUS
         const CONFIG = {
-            applicationId: 'sandbox-sq0idb-XXXX', // Replace with your Square App ID
-            locationId: 'LXXXX', // Replace with your Square Location ID
+            applicationId: 'sq0idp-YOUR_APP_ID_HERE', // TODO: User to provide App ID
+            locationId: 'LYMXB8C26NYP7', 
         };
 
         // Get checkout type from URL
         const urlParams = new URLSearchParams(window.location.search);
-        const checkoutType = urlParams.get('type') || 'early-bird';
+        const checkoutType = urlParams.get('type') || 'founding-member';
         let selectedCard = null;
 
         // Product data
         const products = {
-            'early-bird': {
-                name: 'Early Bird Premium',
-                price: '$4.99/mo',
-                amount: 499,
+            'founding-member': {
+                name: 'Founding Member Premium',
+                price: '$14.99/mo',
+                amount: '14.99',
                 benefits: [
-                    '$5 OFF monthly — locked in FOREVER',
+                    'Price LOCKED for life (Save 50%)',
                     'Premium features on Valentine\'s Day launch',
                     'Entry into Joker drawing',
-                    'Early access badge on profile'
+                    'Founding Member badge on profile'
                 ]
             },
             'royalty': {
                 name: 'Royalty Founder Card',
                 price: '$1,000',
-                amount: 100000,
+                amount: '1000.00',
                 benefits: [
                     'Choose: Ace, King, Queen, or Jack',
                     'Unique animated card border',
@@ -368,124 +399,116 @@
 
         // Initialize
         document.addEventListener('DOMContentLoaded', async () => {
-            const product = products[checkoutType];
+            const product = products[checkoutType] || products['founding-member'];
 
             // Render product summary
             document.getElementById('product-summary').innerHTML = `
                 <div class="product-name">${product.name}</div>
-                <div class="product-price">${product.price} ${checkoutType === 'early-bird' ? '<span>for life</span>' : '<span>one-time</span>'}</div>
+                <div class="product-price">${product.price} ${checkoutType === 'founding-member' ? '<span>for life</span>' : '<span>one-time</span>'}</div>
                 <ul class="benefits-list">
                     ${product.benefits.map(b => `<li>${b}</li>`).join('')}
                 </ul>
             `;
 
-            // Show card selector for royalty purchase
-            if (checkoutType === 'royalty') {
-                document.getElementById('card-selector').style.display = 'grid';
-
-                // Load available cards
-                const availableCards = await fetchAvailableCards();
-
-                document.querySelectorAll('.card-option').forEach(option => {
-                    const card = option.dataset.card;
-                    if (!availableCards[card.toLowerCase()]) {
-                        option.classList.add('disabled');
-                        option.innerHTML += '<div style="color: #DC143C; font-size: 0.8rem;">CLAIMED</div>';
-                    } else {
-                        option.addEventListener('click', () => selectCard(card));
-                    }
-                });
-            }
-
             // Initialize Square
-            await initializeSquare();
+            await initializeSquare(product);
         });
 
-        async function fetchAvailableCards() {
-            try {
-                const response = await fetch('/api/preorder/stats');
-                const data = await response.json();
-                return data.data.availableCards;
-            } catch (error) {
-                return { ace: true, king: true, queen: true, jack: true };
+        async function initializeSquare(product) {
+            if (!Window.Square) {
+                console.error("Square SDK not loaded");
+                return;
             }
-        }
 
-        function selectCard(card) {
-            selectedCard = card;
-            document.querySelectorAll('.card-option').forEach(opt => {
-                opt.classList.remove('selected');
-            });
-            document.querySelector(`[data-card="${card}"]`).classList.add('selected');
-        }
-
-        let card;
-
-        async function initializeSquare() {
             const payments = Square.payments(CONFIG.applicationId, CONFIG.locationId);
 
-            card = await payments.card();
+            // 1. Google Pay
+            try {
+                const paymentRequest = payments.paymentRequest({
+                    countryCode: 'US',
+                    currencyCode: 'USD',
+                    total: {
+                        amount: product.amount,
+                        label: product.name,
+                        pending: false
+                    }
+                });
+
+                const googlePay = await payments.googlePay(paymentRequest);
+                await googlePay.attach('#google-pay-button');
+
+                googlePay.addEventListener('cardentrycanceled', () => {
+                    // Handle cancellation
+                });
+            } catch (e) {
+                console.warn("Google Pay not available:", e);
+                document.getElementById('google-pay-button').style.display = 'none';
+            }
+
+            // 2. Card Payment
+            const card = await payments.card();
             await card.attach('#card-container');
 
-            // Handle form submission
-            document.getElementById('payment-form').addEventListener('submit', handlePayment);
+            document.getElementById('payment-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                await handleCardPayment(card);
+            });
         }
 
-        async function handlePayment(event) {
-            event.preventDefault();
-
+        async function handleCardPayment(card) {
             const submitBtn = document.getElementById('submit-btn');
             submitBtn.disabled = true;
             submitBtn.textContent = 'Processing...';
 
             try {
-                // Validate royalty card selection
-                if (checkoutType === 'royalty' && !selectedCard) {
-                    throw new Error('Please select a card type');
-                }
-
-                // Tokenize card
                 const result = await card.tokenize();
+                if (result.status !== 'OK') throw new Error(result.errors[0].message);
+                await processPayment(result.token);
+            } catch (e) {
+                showError(e.message);
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Complete Pre-Order';
+            }
+        }
 
-                if (result.status !== 'OK') {
-                    throw new Error(result.errors[0].message);
-                }
-
-                // Send to backend
-                const endpoint = checkoutType === 'early-bird'
-                    ? '/api/preorder/early-bird'
-                    : '/api/preorder/royalty-card';
+        async function processPayment(token) {
+            try {
+                // Determine endpoint
+                const endpoint = checkoutType === 'royalty' 
+                    ? '/api/payments/preorder/royalty' 
+                    : '/api/payments/preorder/founding-member';
 
                 const response = await fetch(endpoint, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        name: document.getElementById('name').value,
+                        sourceId: token,
                         email: document.getElementById('email').value,
-                        cardNonce: result.token,
-                        cardType: selectedCard
+                        name: document.getElementById('name').value,
+                        cardType: selectedCard // For royalty only
                     })
                 });
 
                 const data = await response.json();
+                if (!data.success) throw new Error(data.error || 'Payment failed');
 
-                if (!data.success) {
-                    throw new Error(data.error);
-                }
-
-                // Show success
+                // Success
                 document.getElementById('checkout-form').style.display = 'none';
                 document.getElementById('success-message').style.display = 'block';
-                document.getElementById('transaction-id').textContent = data.jokerEntry;
+                document.getElementById('transaction-id').textContent = data.transactionId;
 
-            } catch (error) {
-                const errorDiv = document.getElementById('error-message');
-                errorDiv.textContent = error.message;
-                errorDiv.style.display = 'block';
-
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Complete Pre-Order';
+            } catch (e) {
+                showError(e.message);
+                const btn = document.getElementById('submit-btn');
+                btn.disabled = false;
+                btn.textContent = 'Complete Pre-Order';
             }
+        }
+
+        function showError(msg) {
+            const el = document.getElementById('error-message');
+            el.textContent = msg;
+            el.style.display = 'block';
         }
     </script>
 </body>
