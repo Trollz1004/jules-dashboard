@@ -1,5 +1,12 @@
-$env:CLOUDFLARE_API_TOKEN = 'HFRLaBoWL4qJDQqZQsbQsZuES7n8jF9qw19c4edP'
-$env:CLOUDFLARE_ACCOUNT_ID = '516a3a855f44f5ad8453636d163ae25d'
+# Cloudflare credentials - load from MASTER-PLATFORM-ENV.env or set in environment
+# DO NOT hardcode tokens here - they will be exposed in git history
+if (-not $env:CLOUDFLARE_API_TOKEN) {
+    Write-Host "ERROR: CLOUDFLARE_API_TOKEN not set. Load from C:\Keys\MASTER-PLATFORM-ENV.env" -ForegroundColor Red
+    exit 1
+}
+if (-not $env:CLOUDFLARE_ACCOUNT_ID) {
+    $env:CLOUDFLARE_ACCOUNT_ID = '516a3a855f44f5ad8453636d163ae25d'
+}
 
 Write-Host "=== CLOUDFLARE PAGES DEPLOYMENT ===" -ForegroundColor Cyan
 Write-Host "Project: youandinotai" -ForegroundColor Yellow

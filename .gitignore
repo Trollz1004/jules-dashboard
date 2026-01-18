@@ -27,3 +27,14 @@ nul
 .idea/
 *.swp
 Claude Setup.exe
+
+# Claude Code conversation logs (may contain credentials)
+.claude/projects/
+.claude/*.jsonl
+
+# MCP config files with credentials
+MCP-FIX-COMMANDS.txt
+**/mcp.json
+
+# Deployment scripts (credentials should be env vars)
+# deploy.ps1 files kept but tokens must be env vars
