@@ -74,7 +74,7 @@ router.post('/create-checkout', async (req, res) => {
             location_id: process.env.SQUARE_LOCATION_ID
           },
           checkout_options: {
-            redirect_url: `http://localhost:54112/purchase/success?domain=${domain}`,
+            redirect_url: process.env.FRONTEND_URL ? `${process.env.FRONTEND_URL}/purchase/success?domain=${domain}` : `https://youandinotai.com/purchase/success?domain=${domain}`,
             ask_for_shipping_address: false
           }
         })

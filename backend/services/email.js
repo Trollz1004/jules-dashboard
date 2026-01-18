@@ -227,7 +227,7 @@ async function sendKickstarterPledgeEmail(userEmail, userName = 'Backer', pledge
     <div class="content">
       <h2>Welcome to the Movement, ${userName}!</h2>
 
-      <p>Holy shit. You just backed the most transparent charity-tech hybrid on the planet.</p>
+      <p>This is incredible. You just backed the most transparent charity-tech hybrid on the planet.</p>
 
       <div class="pledge-box">
         <h3>Your Pledge</h3>

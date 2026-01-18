@@ -132,8 +132,8 @@ export async function exchangeCode(code) {
 
         // Save refresh token for future use
         if (tokens.refresh_token) {
-            console.log('[YOUTUBE] Refresh token received - save this to .env as YOUTUBE_REFRESH_TOKEN');
-            console.log('[YOUTUBE] Token:', tokens.refresh_token);
+            console.log('[YOUTUBE] Refresh token received - check secure logs or use token directly');
+            // Token value intentionally not logged for security - Gospel V1.4.1
 
             // Also save to file as backup
             fs.writeFileSync(TOKEN_PATH, JSON.stringify(tokens, null, 2));
