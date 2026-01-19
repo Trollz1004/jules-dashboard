@@ -178,9 +178,9 @@ The checkout page now supports Google Pay for one-tap pre-orders. manual `mailto
 1. ✅ ~~Generate work pack~~ DONE
 2. ✅ ~~Fix Pricing~~ DONE
 3. ✅ ~~Implement Manual Payment~~ DONE
-4. ⏳ Fix compliance violations
-5. ⏳ Push to GitHub
-6. ⏳ Announce pre-orders
+4. ✅ ~~Fix compliance violations~~ DONE (commit 8347a9e)
+5. ✅ ~~Push to GitHub~~ DONE
+6. ⏳ **ANNOUNCE PRE-ORDERS NOW** → See `C:\ops\SURVIVAL-MARKETING-BLITZ.md`
 
 ---
 
