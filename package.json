@@ -1,7 +1,7 @@
 {
-  "name": "for-the-kids-contracts",
+  "name": "enigma-private-core",
   "version": "1.4.1",
-  "description": "FOR THE KIDS Platform Smart Contracts - Gospel V1.4.1 SURVIVAL MODE",
+  "description": "FOR THE KIDS Platform Smart Contracts - Gospel V1.4.1 SURVIVAL MODE - Secure Core",
   "main": "index.js",
   "scripts": {
     "compile": "hardhat compile",
@@ -25,7 +25,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Ai-Solutions-Store/AiCollabForTheKids"
+    "url": "https://github.com/Trollz1004/ENIGMA-private"
   },
   "keywords": [
     "solidity",
