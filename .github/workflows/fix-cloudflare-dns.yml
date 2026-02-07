@@ -1,0 +1,67 @@
+name: Fix Cloudflare DNS
+on: [workflow_dispatch]
+jobs:
+  fix-dns:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Remove Tunnel and Add Pages CNAME
+        env:
+          CF_API_KEY: ${{ secrets.CLOUDFLARE_GLOBAL_API_KEY }}
+          CF_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
+          CF_ZONE_ID: "155fc19cd87bc1ea8989f0deb210d612"
+          CF_ACCOUNT_ID: "516a3a855f44f5ad8453636d163ae25d"
+        run: |
+          echo "=== Fixing youandinotai.com DNS ==="
+          
+          # Get current DNS records
+          echo "Fetching DNS records..."
+          RECORDS=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones/$CF_ZONE_ID/dns_records" \
+            -H "X-Auth-Email: $CF_EMAIL" \
+            -H "X-Auth-Key: $CF_API_KEY" \
+            -H "Content-Type: application/json")
+          
+          echo "Current records:"
+          echo "$RECORDS" | jq -r '.result[] | "\(.type) \(.name) -> \(.content)"'
+          
+          # Find the root record (@ or youandinotai.com)
+          ROOT_RECORD_ID=$(echo "$RECORDS" | jq -r '.result[] | select(.name == "youandinotai.com" and .type == "CNAME") | .id')
+          
+          if [ -n "$ROOT_RECORD_ID" ]; then
+            echo "Found root CNAME record: $ROOT_RECORD_ID"
+            echo "Updating to point to Pages..."
+            
+            curl -s -X PATCH "https://api.cloudflare.com/client/v4/zones/$CF_ZONE_ID/dns_records/$ROOT_RECORD_ID" \
+              -H "X-Auth-Email: $CF_EMAIL" \
+              -H "X-Auth-Key: $CF_API_KEY" \
+              -H "Content-Type: application/json" \
+              --data '{"content":"youandinotai.pages.dev","proxied":true}'
+            
+            echo "Updated!"
+          else
+            echo "No root CNAME found. Creating new one..."
+            
+            curl -s -X POST "https://api.cloudflare.com/client/v4/zones/$CF_ZONE_ID/dns_records" \
+              -H "X-Auth-Email: $CF_EMAIL" \
+              -H "X-Auth-Key: $CF_API_KEY" \
+              -H "Content-Type: application/json" \
+              --data '{"type":"CNAME","name":"@","content":"youandinotai.pages.dev","proxied":true}'
+            
+            echo "Created!"
+          fi
+          
+          # Verify
+          echo ""
+          echo "=== Verifying ==="
+          curl -s -X GET "https://api.cloudflare.com/client/v4/zones/$CF_ZONE_ID/dns_records?name=youandinotai.com" \
+            -H "X-Auth-Email: $CF_EMAIL" \
+            -H "X-Auth-Key: $CF_API_KEY" | jq '.result[] | {type, name, content, proxied}'
+          
+          echo ""
+          echo "=== Adding to Pages custom domains ==="
+          curl -s -X POST "https://api.cloudflare.com/client/v4/accounts/$CF_ACCOUNT_ID/pages/projects/youandinotai/domains" \
+            -H "X-Auth-Email: $CF_EMAIL" \
+            -H "X-Auth-Key: $CF_API_KEY" \
+            -H "Content-Type: application/json" \
+            --data '{"name":"youandinotai.com"}' | jq '.'
+          
+          echo "=== DONE ==="
