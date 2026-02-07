@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouAndINotAI — Pre-Order Now | Launches Valentine's Day 2026</title>
+    <meta name="description" content="The dating app where AI helps you find real love. Pre-order now and lock in Early Bird pricing for life. Launching Valentine's Day 2026.">
+    <meta property="og:title" content="YouAndINotAI — Find Real Love with AI">
+    <meta property="og:description" content="Pre-order the dating app that puts real connections first. Early Bird $4.99/mo locked for life.">
+    <meta property="og:url" content="https://youandinotai.com">
+    <meta property="og:type" content="website">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --red: #DC143C;
+            --red-dark: #a0102e;
+            --gold: #FFD700;
+            --gold-dark: #c9a800;
+            --black: #0a0a0a;
+            --dark: #111;
+            --card-bg: #1a1a1a;
+            --text: #e8e8e8;
+            --text-muted: #999;
+            --radius: 16px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--black);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+        /* NAV */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 100;
+            background: rgba(10,10,10,0.92); backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,215,0,0.1);
+            padding: 16px 0;
+        }
+        nav .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--gold); text-decoration: none; font-weight: 700; }
+        .logo span { color: var(--red); }
+        .nav-cta {
+            background: linear-gradient(135deg, var(--red), var(--red-dark));
+            color: #fff; padding: 10px 24px; border-radius: 50px;
+            text-decoration: none; font-weight: 600; font-size: 0.9rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(220,20,60,0.4); }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh; display: flex; align-items: center;
+            padding: 120px 0 80px;
+            background: radial-gradient(ellipse at 50% 0%, rgba(220,20,60,0.15) 0%, transparent 60%);
+        }
+        .hero .container { text-align: center; }
+        .hero-badge {
+            display: inline-block; background: rgba(220,20,60,0.2);
+            border: 1px solid rgba(220,20,60,0.4); color: var(--red);
+            padding: 8px 20px; border-radius: 50px; font-size: 0.85rem;
+            font-weight: 600; margin-bottom: 24px; letter-spacing: 0.5px;
+        }
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            line-height: 1.15; margin-bottom: 20px; font-weight: 800;
+        }
+        .hero h1 .gold { color: var(--gold); }
+        .hero h1 .red { color: var(--red); }
+        .hero-sub {
+            font-size: 1.15rem; color: var(--text-muted);
+            max-width: 600px; margin: 0 auto 40px;
+        }
+
+        /* COUNTDOWN */
+        .countdown {
+            display: flex; justify-content: center; gap: 20px;
+            margin-bottom: 48px; flex-wrap: wrap;
+        }
+        .countdown-item {
+            background: var(--card-bg); border: 1px solid rgba(255,215,0,0.2);
+            border-radius: var(--radius); padding: 20px 24px; min-width: 90px;
+        }
+        .countdown-item .num {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem; font-weight: 700; color: var(--gold);
+            display: block; line-height: 1;
+        }
+        .countdown-item .label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+
+        .hero-ctas { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 16px 32px; border-radius: 50px; font-weight: 600;
+            text-decoration: none; font-size: 1rem; transition: all 0.2s;
+            border: none; cursor: pointer;
+        }
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--black);
+        }
+        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,215,0,0.3); }
+        .btn-outline {
+            background: transparent; border: 2px solid var(--gold);
+            color: var(--gold);
+        }
+        .btn-outline:hover { background: rgba(255,215,0,0.1); }
+        .btn-red {
+            background: linear-gradient(135deg, var(--red), var(--red-dark));
+            color: #fff;
+        }
+        .btn-red:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(220,20,60,0.4); }
+
+        /* PAYMENT BADGES */
+        .payment-badges {
+            display: flex; justify-content: center; gap: 16px;
+            margin-top: 32px; flex-wrap: wrap; align-items: center;
+        }
+        .payment-badges span {
+            font-size: 0.8rem; color: var(--text-muted);
+            display: flex; align-items: center; gap: 6px;
+        }
+        .payment-badges .lock { color: #4CAF50; }
+
+        /* TIERS */
+        .tiers { padding: 100px 0; }
+        .section-title {
+            text-align: center; margin-bottom: 60px;
+        }
+        .section-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 16px;
+        }
+        .section-title p { color: var(--text-muted); max-width: 500px; margin: 0 auto; }
+
+        .tier-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+
+        .tier-card {
+            background: var(--card-bg); border: 2px solid #333;
+            border-radius: var(--radius); padding: 40px 32px;
+            position: relative; transition: border-color 0.3s, transform 0.3s;
+        }
+        .tier-card:hover { transform: translateY(-4px); }
+        .tier-card.popular { border-color: var(--gold); }
+        .tier-card.popular::before {
+            content: 'MOST POPULAR'; position: absolute; top: -14px; left: 50%;
+            transform: translateX(-50%); background: var(--gold); color: var(--black);
+            padding: 4px 20px; border-radius: 50px; font-size: 0.75rem;
+            font-weight: 700; letter-spacing: 1px;
+        }
+        .tier-card.royalty { border-color: var(--red); }
+        .tier-card.royalty::before {
+            content: 'ONLY 4 AVAILABLE'; position: absolute; top: -14px; left: 50%;
+            transform: translateX(-50%); background: var(--red); color: #fff;
+            padding: 4px 20px; border-radius: 50px; font-size: 0.75rem;
+            font-weight: 700; letter-spacing: 1px;
+        }
+
+        .tier-name { font-size: 1.1rem; font-weight: 600; margin-bottom: 8px; color: var(--text-muted); }
+        .tier-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem; font-weight: 700; margin-bottom: 4px;
+        }
+        .tier-price .period { font-size: 1rem; color: var(--text-muted); font-family: 'Inter', sans-serif; }
+        .tier-price .gold { color: var(--gold); }
+        .tier-price .red { color: var(--red); }
+        .tier-note { font-size: 0.85rem; color: var(--gold); margin-bottom: 24px; font-weight: 500; }
+
+        .tier-features { list-style: none; margin-bottom: 32px; }
+        .tier-features li {
+            padding: 8px 0; display: flex; align-items: flex-start; gap: 10px;
+            font-size: 0.95rem; color: #ccc;
+        }
+        .tier-features li::before { content: '\2665'; color: var(--red); font-size: 0.8rem; margin-top: 3px; }
+        .tier-btn { width: 100%; text-align: center; justify-content: center; font-size: 1.05rem; }
+
+        /* HOW IT WORKS */
+        .how-it-works {
+            padding: 100px 0;
+            background: linear-gradient(180deg, transparent, rgba(220,20,60,0.05), transparent);
+        }
+        .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 40px; }
+        .step { text-align: center; }
+        .step-num {
+            width: 56px; height: 56px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--red), var(--red-dark));
+            color: #fff; display: flex; align-items: center; justify-content: center;
+            font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700;
+            margin: 0 auto 20px;
+        }
+        .step h3 { font-size: 1.15rem; margin-bottom: 8px; }
+        .step p { color: var(--text-muted); font-size: 0.9rem; }
+
+        /* FAQ */
+        .faq { padding: 100px 0; }
+        .faq-list { max-width: 700px; margin: 0 auto; }
+        .faq-item {
+            border-bottom: 1px solid #333; padding: 24px 0;
+        }
+        .faq-q {
+            font-weight: 600; font-size: 1.05rem; cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .faq-q::after { content: '+'; font-size: 1.5rem; color: var(--gold); transition: transform 0.2s; }
+        .faq-item.open .faq-q::after { transform: rotate(45deg); }
+        .faq-a {
+            max-height: 0; overflow: hidden; transition: max-height 0.3s ease;
+            color: var(--text-muted); font-size: 0.95rem; line-height: 1.7;
+        }
+        .faq-item.open .faq-a { max-height: 200px; padding-top: 12px; }
+
+        /* JOKER */
+        .joker {
+            padding: 80px 0; text-align: center;
+            background: linear-gradient(180deg, transparent, rgba(148,0,211,0.08), transparent);
+        }
+        .joker-icon { font-size: 4rem; margin-bottom: 16px; }
+        .joker h2 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 12px; }
+        .joker p { color: var(--text-muted); max-width: 500px; margin: 0 auto; }
+
+        /* FINAL CTA */
+        .final-cta {
+            padding: 100px 0; text-align: center;
+            background: radial-gradient(ellipse at 50% 100%, rgba(220,20,60,0.15) 0%, transparent 60%);
+        }
+        .final-cta h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 16px;
+        }
+        .final-cta p { color: var(--text-muted); margin-bottom: 32px; }
+
+        /* FOOTER */
+        footer {
+            padding: 40px 0; border-top: 1px solid #222; text-align: center;
+        }
+        footer p { color: var(--text-muted); font-size: 0.85rem; }
+        footer a { color: var(--gold); text-decoration: none; }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .countdown { gap: 12px; }
+            .countdown-item { padding: 14px 16px; min-width: 70px; }
+            .countdown-item .num { font-size: 1.8rem; }
+            .tier-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+            .hero-ctas { flex-direction: column; align-items: center; }
+            .btn { width: 100%; max-width: 320px; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="container">
+        <a href="https://youandinotai.com" class="logo">You<span>&</span>INotAI</a>
+        <a href="#tiers" class="nav-cta">Pre-Order Now</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="container">
+        <div class="hero-badge">Launching Valentine's Day 2026</div>
+        <h1>Find Love That's <span class="gold">Real</span>,<br>Not <span class="red">Artificial</span></h1>
+        <p class="hero-sub">AI-powered matching that finds people who actually get you. No bots. No catfish. No games. Just genuine connections.</p>
+
+        <div class="countdown" id="countdown">
+            <div class="countdown-item"><span class="num" id="cd-days">7</span><span class="label">Days</span></div>
+            <div class="countdown-item"><span class="num" id="cd-hours">0</span><span class="label">Hours</span></div>
+            <div class="countdown-item"><span class="num" id="cd-mins">0</span><span class="label">Min</span></div>
+            <div class="countdown-item"><span class="num" id="cd-secs">0</span><span class="label">Sec</span></div>
+        </div>
+
+        <div class="hero-ctas">
+            <a href="#tiers" class="btn btn-gold">Pre-Order Early Bird — $4.99/mo</a>
+            <a href="#how" class="btn btn-outline">How It Works</a>
+        </div>
+
+        <div class="payment-badges">
+            <span><span class="lock">&#128274;</span> Secured by Square</span>
+            <span>Google Pay</span>
+            <span>Apple Pay</span>
+            <span>All Major Cards</span>
+        </div>
+    </div>
+</section>
+
+<section class="tiers" id="tiers">
+    <div class="container">
+        <div class="section-title">
+            <h2>Choose Your <span style="color:var(--gold)">Heart</span></h2>
+            <p>Lock in your price before launch. Every pre-order enters the Joker Drawing.</p>
+        </div>
+        <div class="tier-grid">
+            <div class="tier-card popular">
+                <div class="tier-name">Early Bird</div>
+                <div class="tier-price"><span class="gold">$4.99</span><span class="period">/mo for life</span></div>
+                <div class="tier-note">$5 OFF forever — only 100 slots</div>
+                <ul class="tier-features">
+                    <li>Premium features on launch day</li>
+                    <li>Price locked at $4.99/mo forever</li>
+                    <li>AI-powered compatibility matching</li>
+                    <li>Unlimited likes</li>
+                    <li>See who liked you</li>
+                    <li>Early Bird badge on profile</li>
+                    <li>Entry into Joker Drawing</li>
+                </ul>
+                <a href="checkout.html?type=early-bird" class="btn btn-gold tier-btn">Claim Early Bird</a>
+            </div>
+
+            <div class="tier-card royalty">
+                <div class="tier-name">Royalty Founder Card</div>
+                <div class="tier-price"><span class="red">$1,000</span><span class="period"> one-time</span></div>
+                <div class="tier-note">Only 4 cards: Ace, King, Queen, Jack</div>
+                <ul class="tier-features">
+                    <li>Choose your card: Ace, King, Queen, or Jack</li>
+                    <li>Unique animated card border on profile</li>
+                    <li>Premium FREE FOR LIFE</li>
+                    <li>UNLIMITED Super Likes forever</li>
+                    <li>DAO voting rights</li>
+                    <li>Founder badge + Royalty crown</li>
+                    <li>Entry into Joker Drawing</li>
+                </ul>
+                <a href="checkout.html?type=royalty" class="btn btn-red tier-btn">Claim Your Card</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="joker">
+    <div class="container">
+        <div class="joker-icon">&#127183;</div>
+        <h2>The Joker Drawing</h2>
+        <p>Every pre-order transaction ID is entered into the Valentine's Day Joker Drawing. The winner designs their own 1-of-1 animated profile card with our AI. One chance. One card. One legend.</p>
+    </div>
+</section>
+
+<section class="how-it-works" id="how">
+    <div class="container">
+        <div class="section-title">
+            <h2>How It Works</h2>
+            <p>Three steps to finding someone who actually gets you.</p>
+        </div>
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <h3>Create Your Profile</h3>
+                <p>Tell us who you are. Our AI personality quiz goes deeper than photos to understand what makes you tick.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <h3>Get Matched</h3>
+                <p>Our AI analyzes 50+ compatibility factors. You see matches that make sense, not just anyone nearby.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <h3>Connect for Real</h3>
+                <p>Message, video chat, plan your first date. Every profile is verified. No catfish, no bots, just real people.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="faq" id="faq">
+    <div class="container">
+        <div class="section-title">
+            <h2>Questions?</h2>
+        </div>
+        <div class="faq-list">
+            <div class="faq-item">
+                <div class="faq-q">What does "price locked for life" mean?</div>
+                <div class="faq-a">If you pre-order the Early Bird tier, you pay $4.99/mo as long as you're a member. The regular price after launch will be $9.99/mo. Your rate never goes up.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">When does the app launch?</div>
+                <div class="faq-a">Valentine's Day 2026 — February 14th. Pre-order members get access first.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">What are the Royalty Founder Cards?</div>
+                <div class="faq-a">There are only 4 in existence: Ace, King, Queen, and Jack of Hearts. Each gives you a unique animated card border on your profile, Premium for life, unlimited Super Likes, and DAO voting rights. Once they're claimed, they're gone forever.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">What is the Joker Drawing?</div>
+                <div class="faq-a">Every pre-order gets a transaction ID that enters you into the Valentine's Day drawing. The winner works with our AI to design a completely custom 1-of-1 animated profile card. It's the rarest item in the entire app.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Is my payment secure?</div>
+                <div class="faq-a">Yes. All payments are processed through Square with 256-bit encryption. We support Google Pay, Apple Pay, and all major credit/debit cards.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Can I get a refund?</div>
+                <div class="faq-a">If the app doesn't launch by March 2026, all pre-orders are automatically refunded in full. No questions asked.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Where does the money go?</div>
+                <div class="faq-a">Revenue from YouAndINotAI funds the platform and ultimately supports kids in need through our DAO charity structure. Every transaction is transparent and on-chain auditable.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="final-cta">
+    <div class="container">
+        <h2>Valentine's Day Is <span style="color:var(--red)">7 Days</span> Away</h2>
+        <p>Early Bird slots are limited to 100. Don't miss the price lock.</p>
+        <div class="hero-ctas">
+            <a href="#tiers" class="btn btn-gold">Pre-Order Now</a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2026 YouAndINotAI — Trash Or Treasure Online Recycler LLC</p>
+        <p style="margin-top:8px;"><a href="https://youandinotai.com">youandinotai.com</a></p>
+    </div>
+</footer>
+
+<script>
+// Countdown to Feb 14, 2026 00:00 EST
+function updateCountdown() {
+    const launch = new Date('2026-02-14T00:00:00-05:00').getTime();
+    const now = Date.now();
+    const diff = launch - now;
+
+    if (diff <= 0) {
+        document.getElementById('cd-days').textContent = '0';
+        document.getElementById('cd-hours').textContent = '0';
+        document.getElementById('cd-mins').textContent = '0';
+        document.getElementById('cd-secs').textContent = '0';
+        return;
+    }
+
+    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+    document.getElementById('cd-days').textContent = d;
+    document.getElementById('cd-hours').textContent = h;
+    document.getElementById('cd-mins').textContent = m;
+    document.getElementById('cd-secs').textContent = s;
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// FAQ toggle
+document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+        q.parentElement.classList.toggle('open');
+    });
+});
+</script>
+
+</body>
+</html>

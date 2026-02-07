@@ -99,6 +99,7 @@ app.use(cors({
     'http://localhost:5175',
     'http://localhost:5176',
     'http://localhost:5177',
+    'http://localhost:8081',
     'http://192.168.0.101:8080',
     'http://192.168.0.103:8080',
     'http://192.168.0.103:5173',

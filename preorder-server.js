@@ -6,6 +6,9 @@
  * Launches Valentine's Day 2026
  */
 
+import dotenv from 'dotenv';
+dotenv.config();
+
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -16,13 +19,16 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PREORDER_PORT || 8081;
 
+// Parse JSON bodies for API proxy
+app.use(express.json());
+
 // Serve static files from marketing/preorder
 app.use(express.static(path.join(__dirname, 'marketing', 'preorder')));
 
 // Also serve marketing assets
 app.use('/assets', express.static(path.join(__dirname, 'marketing')));
 
-// API proxy to main backend
+// API proxy to main backend (injects API key for auth)
 app.use('/api', async (req, res) => {
   try {
     const backendUrl = process.env.BACKEND_URL || 'http://localhost:3000';
@@ -30,7 +36,7 @@ app.use('/api', async (req, res) => {
       method: req.method,
       headers: {
         'Content-Type': 'application/json',
-        ...req.headers
+        'X-API-Key': process.env.API_KEY || ''
       },
       body: req.method !== 'GET' ? JSON.stringify(req.body) : undefined
     });
