@@ -1,0 +1,92 @@
+{{!-- New Message Notification Email Template --}}
+{{#> base subject=sender.firstName + " sent you a message"}}
+
+<h1>You've Got a New Message! &#128172;</h1>
+
+<p>Hey {{user.firstName}}, <strong>{{sender.firstName}}</strong> just sent you a message. Don't keep them waiting!</p>
+
+<!-- Sender Info Card -->
+<div class="card" style="padding: 24px;">
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+        <tr>
+            <td width="64" valign="top">
+                <div style="width: 56px; height: 56px; border-radius: 50%; overflow: hidden; background: linear-gradient(135deg, #e91e63 0%, #ff5722 100%);">
+                    {{#if sender.photoUrl}}
+                    <img src="{{sender.photoUrl}}" alt="{{sender.firstName}}" style="width: 100%; height: 100%; object-fit: cover;" />
+                    {{else}}
+                    <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 24px; font-weight: 600;">
+                        {{sender.firstInitial}}
+                    </div>
+                    {{/if}}
+                </div>
+            </td>
+            <td valign="middle" style="padding-left: 16px;">
+                <strong style="color: #1a1a2e; font-size: 18px;">{{sender.firstName}}, {{sender.age}}</strong>
+                <p style="margin: 4px 0 0; color: #9a9ea6; font-size: 14px;">
+                    {{sender.location}} &bull; {{messageTime}}
+                </p>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<!-- Message Preview -->
+<div class="card card-highlight" style="margin: 24px 0;">
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+        <tr>
+            <td>
+                <p style="margin: 0; color: #51545e; font-style: italic; font-size: 16px; line-height: 1.6;">
+                    "{{messagePreview}}{{#if isMessageTruncated}}..."{{/if}}
+                </p>
+                {{#if isMessageTruncated}}
+                <p style="margin: 12px 0 0; color: #9a9ea6; font-size: 13px;">
+                    Message continues...
+                </p>
+                {{/if}}
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div class="text-center">
+    <a href="{{siteUrl}}/messages/{{conversationId}}" class="btn-primary">Reply Now</a>
+</div>
+
+<div class="divider"></div>
+
+<!-- Conversation Stats -->
+{{#if conversationStats}}
+<div style="background-color: #f9f9fb; border-radius: 8px; padding: 20px;">
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+        <tr>
+            <td width="50%" style="padding: 8px;">
+                <span class="text-muted text-small">Messages exchanged:</span><br>
+                <strong style="color: #1a1a2e; font-size: 18px;">{{conversationStats.messageCount}}</strong>
+            </td>
+            <td width="50%" style="padding: 8px;">
+                <span class="text-muted text-small">Talking for:</span><br>
+                <strong style="color: #1a1a2e; font-size: 18px;">{{conversationStats.duration}}</strong>
+            </td>
+        </tr>
+    </table>
+</div>
+{{/if}}
+
+<!-- Quick Reply Suggestions -->
+<div style="margin-top: 24px;">
+    <p class="text-muted text-small text-center" style="margin-bottom: 16px;">Quick response ideas:</p>
+    <div class="text-center">
+        {{#each quickReplies}}
+        <a href="{{../siteUrl}}/messages/{{../conversationId}}?quickReply={{encodeURIComponent this}}"
+           style="display: inline-block; background-color: #fff; border: 1px solid #dedede; color: #51545e; padding: 8px 16px; border-radius: 20px; font-size: 13px; margin: 4px; text-decoration: none;">
+            {{this}}
+        </a>
+        {{/each}}
+    </div>
+</div>
+
+<p class="text-muted text-small text-center" style="margin-top: 24px;">
+    &#128337; Tip: People who reply within an hour are more likely to get a date!
+</p>
+
+{{/base}}

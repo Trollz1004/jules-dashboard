@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anti-AI Merch Store</title>
+    <script type="text/javascript" src="https://web.squarecdn.com/v1/square.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #141413 0%, #2a2a2a 100%);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; }
+
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 48px;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #CC785C 0%, #078EFA 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle { font-size: 18px; color: #aaa; }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 30px;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            border-color: #CC785C;
+        }
+
+        .product-emoji { font-size: 64px; margin-bottom: 20px; display: block; }
+        .product-name { font-size: 24px; font-weight: 600; margin-bottom: 12px; }
+        .product-description { color: #aaa; margin-bottom: 20px; line-height: 1.6; }
+        .product-price { font-size: 32px; font-weight: 700; color: #CC785C; margin-bottom: 20px; }
+
+        .btn {
+            width: 100%;
+            padding: 16px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #CC785C 0%, #078EFA 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 20px rgba(204, 120, 92, 0.4);
+        }
+
+        .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px; right: 20px;
+            background: none;
+            border: none;
+            color: #aaa;
+            font-size: 32px;
+            cursor: pointer;
+        }
+
+        .close-modal:hover { color: #fff; }
+        .checkout-form { margin-top: 30px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: 500; color: #ddd; }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        input:focus { outline: none; border-color: #CC785C; }
+        #card-container { margin-bottom: 20px; }
+
+        .status-message { padding: 16px; border-radius: 8px; margin-bottom: 20px; text-align: center; }
+        .status-error { background: rgba(255, 68, 68, 0.1); border: 1px solid rgba(255, 68, 68, 0.3); color: #ff4444; }
+        .status-success { background: rgba(76, 175, 80, 0.1); border: 1px solid rgba(76, 175, 80, 0.3); color: #4caf50; }
+        .status-processing { background: rgba(7, 142, 250, 0.1); border: 1px solid rgba(7, 142, 250, 0.3); color: #078EFA; }
+
+        .footer { text-align: center; padding: 40px 20px; color: #666; font-size: 14px; }
+
+        .loading {
+            display: inline-block;
+            width: 20px; height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #CC785C;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Anti-AI Merch Store</h1>
+            <p class="subtitle">Premium apparel for humans. Make your stand for human connection.</p>
+        </div>
+
+        <div class="products">
+            <div class="product-card">
+                <span class="product-emoji">👕</span>
+                <h2 class="product-name">"YOU AND I, NOT AI" T-Shirt</h2>
+                <p class="product-description">Premium cotton tee with bold anti-AI statement. Make your stand for human connection.</p>
+                <div class="product-price">$24.99</div>
+                <button class="btn btn-primary" onclick="openCheckout('YOU AND I, NOT AI T-Shirt', 24.99)">BUY NOW</button>
+            </div>
+
+            <div class="product-card">
+                <span class="product-emoji">🧥</span>
+                <h2 class="product-name">Anti-AI Hoodie</h2>
+                <p class="product-description">Cozy hoodie with "HUMANS ONLY" print. Stay warm while making a statement.</p>
+                <div class="product-price">$44.99</div>
+                <button class="btn btn-primary" onclick="openCheckout('Anti-AI Hoodie', 44.99)">BUY NOW</button>
+            </div>
+
+            <div class="product-card">
+                <span class="product-emoji">🧢</span>
+                <h2 class="product-name">Mission Cap</h2>
+                <p class="product-description">Classic baseball cap. Wear your values proudly.</p>
+                <div class="product-price">$19.99</div>
+                <button class="btn btn-primary" onclick="openCheckout('Mission Cap', 19.99)">BUY NOW</button>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Powered by Square Payments</p>
+        </div>
+    </div>
+
+    <div id="checkoutModal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeCheckout()">&times;</button>
+            <h2 id="modalProductName">Product Checkout</h2>
+            <div id="statusContainer"></div>
+            <form class="checkout-form" id="checkoutForm">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required placeholder="your@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" required>
+                </div>
+                <div class="form-group">
+                    <label>Payment Information</label>
+                    <div id="card-container"></div>
+                </div>
+                <button type="submit" class="btn btn-primary" id="payButton">
+                    <span id="payButtonText">PAY NOW</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let payments, card, currentProduct = null, currentPrice = 0;
+        let SQUARE_APP_ID, SQUARE_LOCATION_ID;
+
+        async function loadSquareConfig() {
+            try {
+                const response = await fetch('/api/merch/config');
+                const data = await response.json();
+                if (data.success) {
+                    SQUARE_APP_ID = data.square.applicationId;
+                    SQUARE_LOCATION_ID = data.square.locationId;
+                    return true;
+                }
+            } catch (error) {
+                console.error('Failed to load Square config:', error);
+            }
+            return false;
+        }
+
+        async function initializeSquare() {
+            if (!window.Square) return;
+            try {
+                payments = window.Square.payments(SQUARE_APP_ID, SQUARE_LOCATION_ID);
+                card = await payments.card();
+                await card.attach('#card-container');
+            } catch (e) {
+                console.error('Failed to initialize Square:', e);
+                showStatus('Payment system unavailable.', 'error');
+            }
+        }
+
+        function openCheckout(productName, price) {
+            currentProduct = productName;
+            currentPrice = price;
+            document.getElementById('modalProductName').textContent = productName;
+            document.getElementById('checkoutModal').classList.add('active');
+            if (!payments) initializeSquare();
+        }
+
+        function closeCheckout() {
+            document.getElementById('checkoutModal').classList.remove('active');
+            document.getElementById('statusContainer').innerHTML = '';
+            document.getElementById('checkoutForm').reset();
+        }
+
+        function showStatus(message, type) {
+            document.getElementById('statusContainer').innerHTML = `<div class="status-message status-${type}">${message}</div>`;
+        }
+
+        document.getElementById('checkoutForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const payButton = document.getElementById('payButton');
+            const payButtonText = document.getElementById('payButtonText');
+
+            payButton.disabled = true;
+            payButtonText.innerHTML = '<span class="loading"></span> Processing...';
+            showStatus('Processing your payment...', 'processing');
+
+            try {
+                const result = await card.tokenize();
+                if (result.status === 'OK') {
+                    const response = await fetch('/api/merch/square-checkout', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            sourceId: result.token,
+                            amount: Math.round(currentPrice * 100),
+                            currency: 'USD',
+                            productName: currentProduct,
+                            customer: {
+                                email: document.getElementById('email').value,
+                                firstName: document.getElementById('firstName').value,
+                                lastName: document.getElementById('lastName').value
+                            }
+                        })
+                    });
+
+                    const data = await response.json();
+                    if (data.success) {
+                        showStatus('SUCCESS! Payment received. Check your email for receipt.', 'success');
+                        setTimeout(closeCheckout, 5000);
+                    } else {
+                        throw new Error(data.error || 'Payment failed');
+                    }
+                } else {
+                    throw new Error(result.errors?.[0]?.message || 'Card tokenization failed');
+                }
+            } catch (error) {
+                showStatus(`Payment failed: ${error.message}`, 'error');
+                payButton.disabled = false;
+                payButtonText.textContent = 'PAY NOW';
+            }
+        });
+
+        window.addEventListener('load', async () => {
+            await loadSquareConfig();
+            await initializeSquare();
+        });
+    </script>
+</body>
+</html>

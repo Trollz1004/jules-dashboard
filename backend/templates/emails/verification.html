@@ -1,0 +1,152 @@
+{{!-- Email Verification Template --}}
+{{#> base subject="Verify Your Email Address - " + siteName}}
+
+<!-- Verification Header -->
+<div class="text-center" style="margin-bottom: 32px;">
+    <div style="width: 80px; height: 80px; margin: 0 auto 20px; background: linear-gradient(135deg, #e91e63 0%, #ff5722 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+        <span style="font-size: 40px; line-height: 80px;">&#9993;</span>
+    </div>
+    <h1>Verify Your Email</h1>
+</div>
+
+<p>Hi {{user.firstName}},</p>
+
+<p>Thanks for signing up for {{siteName}}! To complete your registration and start meeting amazing people, please verify your email address.</p>
+
+{{#if verificationCode}}
+<!-- Verification Code Option -->
+<div class="card card-highlight" style="text-align: center; padding: 32px;">
+    <p style="margin: 0 0 16px; color: #51545e;">Enter this code on the verification page:</p>
+    <div style="background-color: #fff; border: 2px dashed #e91e63; border-radius: 12px; padding: 20px; margin: 16px 0;">
+        <span style="font-size: 36px; font-weight: 700; letter-spacing: 8px; color: #1a1a2e; font-family: 'Courier New', monospace;">{{verificationCode}}</span>
+    </div>
+    <p class="text-muted text-small" style="margin: 16px 0 0;">This code expires in {{codeExpiration}}</p>
+</div>
+
+<div class="text-center" style="margin: 24px 0;">
+    <span class="text-muted">&#8212; OR &#8212;</span>
+</div>
+{{/if}}
+
+<!-- Verification Link Button -->
+<div class="text-center">
+    <p style="margin: 0 0 20px; color: #51545e;">Click the button below to verify instantly:</p>
+    <a href="{{verificationUrl}}" class="btn-primary">Verify Email Address</a>
+</div>
+
+<!-- Time Warning -->
+<div style="background-color: #e3f2fd; border: 1px solid #90caf9; border-radius: 8px; padding: 16px; margin: 24px 0;">
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+        <tr>
+            <td width="40" valign="top">
+                <span style="font-size: 24px;">&#128337;</span>
+            </td>
+            <td valign="top">
+                <strong style="color: #1565c0;">Link expires in {{linkExpiration}}</strong>
+                <p style="margin: 4px 0 0; color: #1565c0; font-size: 14px;">
+                    For security, this verification link is only valid for {{linkExpiration}}. After that, you'll need to request a new one from the login page.
+                </p>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div class="divider"></div>
+
+<!-- Why Verify Section -->
+<h2>Why Verify Your Email?</h2>
+
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 20px 0;">
+    <tr>
+        <td style="padding: 12px 0;">
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                <tr>
+                    <td width="48" valign="top">
+                        <div style="width: 40px; height: 40px; background-color: #e8f5e9; border-radius: 50%; text-align: center; line-height: 40px; font-size: 20px;">
+                            &#128737;
+                        </div>
+                    </td>
+                    <td valign="top" style="padding-left: 12px;">
+                        <strong style="color: #1a1a2e;">Account Security</strong>
+                        <p style="margin: 4px 0 0; color: #51545e; font-size: 14px;">Protect your account from unauthorized access</p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding: 12px 0;">
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                <tr>
+                    <td width="48" valign="top">
+                        <div style="width: 40px; height: 40px; background-color: #fff3e0; border-radius: 50%; text-align: center; line-height: 40px; font-size: 20px;">
+                            &#128172;
+                        </div>
+                    </td>
+                    <td valign="top" style="padding-left: 12px;">
+                        <strong style="color: #1a1a2e;">Stay Connected</strong>
+                        <p style="margin: 4px 0 0; color: #51545e; font-size: 14px;">Receive notifications about matches and messages</p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding: 12px 0;">
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                <tr>
+                    <td width="48" valign="top">
+                        <div style="width: 40px; height: 40px; background-color: #fce4ec; border-radius: 50%; text-align: center; line-height: 40px; font-size: 20px;">
+                            &#10004;
+                        </div>
+                    </td>
+                    <td valign="top" style="padding-left: 12px;">
+                        <strong style="color: #1a1a2e;">Verified Badge</strong>
+                        <p style="margin: 4px 0 0; color: #51545e; font-size: 14px;">Get a verified badge on your profile to build trust</p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding: 12px 0;">
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                <tr>
+                    <td width="48" valign="top">
+                        <div style="width: 40px; height: 40px; background-color: #e3f2fd; border-radius: 50%; text-align: center; line-height: 40px; font-size: 20px;">
+                            &#128275;
+                        </div>
+                    </td>
+                    <td valign="top" style="padding-left: 12px;">
+                        <strong style="color: #1a1a2e;">Password Recovery</strong>
+                        <p style="margin: 4px 0 0; color: #51545e; font-size: 14px;">Recover your account if you forget your password</p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<div class="divider"></div>
+
+<!-- Alternative Link -->
+<div style="background-color: #f9f9fb; border-radius: 8px; padding: 20px;">
+    <p style="margin: 0 0 12px; color: #51545e; font-size: 14px;"><strong>Button not working?</strong> Copy and paste this link into your browser:</p>
+    <p style="margin: 0; word-break: break-all; font-size: 13px; color: #9a9ea6; background-color: #fff; padding: 12px; border-radius: 4px; border: 1px solid #eaeaec;">
+        {{verificationUrl}}
+    </p>
+</div>
+
+<!-- Security Notice -->
+<div style="margin-top: 24px; padding: 16px; border-left: 4px solid #e91e63; background-color: #fafafa;">
+    <p style="margin: 0; color: #51545e; font-size: 14px;">
+        <strong style="color: #1a1a2e;">&#128274; Security Notice:</strong><br>
+        If you didn't create an account on {{siteName}}, please ignore this email. Someone may have entered your email address by mistake.
+    </p>
+</div>
+
+<p class="text-muted text-small text-center" style="margin-top: 32px;">
+    Having trouble? Contact us at <a href="mailto:{{supportEmail}}">{{supportEmail}}</a>
+</p>
+
+{{/base}}

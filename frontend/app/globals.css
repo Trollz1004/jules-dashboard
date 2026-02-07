@@ -1,0 +1,375 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 255 255 255;
+    --foreground: 15 23 42;
+    --primary: 236 72 153;
+    --primary-foreground: 255 255 255;
+    --secondary: 244 63 94;
+    --secondary-foreground: 255 255 255;
+    --muted: 241 245 249;
+    --muted-foreground: 100 116 139;
+    --accent: 234 179 8;
+    --accent-foreground: 255 255 255;
+    --border: 226 232 240;
+    --input: 226 232 240;
+    --ring: 236 72 153;
+    --radius: 1rem;
+  }
+
+  .dark {
+    --background: 15 23 42;
+    --foreground: 248 250 252;
+    --primary: 236 72 153;
+    --primary-foreground: 255 255 255;
+    --secondary: 244 63 94;
+    --secondary-foreground: 255 255 255;
+    --muted: 30 41 59;
+    --muted-foreground: 148 163 184;
+    --accent: 234 179 8;
+    --accent-foreground: 255 255 255;
+    --border: 51 65 85;
+    --input: 51 65 85;
+    --ring: 236 72 153;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-white text-dark-900 font-sans antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  .dark body {
+    @apply bg-dark-950 text-dark-50;
+  }
+}
+
+@layer components {
+  /* Button Styles */
+  .btn {
+    @apply inline-flex items-center justify-center rounded-2xl font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-primary {
+    @apply btn bg-love-gradient text-white shadow-glow hover:shadow-glow-lg hover:scale-105 active:scale-95 focus:ring-primary-500;
+  }
+
+  .btn-secondary {
+    @apply btn bg-white text-dark-900 border-2 border-dark-200 hover:border-primary-400 hover:text-primary-600 focus:ring-dark-300;
+  }
+
+  .btn-ghost {
+    @apply btn bg-transparent text-dark-600 hover:bg-dark-100 hover:text-dark-900 focus:ring-dark-300;
+  }
+
+  .btn-danger {
+    @apply btn bg-red-500 text-white hover:bg-red-600 focus:ring-red-500;
+  }
+
+  .btn-sm {
+    @apply px-4 py-2 text-sm;
+  }
+
+  .btn-md {
+    @apply px-6 py-3 text-base;
+  }
+
+  .btn-lg {
+    @apply px-8 py-4 text-lg;
+  }
+
+  .btn-xl {
+    @apply px-10 py-5 text-xl;
+  }
+
+  /* Input Styles */
+  .input {
+    @apply w-full rounded-xl border-2 border-dark-200 bg-white px-4 py-3 text-dark-900 placeholder:text-dark-400 transition-all duration-200 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20;
+  }
+
+  .input-error {
+    @apply border-red-500 focus:border-red-500 focus:ring-red-500/20;
+  }
+
+  /* Card Styles */
+  .card {
+    @apply rounded-3xl bg-white shadow-card transition-all duration-300 hover:shadow-card-hover;
+  }
+
+  .card-dark {
+    @apply bg-dark-800 text-white;
+  }
+
+  /* Profile Card (Swipe Card) */
+  .swipe-card {
+    @apply relative overflow-hidden rounded-4xl bg-dark-900 shadow-2xl;
+    aspect-ratio: 3/4;
+    touch-action: none;
+  }
+
+  .swipe-card-image {
+    @apply absolute inset-0 w-full h-full object-cover;
+  }
+
+  .swipe-card-overlay {
+    @apply absolute inset-0 bg-card-gradient;
+  }
+
+  .swipe-card-content {
+    @apply absolute bottom-0 left-0 right-0 p-6 text-white;
+  }
+
+  /* Match Badge */
+  .match-badge {
+    @apply inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium bg-primary-500/20 text-primary-400;
+  }
+
+  /* Online Indicator */
+  .online-indicator {
+    @apply absolute bottom-0 right-0 w-4 h-4 bg-green-500 border-2 border-white rounded-full;
+  }
+
+  /* Chat Bubble */
+  .chat-bubble {
+    @apply max-w-[80%] px-4 py-3 rounded-2xl;
+  }
+
+  .chat-bubble-sent {
+    @apply bg-love-gradient text-white rounded-br-md;
+  }
+
+  .chat-bubble-received {
+    @apply bg-dark-100 text-dark-900 rounded-bl-md;
+  }
+
+  /* Navigation */
+  .nav-item {
+    @apply flex flex-col items-center gap-1 p-2 text-dark-400 transition-colors hover:text-primary-500;
+  }
+
+  .nav-item-active {
+    @apply text-primary-500;
+  }
+
+  /* Like/Nope Stamps */
+  .stamp {
+    @apply absolute top-8 px-4 py-2 text-4xl font-bold uppercase border-4 rounded-lg rotate-[-20deg] opacity-0 transition-opacity;
+  }
+
+  .stamp-like {
+    @apply right-8 text-green-500 border-green-500;
+  }
+
+  .stamp-nope {
+    @apply left-8 text-red-500 border-red-500 rotate-[20deg];
+  }
+
+  /* Action Buttons */
+  .action-btn {
+    @apply flex items-center justify-center rounded-full shadow-lg transition-all duration-200 hover:scale-110 active:scale-95;
+  }
+
+  .action-btn-sm {
+    @apply w-12 h-12;
+  }
+
+  .action-btn-md {
+    @apply w-14 h-14;
+  }
+
+  .action-btn-lg {
+    @apply w-16 h-16;
+  }
+
+  /* Modal */
+  .modal-overlay {
+    @apply fixed inset-0 bg-black/60 backdrop-blur-sm z-50;
+  }
+
+  .modal-content {
+    @apply relative bg-white rounded-3xl shadow-2xl max-h-[90vh] overflow-auto;
+  }
+
+  /* Avatar */
+  .avatar {
+    @apply relative inline-block rounded-full overflow-hidden bg-dark-200;
+  }
+
+  .avatar-sm {
+    @apply w-10 h-10;
+  }
+
+  .avatar-md {
+    @apply w-14 h-14;
+  }
+
+  .avatar-lg {
+    @apply w-20 h-20;
+  }
+
+  .avatar-xl {
+    @apply w-32 h-32;
+  }
+
+  /* Progress Bar */
+  .progress-bar {
+    @apply h-1 bg-dark-200 rounded-full overflow-hidden;
+  }
+
+  .progress-bar-fill {
+    @apply h-full bg-love-gradient transition-all duration-300;
+  }
+
+  /* Tags/Interests */
+  .tag {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary-100 text-primary-700;
+  }
+
+  /* Skeleton Loading */
+  .skeleton {
+    @apply animate-pulse bg-dark-200 rounded-xl;
+  }
+
+  /* Photo Grid */
+  .photo-grid {
+    @apply grid grid-cols-3 gap-2;
+  }
+
+  .photo-slot {
+    @apply relative aspect-square rounded-xl overflow-hidden bg-dark-100 border-2 border-dashed border-dark-300 hover:border-primary-400 transition-colors cursor-pointer;
+  }
+
+  /* Gradient Text */
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-love-gradient;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .safe-left {
+    padding-left: env(safe-area-inset-left);
+  }
+
+  .safe-right {
+    padding-right: env(safe-area-inset-right);
+  }
+
+  /* Glass Effect */
+  .glass {
+    @apply bg-white/80 backdrop-blur-lg;
+  }
+
+  .glass-dark {
+    @apply bg-dark-900/80 backdrop-blur-lg;
+  }
+
+  /* Hide scrollbar for touch devices */
+  @media (hover: none) {
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+/* Custom scrollbar for desktop */
+@media (hover: hover) {
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-dark-100 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-dark-300 rounded-full hover:bg-dark-400;
+  }
+}
+
+/* Animation for swipe actions */
+.swipe-hint {
+  animation: swipeHint 2s ease-in-out infinite;
+}
+
+@keyframes swipeHint {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  75% {
+    transform: translateX(10px);
+  }
+}
+
+/* Typing indicator */
+.typing-indicator {
+  display: flex;
+  gap: 4px;
+}
+
+.typing-indicator span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: currentColor;
+  animation: typing 1.4s infinite ease-in-out both;
+}
+
+.typing-indicator span:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.typing-indicator span:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes typing {
+  0%, 80%, 100% {
+    transform: scale(0.6);
+    opacity: 0.6;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

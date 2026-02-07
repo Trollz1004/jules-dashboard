@@ -1,0 +1,209 @@
+{{!-- Subscription Confirmation Email Template --}}
+{{#> base subject="Welcome to " + siteName + " " + subscription.planName + "!"}}
+
+<!-- Success Header -->
+<div class="text-center" style="margin-bottom: 32px;">
+    <div style="width: 80px; height: 80px; margin: 0 auto 20px; background: linear-gradient(135deg, #4caf50 0%, #8bc34a 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+        <span style="font-size: 40px; line-height: 80px;">&#10004;</span>
+    </div>
+    <h1>Payment Successful!</h1>
+    <p class="text-muted">Your subscription is now active</p>
+</div>
+
+<p>Hi {{user.firstName}},</p>
+
+<p>Thank you for upgrading to <strong>{{siteName}} {{subscription.planName}}</strong>! Your premium features are now unlocked and ready to help you find that special someone.</p>
+
+<!-- Plan Details Card -->
+<div class="card card-highlight" style="padding: 28px;">
+    <h2 style="margin-top: 0; margin-bottom: 20px; text-align: center;">
+        <span style="background: linear-gradient(135deg, #e91e63 0%, #ff5722 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+            {{subscription.planName}}
+        </span>
+    </h2>
+
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+        <tr>
+            <td style="padding: 12px 0; border-bottom: 1px solid #eaeaec;">
+                <span style="color: #51545e;">Subscription Type</span>
+            </td>
+            <td style="padding: 12px 0; border-bottom: 1px solid #eaeaec; text-align: right;">
+                <strong style="color: #1a1a2e;">{{subscription.billingCycle}}</strong>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding: 12px 0; border-bottom: 1px solid #eaeaec;">
+                <span style="color: #51545e;">Amount Paid</span>
+            </td>
+            <td style="padding: 12px 0; border-bottom: 1px solid #eaeaec; text-align: right;">
+                <strong style="color: #1a1a2e;">{{subscription.currency}}{{subscription.amount}}</strong>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding: 12px 0; border-bottom: 1px solid #eaeaec;">
+                <span style="color: #51545e;">Start Date</span>
+            </td>
+            <td style="padding: 12px 0; border-bottom: 1px solid #eaeaec; text-align: right;">
+                <strong style="color: #1a1a2e;">{{subscription.startDate}}</strong>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding: 12px 0; border-bottom: 1px solid #eaeaec;">
+                <span style="color: #51545e;">Next Billing Date</span>
+            </td>
+            <td style="padding: 12px 0; border-bottom: 1px solid #eaeaec; text-align: right;">
+                <strong style="color: #1a1a2e;">{{subscription.nextBillingDate}}</strong>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding: 12px 0;">
+                <span style="color: #51545e;">Order ID</span>
+            </td>
+            <td style="padding: 12px 0; text-align: right;">
+                <code style="background-color: #f4f4f7; padding: 4px 8px; border-radius: 4px; font-size: 13px; color: #51545e;">{{subscription.orderId}}</code>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<!-- Payment Method -->
+<div class="card" style="margin: 24px 0;">
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+        <tr>
+            <td width="48" valign="middle">
+                <div style="width: 40px; height: 26px; background-color: #1a1f71; border-radius: 4px; text-align: center; line-height: 26px;">
+                    <span style="color: #fff; font-size: 12px; font-weight: bold;">{{billing.cardBrand}}</span>
+                </div>
+            </td>
+            <td valign="middle" style="padding-left: 12px;">
+                <span style="color: #51545e; font-size: 14px;">Payment Method</span><br>
+                <strong style="color: #1a1a2e;">{{billing.cardBrand}} ending in {{billing.cardLast4}}</strong>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div class="divider"></div>
+
+<!-- Premium Features -->
+<h2>Your Premium Features &#127775;</h2>
+
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 20px 0;">
+    {{#each subscription.features}}
+    <tr>
+        <td style="padding: 12px 0; border-bottom: 1px solid #f4f4f7;">
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                <tr>
+                    <td width="32" valign="top">
+                        <span style="color: #4caf50; font-size: 20px;">&#10004;</span>
+                    </td>
+                    <td valign="top">
+                        <strong style="color: #1a1a2e;">{{title}}</strong>
+                        <p style="margin: 4px 0 0; color: #51545e; font-size: 14px;">{{description}}</p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    {{/each}}
+</table>
+
+<div class="text-center" style="margin: 24px 0;">
+    <a href="{{siteUrl}}/discover" class="btn-primary">Start Using Premium Features</a>
+</div>
+
+<div class="divider"></div>
+
+<!-- Billing Information -->
+<h2>Billing Information</h2>
+
+<div class="card">
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+        <tr>
+            <td style="padding: 8px 0;">
+                <span style="color: #51545e; font-size: 14px;">Billed To:</span><br>
+                <strong style="color: #1a1a2e;">{{billing.name}}</strong>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding: 8px 0;">
+                <span style="color: #51545e; font-size: 14px;">Email:</span><br>
+                <strong style="color: #1a1a2e;">{{billing.email}}</strong>
+            </td>
+        </tr>
+        {{#if billing.address}}
+        <tr>
+            <td style="padding: 8px 0;">
+                <span style="color: #51545e; font-size: 14px;">Billing Address:</span><br>
+                <strong style="color: #1a1a2e;">{{billing.address}}</strong>
+            </td>
+        </tr>
+        {{/if}}
+    </table>
+</div>
+
+<!-- Receipt Download -->
+<div style="background-color: #f9f9fb; border-radius: 8px; padding: 20px; margin: 24px 0; text-align: center;">
+    <p style="margin: 0 0 12px; color: #51545e;">
+        Need a copy for your records?
+    </p>
+    <a href="{{receiptUrl}}" class="btn-secondary" style="text-decoration: none;">
+        &#128196; Download Receipt (PDF)
+    </a>
+</div>
+
+<div class="divider"></div>
+
+<!-- Manage Subscription -->
+<h2>Manage Your Subscription</h2>
+
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+    <tr>
+        <td style="padding: 12px 0;">
+            <a href="{{siteUrl}}/settings/subscription" style="color: #e91e63; text-decoration: none; font-weight: 500;">
+                &#9881; View or modify your subscription
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding: 12px 0;">
+            <a href="{{siteUrl}}/settings/billing" style="color: #e91e63; text-decoration: none; font-weight: 500;">
+                &#128179; Update payment method
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding: 12px 0;">
+            <a href="{{siteUrl}}/settings/billing/history" style="color: #e91e63; text-decoration: none; font-weight: 500;">
+                &#128203; View billing history
+            </a>
+        </td>
+    </tr>
+</table>
+
+<!-- Support Section -->
+<div style="background-color: #e8f5e9; border-radius: 8px; padding: 20px; margin: 24px 0;">
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+        <tr>
+            <td width="48" valign="top">
+                <span style="font-size: 32px;">&#128075;</span>
+            </td>
+            <td valign="top" style="padding-left: 12px;">
+                <strong style="color: #2e7d32;">Need Help?</strong>
+                <p style="margin: 8px 0 0; color: #2e7d32; font-size: 14px;">
+                    Our premium support team is here for you! Contact us anytime:
+                </p>
+                <p style="margin: 8px 0 0; font-size: 14px;">
+                    <a href="mailto:{{supportEmail}}" style="color: #2e7d32; font-weight: 500;">{{supportEmail}}</a><br>
+                    <a href="{{siteUrl}}/help" style="color: #2e7d32; font-weight: 500;">Help Center</a>
+                </p>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<p class="text-muted text-small text-center">
+    Thank you for choosing {{siteName}}. We're excited to be part of your journey! &#10084;
+</p>
+
+{{/base}}

@@ -1,0 +1,1173 @@
+// Prisma Schema for AiCollabForTheKids
+// Mission: FOR THE KIDS - 100% to verified pediatric charities (Gospel V1.4.1 SURVIVAL MODE)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// REVENUE TRACKING MODELS
+// ============================================
+
+enum ProjectType {
+  EXISTING // 100% to verified pediatric charities (Gospel V1.4.1 SURVIVAL MODE)
+  NEW // 100% to verified pediatric charities (rotating)
+}
+
+enum RevenueSource {
+  DATING_APP // YouAndINotAI
+  EBAY_RECYCLED_TECH // Trash or Treasure
+  PRINTFUL_MERCH // Anti-AI merchandise
+  SQUARE_DONATIONS // Direct donations
+  PAYPAL_DONATIONS // Direct donations
+  AUTOMATED_SERVICES // Jules automation revenue
+  OTHER
+}
+
+model Transaction {
+  id          String        @id @default(uuid())
+  createdAt   DateTime      @default(now())
+  amount      Decimal       @db.Decimal(10, 2)
+  source      RevenueSource
+  projectType ProjectType
+  description String?
+
+  // Automatic revenue split
+  charityAmount Decimal @db.Decimal(10, 2) // 100% (Gospel V1.4.1 SURVIVAL MODE)
+  opsAmount     Decimal @db.Decimal(10, 2) // 0% (survival mode)
+  founderAmount Decimal @db.Decimal(10, 2) // 0% (survival mode)
+
+  // Distribution tracking
+  distribution CharityDistribution?
+  escrowSplit  EscrowSplit?
+
+  // Metadata
+  metadata Json? // Extra data (customer info, etc.)
+
+  @@index([createdAt])
+  @@index([source])
+  @@index([projectType])
+}
+
+model CharityDistribution {
+  id            String      @id @default(uuid())
+  transactionId String      @unique
+  transaction   Transaction @relation(fields: [transactionId], references: [id])
+
+  // Which hospital received this donation
+  hospitalName String // "Verified Pediatric Charities" or rotating hospital
+  hospitalId   String? // External hospital ID if available
+
+  // Distribution tracking
+  distributedAt DateTime @default(now())
+  amount        Decimal  @db.Decimal(10, 2)
+
+  // Impact metrics
+  kidsHelped   Int? // Estimated number of kids helped
+  impactReport String? // Link to impact report
+
+  @@index([hospitalName])
+  @@index([distributedAt])
+}
+
+// ============================================
+// CAMPAIGN TRACKING
+// ============================================
+
+model Campaign {
+  id          String      @id @default(uuid())
+  createdAt   DateTime    @default(now())
+  name        String
+  description String?
+  projectType ProjectType
+
+  // Goals
+  goalAmount Decimal? @db.Decimal(10, 2)
+  goalKids   Int? // Target number of kids to help
+
+  // Results
+  raisedAmount Decimal @default(0) @db.Decimal(10, 2)
+  kidsHelped   Int     @default(0)
+
+  // Status
+  isActive  Boolean   @default(true)
+  startDate DateTime  @default(now())
+  endDate   DateTime?
+
+  @@index([isActive])
+  @@index([createdAt])
+}
+
+// ============================================
+// DONOR MANAGEMENT
+// ============================================
+
+model Donor {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  // Contact info (optional for privacy)
+  email String? @unique
+  name  String?
+
+  // Donation history
+  totalDonated  Decimal   @default(0) @db.Decimal(10, 2)
+  donationCount Int       @default(0)
+  lastDonation  DateTime?
+
+  // Recognition (opt-in only)
+  isAnonymous  Boolean @default(true)
+  allowContact Boolean @default(false)
+
+  @@index([email])
+}
+
+// ============================================
+// JULES AI AUTOMATION LOGS
+// ============================================
+
+model JulesCommand {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  // Command details
+  command     String
+  commandType String // "execute", "git-merge", "lighthouse"
+
+  // Results
+  success      Boolean
+  response     String? @db.Text
+  errorMessage String?
+
+  // Performance
+  executionTime Int? // milliseconds
+  tokensUsed    Int?
+
+  // Revenue generation (if applicable)
+  generatedIdeas Json? // Store revenue ideas from Lighthouse
+
+  @@index([createdAt])
+  @@index([commandType])
+}
+
+// ============================================
+// TRANSPARENCY & IMPACT TRACKING
+// ============================================
+
+model ImpactReport {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  // Reporting period
+  periodStart DateTime
+  periodEnd   DateTime
+
+  // Financial summary
+  totalRevenue  Decimal @db.Decimal(10, 2)
+  charityAmount Decimal @db.Decimal(10, 2)
+  opsAmount     Decimal @db.Decimal(10, 2)
+  founderAmount Decimal @db.Decimal(10, 2)
+
+  // Impact metrics
+  kidsHelped Int
+  donorCount Int
+
+  // Report content
+  summary   String  @db.Text
+  publicUrl String? // Link to public transparency report
+
+  @@index([periodStart])
+}
+
+// ============================================
+// AGE VERIFICATION & COMPLIANCE (Jules' Directive)
+// ============================================
+
+enum VerificationLevel {
+  NONE // Not verified
+  BASIC // Self-attestation only
+  ENHANCED // Third-party ID verification
+  VERIFIED // Fully verified with ID
+}
+
+enum VerificationProvider {
+  SELF_ATTESTATION
+  YOTI
+  AWS_REKOGNITION
+  JUMIO
+  STRIPE_IDENTITY
+}
+
+model AgeVerification {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // User identification (minimal PII)
+  sessionId     String  @unique
+  userId        String? // Only if authenticated
+  ipHash        String // Hashed IP for rate limiting
+  userAgentHash String? // Hashed user agent
+
+  // Verification details
+  verificationLevel VerificationLevel    @default(NONE)
+  provider          VerificationProvider @default(SELF_ATTESTATION)
+  verifiedAt        DateTime?
+  expiresAt         DateTime
+
+  // Verification results (NO PII stored)
+  isVerified      Boolean @default(false)
+  ageConfirmed    Boolean @default(false)
+  documentType    String? // e.g., "drivers_license", "passport"
+  documentCountry String? // Country code only
+
+  // Security & Audit
+  verificationAttempts Int      @default(1)
+  lastAttemptAt        DateTime @default(now())
+  failureReason        String?
+
+  // Compliance tracking
+  policyVersion String  @default("1.0")
+  consentGiven  Boolean @default(false)
+  tosAccepted   Boolean @default(false)
+
+  // Relations
+  consentRecords UserConsent[]
+  minorReports   MinorReport[] @relation("ReportedUser")
+
+  @@index([sessionId])
+  @@index([userId])
+  @@index([createdAt])
+  @@index([verificationLevel])
+  @@index([isVerified])
+}
+
+// ============================================
+// COOKIE CONSENT MANAGEMENT (3-Box System)
+// ============================================
+
+model UserConsent {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // User identification
+  sessionId      String
+  userId         String? // Only if authenticated
+  verificationId String?
+  verification   AgeVerification? @relation(fields: [verificationId], references: [id])
+
+  // Consent choices (3-Box System)
+  essential Boolean @default(true) // Always true (required)
+  analytics Boolean @default(false) // Optional
+  marketing Boolean @default(false) // Optional
+
+  // Metadata
+  ipHash        String // Hashed IP for audit
+  userAgent     String?
+  domain        String // Which domain consent applies to
+  policyVersion String  @default("1.0")
+
+  // Expiration
+  expiresAt DateTime // 1 year from creation
+
+  // Audit trail
+  action            String  @default("create") // create, update, withdraw
+  previousConsentId String? // For updates
+
+  @@index([sessionId])
+  @@index([userId])
+  @@index([createdAt])
+  @@index([domain])
+}
+
+// ============================================
+// COPPA SAFEGUARDS - Minor Reporting
+// ============================================
+
+enum ReportStatus {
+  PENDING
+  INVESTIGATING
+  CONFIRMED
+  DISMISSED
+  ESCALATED
+}
+
+model MinorReport {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Reported user
+  reportedUserId       String
+  reportedVerification AgeVerification @relation("ReportedUser", fields: [reportedUserId], references: [id])
+
+  // Reporter (optional - can be anonymous)
+  reporterUserId    String?
+  reporterSessionId String?
+
+  // Report details
+  reason   String
+  evidence String?      @db.Text
+  status   ReportStatus @default(PENDING)
+
+  // Investigation
+  investigatedBy     String? // Admin user ID
+  investigatedAt     DateTime?
+  investigationNotes String?   @db.Text
+  resolution         String?   @db.Text
+
+  // Actions taken
+  accountSuspended    Boolean   @default(false)
+  suspendedAt         DateTime?
+  dataPurged          Boolean   @default(false)
+  purgedAt            DateTime?
+  authoritiesNotified Boolean   @default(false)
+
+  // Priority tracking
+  priority         String   @default("HIGH") // HIGH, CRITICAL
+  responseDeadline DateTime // Must respond within 24 hours
+
+  @@index([reportedUserId])
+  @@index([status])
+  @@index([createdAt])
+  @@index([priority])
+}
+
+// ============================================
+// COMPLIANCE AUDIT LOG (BigQuery Mirror)
+// ============================================
+
+model ComplianceAudit {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  // Audit type
+  auditType String // "age_verification", "consent_change", "data_access", "data_deletion"
+  action    String // Specific action taken
+
+  // User identification (hashed)
+  sessionId String?
+  userId    String?
+  ipHash    String?
+
+  // Details
+  details      Json // Flexible JSON for audit details
+  success      Boolean @default(true)
+  errorMessage String?
+
+  // Compliance framework
+  regulationApplied String? // "GDPR", "CCPA", "COPPA"
+  dataRetention     Int? // Days until auto-deletion
+
+  // BigQuery sync
+  bigQuerySynced   Boolean   @default(false)
+  bigQuerySyncedAt DateTime?
+
+  @@index([createdAt])
+  @@index([auditType])
+  @@index([userId])
+  @@index([bigQuerySynced])
+}
+
+// ============================================
+// SQUARE ESCROW SPLIT TRACKING (IMMUTABLE)
+// ============================================
+
+enum SplitStatus {
+  PENDING // Awaiting execution
+  PROCESSING // Split in progress
+  COMPLETED // Successfully transferred
+  FAILED // Transfer failed (needs retry)
+  RETRYING // Retry in progress
+}
+
+model EscrowSplit {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Source Transaction
+  transactionId String      @unique
+  transaction   Transaction @relation(fields: [transactionId], references: [id])
+
+  // Split Details (IMMUTABLE - Gospel V1.4.1 SURVIVAL MODE)
+  charityAmount        Decimal @db.Decimal(10, 2) // 100% to verified pediatric charities
+  infrastructureAmount Decimal @db.Decimal(10, 2) // 0% (survival mode)
+  ownerAmount          Decimal @db.Decimal(10, 2) // 0% (survival mode)
+
+  // Destination Accounts
+  charityAccount        String @default("charity@yourplatform.com")
+  infrastructureAccount String @default("admin@yourplatform.com")
+  ownerAccount          String @default("admin@yourplatform.com")
+
+  // Execution Status
+  status     SplitStatus @default(PENDING)
+  executedAt DateTime?
+
+  // Square Transfer IDs (proof)
+  charityTransferId String?
+  infraTransferId    String?
+  ownerTransferId    String?
+
+  // Retry Logic
+  attemptCount  Int       @default(0)
+  lastAttemptAt DateTime?
+  errorMessage  String?
+
+  // Immutable Proof
+  hash         String // SHA-256 of split data
+  previousHash String? // Blockchain-style linking
+
+  @@index([transactionId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+// ============================================
+// USER SUBSCRIPTIONS (Dating App)
+// ============================================
+
+enum SubscriptionTier {
+  FREE
+  PREMIUM
+  VIP
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  CANCELLED
+  EXPIRED
+  PAYMENT_FAILED
+}
+
+model Subscription {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // User identification
+  userId String
+  email  String?
+
+  // Subscription details
+  tier                  SubscriptionTier
+  status                SubscriptionStatus @default(ACTIVE)
+  squareSubscriptionId  String?            @unique
+  squareCustomerId      String?
+
+  // Billing
+  amount           Decimal   @db.Decimal(10, 2)
+  currency         String    @default("USD")
+  billingInterval  String    @default("MONTHLY") // MONTHLY, YEARLY
+  nextBillingDate  DateTime?
+  lastPaymentDate  DateTime?
+  lastPaymentId    String?
+
+  // Lifecycle
+  startedAt   DateTime  @default(now())
+  cancelledAt DateTime?
+  expiredAt   DateTime?
+
+  // Features enabled
+  features Json? // Store tier-specific features
+
+  @@index([userId])
+  @@index([status])
+  @@index([tier])
+  @@index([nextBillingDate])
+}
+
+// ============================================
+// FREE DAO - 100% TO BENEFICIARIES (Joshua's Gift)
+// ============================================
+
+enum DAOProposalStatus {
+  ACTIVE
+  PASSED
+  REJECTED
+  EXECUTED
+  CANCELLED
+}
+
+model FreeDAOTreasury {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Balances
+  totalDeposited  Decimal @default(0) @db.Decimal(12, 2)
+  totalDisbursed  Decimal @default(0) @db.Decimal(12, 2)
+  currentBalance  Decimal @default(0) @db.Decimal(12, 2)
+
+  // GOSPEL LOCKED: Always 100% to beneficiaries
+  beneficiaryPercentage Int @default(100) // NEVER CHANGE
+  founderPercentage     Int @default(0)   // Joshua takes $0
+
+  // Relations
+  deposits      FreeDAODeposit[]
+  disbursements FreeDAODisbursement[]
+}
+
+model FreeDAODeposit {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  // Treasury
+  treasuryId String
+  treasury   FreeDAOTreasury @relation(fields: [treasuryId], references: [id])
+
+  // Deposit details
+  amount     Decimal @db.Decimal(10, 2)
+  source     String  // "Direct", "Platform Surplus", "AI Partner"
+  donorName  String  @default("Anonymous")
+  donorEmail String?
+
+  // 100% allocation (no splits)
+  beneficiaryAllocation Decimal @db.Decimal(10, 2) // Always equals amount
+
+  // Verification
+  transactionHash String? // For verification
+  verified        Boolean @default(true)
+
+  @@index([treasuryId])
+  @@index([createdAt])
+}
+
+model FreeDAOProposal {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Proposal details
+  title            String
+  description      String   @db.Text
+  beneficiary      String   // Organization or individual name
+  beneficiaryType  String   // "charity", "hospital", "program", "individual"
+  amount           Decimal  @db.Decimal(10, 2)
+  impactDescription String? @db.Text
+
+  // Proposer
+  proposerName  String @default("Community Member")
+  proposerEmail String?
+
+  // Voting
+  votesFor     Int @default(0)
+  votesAgainst Int @default(0)
+  votesAbstain Int @default(0)
+  totalVotes   Int @default(0)
+  quorumRequired Int @default(100)
+
+  // Status
+  status   DAOProposalStatus @default(ACTIVE)
+  endsAt   DateTime
+  executedAt DateTime?
+
+  // GOSPEL LOCKED
+  founderTake          Decimal @default(0) @db.Decimal(10, 2) // Always $0
+  beneficiaryAllocation Decimal @db.Decimal(10, 2) // Always 100%
+
+  // Relations
+  votes        FreeDAOVote[]
+  disbursement FreeDAODisbursement?
+
+  @@index([status])
+  @@index([createdAt])
+  @@index([endsAt])
+}
+
+model FreeDAOVote {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  // Proposal
+  proposalId String
+  proposal   FreeDAOProposal @relation(fields: [proposalId], references: [id])
+
+  // Voter
+  voterName  String @default("Anonymous")
+  voterEmail String?
+  voterHash  String // Hashed identifier to prevent duplicates
+
+  // Vote
+  vote String // "for", "against", "abstain"
+
+  @@unique([proposalId, voterHash])
+  @@index([proposalId])
+}
+
+model FreeDAODisbursement {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  // Treasury
+  treasuryId String
+  treasury   FreeDAOTreasury @relation(fields: [treasuryId], references: [id])
+
+  // Proposal (if from voting)
+  proposalId String?          @unique
+  proposal   FreeDAOProposal? @relation(fields: [proposalId], references: [id])
+
+  // Disbursement details
+  beneficiary     String
+  beneficiaryType String
+  amount          Decimal @db.Decimal(10, 2)
+  purpose         String?
+
+  // Verification
+  transferId   String? // Payment processor transfer ID
+  verified     Boolean @default(false)
+  verifiedAt   DateTime?
+  verifiedBy   String? // "Claude", "Jules", "Admin"
+
+  // Impact tracking
+  impactReport String? @db.Text
+
+  @@index([treasuryId])
+  @@index([createdAt])
+}
+
+// ============================================
+// DATING APP - YouAndINotAI
+// ============================================
+
+enum UserStatus {
+  PENDING_VERIFICATION
+  ACTIVE
+  SUSPENDED
+  BANNED
+  DELETED
+}
+
+enum VerificationStatus {
+  UNVERIFIED
+  PENDING
+  VERIFIED
+  REJECTED
+  EXPIRED
+}
+
+model DatingUser {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Authentication
+  email         String     @unique
+  passwordHash  String
+  status        UserStatus @default(PENDING_VERIFICATION)
+
+  // Human Verification (Anti-AI)
+  humanVerificationStatus VerificationStatus @default(UNVERIFIED)
+  humanVerifiedAt         DateTime?
+  humanVerificationMethod String? // "video", "captcha", "id"
+  humanVerificationScore  Float?  // 0-100
+
+  // Age Verification
+  ageVerified        Boolean   @default(false)
+  ageVerifiedAt      DateTime?
+  ageVerificationId  String?   // Link to AgeVerification
+
+  // Profile
+  displayName   String?
+  bio           String?  @db.Text
+  birthDate     DateTime?
+  gender        String?
+  lookingFor    String[] // Preferences
+  location      String?
+  locationLat   Float?
+  locationLng   Float?
+
+  // Photos (URLs only, stored in Cloudflare R2)
+  photoUrls     String[]
+  primaryPhoto  String?
+
+  // Preferences
+  ageRangeMin   Int @default(18)
+  ageRangeMax   Int @default(99)
+  maxDistance   Int @default(50) // miles
+
+  // Subscription
+  subscriptionId String?
+  isPremium      Boolean @default(false)
+  isVIP          Boolean @default(false)
+  isFoundingMember Boolean @default(false)
+
+  // Activity
+  lastActiveAt DateTime @default(now())
+  loginCount   Int      @default(0)
+
+  // Safety
+  reportCount  Int     @default(0)
+  warningCount Int     @default(0)
+  blockedUsers String[] // User IDs
+
+  // Relations
+  sentLikes     DatingLike[]    @relation("SentLikes")
+  receivedLikes DatingLike[]    @relation("ReceivedLikes")
+  sentMessages  DatingMessage[] @relation("SentMessages")
+  receivedMessages DatingMessage[] @relation("ReceivedMessages")
+  matches       DatingMatch[]   @relation("UserMatches")
+  matchedWith   DatingMatch[]   @relation("MatchedWith")
+
+  @@index([email])
+  @@index([status])
+  @@index([humanVerificationStatus])
+  @@index([location])
+  @@index([lastActiveAt])
+}
+
+model DatingLike {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  // Users
+  fromUserId String
+  fromUser   DatingUser @relation("SentLikes", fields: [fromUserId], references: [id])
+  toUserId   String
+  toUser     DatingUser @relation("ReceivedLikes", fields: [toUserId], references: [id])
+
+  // Like type
+  isSuperLike Boolean @default(false)
+
+  // Match created?
+  matchId String?
+
+  @@unique([fromUserId, toUserId])
+  @@index([toUserId])
+}
+
+model DatingMatch {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  // Users
+  userId1 String
+  user1   DatingUser @relation("UserMatches", fields: [userId1], references: [id])
+  userId2 String
+  user2   DatingUser @relation("MatchedWith", fields: [userId2], references: [id])
+
+  // Status
+  isActive    Boolean @default(true)
+  unmatchedAt DateTime?
+  unmatchedBy String?
+
+  // Messages
+  messages DatingMessage[]
+
+  @@unique([userId1, userId2])
+  @@index([userId1])
+  @@index([userId2])
+}
+
+model DatingMessage {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  // Match
+  matchId String
+  match   DatingMatch @relation(fields: [matchId], references: [id])
+
+  // Sender
+  senderId String
+  sender   DatingUser @relation("SentMessages", fields: [senderId], references: [id])
+  receiverId String
+  receiver   DatingUser @relation("ReceivedMessages", fields: [receiverId], references: [id])
+
+  // Content
+  content   String @db.Text
+  isRead    Boolean @default(false)
+  readAt    DateTime?
+
+  // AI Detection (Anti-AI messaging)
+  aiScore   Float? // 0-100, higher = more likely AI
+  flagged   Boolean @default(false)
+
+  @@index([matchId])
+  @@index([senderId])
+  @@index([receiverId])
+  @@index([createdAt])
+}
+
+// ============================================
+// FOUNDING MEMBERS & KICKSTARTER BACKERS
+// ============================================
+
+enum BackerTier {
+  SUPPORTER       // $10
+  BELIEVER        // $25
+  PIONEER         // $50
+  LEGACY          // $100
+  EXECUTIVE       // $500
+  VISIONARY       // $1000
+}
+
+model KickstarterBacker {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  // Backer info
+  email       String @unique
+  name        String
+  tier        BackerTier
+  amount      Decimal @db.Decimal(10, 2)
+
+  // Payment
+  paymentId   String? // Square/Stripe payment ID
+  paymentDate DateTime?
+  isPaid      Boolean @default(false)
+
+  // Rewards
+  rewardsFulfilled Boolean   @default(false)
+  fulfilledAt      DateTime?
+
+  // Perks
+  foundingMemberBadge Boolean @default(false)
+  earlyAccess         Boolean @default(false)
+  thankYouVideo       Boolean @default(false)
+  legacyWall          Boolean @default(false)
+  zoomCall            Boolean @default(false)
+  advisoryRole        Boolean @default(false)
+  customArt           Boolean @default(false)
+  visionaryCouncil    Boolean @default(false)
+  homepageCredit      Boolean @default(false)
+
+  @@index([tier])
+  @@index([isPaid])
+}
+
+model FoundingMember {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  // Member info
+  email     String @unique
+  name      String?
+
+  // Preorder
+  preorderDate   DateTime @default(now())
+  monthlyPrice   Decimal  @db.Decimal(10, 2) // $14.99 (20% off)
+  regularPrice   Decimal  @db.Decimal(10, 2) // $19.99
+  lifetimeDiscount Boolean @default(true)
+
+  // Status
+  isActive  Boolean @default(true)
+  datingUserId String? // Link when they activate
+
+  // Badge
+  badgeNumber Int @unique // 1-100 founding member number
+
+  @@index([email])
+}
+
+// ============================================
+// MERCH STORE - Anti-AI Merchandise
+// ============================================
+
+enum OrderStatus {
+  PENDING
+  PAID
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+model Product {
+  id          String   @id @default(uuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Product details
+  name        String
+  description String?  @db.Text
+  price       Decimal  @db.Decimal(10, 2)
+  imageUrl    String?
+  category    String   // e.g., "apparel", "accessories", "stickers"
+  sku         String   @unique
+  active      Boolean  @default(true)
+
+  // Relations
+  variants    ProductVariant[]
+  orderItems  OrderItem[]
+
+  @@index([active])
+  @@index([category])
+  @@index([createdAt])
+}
+
+model ProductVariant {
+  id            String   @id @default(uuid())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Product relationship
+  productId     String
+  product       Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  // Variant details
+  size          String?  // e.g., "S", "M", "L", "XL"
+  color         String?  // e.g., "Black", "White"
+  sku           String   @unique
+  stockQuantity Int      @default(0)
+  price         Decimal? @db.Decimal(10, 2) // Nullable - use product price if not set
+
+  // Relations
+  orderItems    OrderItem[]
+
+  @@index([productId])
+  @@index([sku])
+}
+
+model Order {
+  id              String      @id @default(uuid())
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  // Order visibility & identification
+  visibleId       String      @unique // Human-readable order number
+  userId          String?     // Optional for guest checkout
+  email           String      // Always store email for communication
+
+  // Order status
+  status          OrderStatus @default(PENDING)
+
+  // Financial details
+  total           Decimal     @db.Decimal(10, 2)
+
+  // Shipping
+  shippingAddress Json        // Full address as JSON
+
+  // Payment tracking
+  stripePaymentId String?     @unique
+
+  // Relations
+  items           OrderItem[]
+
+  @@index([visibleId])
+  @@index([userId])
+  @@index([email])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model OrderItem {
+  id            String  @id @default(uuid())
+  createdAt     DateTime @default(now())
+
+  // Order relationship
+  orderId       String
+  order         Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  // Product relationship
+  productId     String
+  product       Product @relation(fields: [productId], references: [id])
+
+  // Variant relationship (optional)
+  variantId     String?
+  variant       ProductVariant? @relation(fields: [variantId], references: [id])
+
+  // Quantity & pricing
+  quantity      Int     @default(1)
+  priceEach     Decimal @db.Decimal(10, 2)
+
+  @@index([orderId])
+  @@index([productId])
+  @@index([variantId])
+}
+
+// ============================================
+// AFFILIATE PROGRAM - Revenue Sharing
+// ============================================
+
+enum AffiliateStatus {
+  PENDING     // Application pending review
+  ACTIVE      // Approved and active
+  SUSPENDED   // Temporarily suspended
+  TERMINATED  // Permanently removed
+}
+
+enum PayoutStatus {
+  PENDING     // Awaiting payout threshold or period
+  PROCESSING  // Payout in progress
+  COMPLETED   // Successfully paid
+  FAILED      // Payment failed
+  CANCELLED   // Cancelled by admin
+}
+
+model Affiliate {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Affiliate identification
+  code            String          @unique // Unique referral code (e.g., "PARTNER123")
+  email           String          @unique
+  name            String?
+  companyName     String?
+
+  // Status
+  status          AffiliateStatus @default(PENDING)
+  approvedAt      DateTime?
+  approvedBy      String?         // Admin who approved
+
+  // Commission configuration (percentage of revenue they earn)
+  commissionRate  Decimal         @default(10) @db.Decimal(5, 2) // Default 10%
+
+  // Payment information
+  paymentMethod   String          @default("square") // "square", "paypal", "bank"
+  paymentEmail    String?         // Email for Square/PayPal
+  bankDetails     Json?           // Bank account details (encrypted)
+
+  // Statistics
+  totalReferrals  Int             @default(0)
+  totalRevenue    Decimal         @default(0) @db.Decimal(10, 2)
+  totalCommission Decimal         @default(0) @db.Decimal(10, 2)
+  totalPaid       Decimal         @default(0) @db.Decimal(10, 2)
+
+  // Settings
+  notifyOnReferral Boolean        @default(true)
+  notifyOnPayout   Boolean        @default(true)
+
+  // Relations
+  referrals       AffiliateReferral[]
+  commissions     AffiliateCommission[]
+  payouts         AffiliatePayout[]
+
+  @@index([code])
+  @@index([email])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model AffiliateReferral {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  // Affiliate
+  affiliateId   String
+  affiliate     Affiliate @relation(fields: [affiliateId], references: [id])
+
+  // Customer identification (minimal PII)
+  customerEmail String?
+  customerId    String? // If they create an account
+  sessionId     String? // Anonymous tracking
+
+  // Conversion tracking
+  firstVisit    DateTime @default(now())
+  convertedAt   DateTime? // When they made first purchase
+  isConverted   Boolean  @default(false)
+
+  // Revenue attribution
+  totalRevenue  Decimal  @default(0) @db.Decimal(10, 2)
+  orderCount    Int      @default(0)
+
+  // Metadata
+  source        String?  // "twitter", "blog", "email", etc.
+  metadata      Json?    // Additional tracking data
+
+  // Relations
+  commissions   AffiliateCommission[]
+
+  @@index([affiliateId])
+  @@index([customerEmail])
+  @@index([customerId])
+  @@index([isConverted])
+  @@index([createdAt])
+}
+
+model AffiliateCommission {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  // Affiliate
+  affiliateId String
+  affiliate   Affiliate @relation(fields: [affiliateId], references: [id])
+
+  // Referral
+  referralId  String
+  referral    AffiliateReferral @relation(fields: [referralId], references: [id])
+
+  // Transaction details
+  transactionId   String?     // Link to Transaction model
+  orderId         String?     // Link to Order model
+  subscriptionId  String?     // Link to Subscription model
+
+  // Commission calculation
+  revenueAmount   Decimal     @db.Decimal(10, 2) // Revenue generated
+  commissionRate  Decimal     @db.Decimal(5, 2)  // % earned (snapshot at time)
+  commissionAmount Decimal    @db.Decimal(10, 2) // Actual commission
+
+  // Gospel V1.4.1 SURVIVAL MODE tracking (100% to verified pediatric charities)
+  charityImpact   Decimal     @db.Decimal(10, 2) // 100% to verified pediatric charities
+
+  // Payout tracking
+  payoutId    String?
+  payout      AffiliatePayout? @relation(fields: [payoutId], references: [id])
+  isPaid      Boolean          @default(false)
+  paidAt      DateTime?
+
+  // Metadata
+  description String?
+  metadata    Json?
+
+  @@index([affiliateId])
+  @@index([referralId])
+  @@index([transactionId])
+  @@index([isPaid])
+  @@index([createdAt])
+}
+
+model AffiliatePayout {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Affiliate
+  affiliateId String
+  affiliate   Affiliate @relation(fields: [affiliateId], references: [id])
+
+  // Payout period
+  periodStart DateTime
+  periodEnd   DateTime
+
+  // Financial details
+  totalCommission Decimal      @db.Decimal(10, 2)
+  payoutAmount    Decimal      @db.Decimal(10, 2) // After any fees
+  fees            Decimal      @default(0) @db.Decimal(10, 2)
+
+  // Payment details
+  paymentMethod   String       // "square", "paypal", "bank"
+  paymentEmail    String?
+
+  // Status tracking
+  status          PayoutStatus @default(PENDING)
+  processedAt     DateTime?
+  completedAt     DateTime?
+
+  // Square/PayPal transaction IDs (proof)
+  paymentId       String?      // External payment ID
+  receiptUrl      String?      // Receipt URL
+
+  // Retry logic
+  attemptCount    Int          @default(0)
+  lastAttemptAt   DateTime?
+  errorMessage    String?
+
+  // Audit trail
+  processedBy     String?      // "system" or admin ID
+  notes           String?      @db.Text
+
+  // Relations
+  commissions     AffiliateCommission[]
+
+  @@index([affiliateId])
+  @@index([status])
+  @@index([periodStart])
+  @@index([periodEnd])
+  @@index([createdAt])
+}

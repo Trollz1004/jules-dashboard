@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You And I, Not AI - The First 100% Human Dating App</title>
+    <meta name="description" content="The world's first dating app that guarantees you're talking to a real human, not an AI. No bots. No catfish. Just authentic connections.">
+    <meta name="keywords" content="dating app, human verification, anti-AI dating, authentic connections, real dating">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://youandinotai.com/">
+    <meta property="og:title" content="You And I, Not AI - 100% Human Dating">
+    <meta property="og:description" content="The world's first dating app that guarantees you're talking to a real human, not an AI. No bots. No catfish.">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://youandinotai.com/">
+    <meta property="twitter:title" content="You And I, Not AI - 100% Human Dating">
+    <meta property="twitter:description" content="The world's first dating app that guarantees you're talking to a real human, not an AI.">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #0d1421 0%, #1a2744 50%, #243352 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            background: linear-gradient(180deg, #ffffff 0%, #c0c0c0 40%, #8a9bae 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+        }
+
+        .tagline {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            color: #8a9bae;
+        }
+
+        .hero-section {
+            background: rgba(26, 39, 68, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(192,192,192,0.15);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .feature-card {
+            background: rgba(26, 39, 68, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(192,192,192,0.15);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: #c0c0c0;
+        }
+
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(180deg, #e8e8e8 0%, #c0c0c0 50%, #8a9bae 100%);
+            color: #1a2744;
+            padding: 20px 50px;
+            font-size: 1.3em;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px 0 rgba(192, 192, 192, 0.3);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px 0 rgba(192, 192, 192, 0.5);
+        }
+
+        .stats-section {
+            background: rgba(26, 39, 68, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            text-align: center;
+            border: 1px solid rgba(192,192,192,0.15);
+        }
+
+        .stats-section h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            background: linear-gradient(180deg, #ffffff 0%, #c0c0c0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stats-grid {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3em;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .stat-label {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .founding-members {
+            background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .founding-members h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 25px;
+            margin: 10px 5px;
+            font-weight: 600;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+
+            .tagline {
+                font-size: 1.2em;
+            }
+
+            .stats-grid {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>You And I, Not AI</h1>
+            <p class="tagline">The world's first dating app that guarantees you're talking to a real human</p>
+        </header>
+
+        <div class="hero-section">
+            <h2 style="font-size: 2em; margin-bottom: 20px;">No Bots. No Catfish. Just Real Humans.</h2>
+            <p style="font-size: 1.2em;">Every user is verified as human before they can message. We use advanced anti-AI detection to ensure authentic connections.</p>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">✓</div>
+                <h3>Human Verification</h3>
+                <p>Video verification ensures every profile is a real person</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <h3>Anti-AI Detection</h3>
+                <p>Advanced algorithms flag AI-generated messages instantly</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3>Real Conversations</h3>
+                <p>Talk to humans who actually want to connect</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Privacy First</h3>
+                <p>Your data is encrypted and never sold</p>
+            </div>
+        </div>
+
+        <div class="stats-section">
+            <h2>Why Human Verification Matters</h2>
+            <p style="font-size: 1.2em; margin-bottom: 30px;">
+                Other dating apps are flooded with bots, scammers, and AI-generated profiles. We built something different.
+            </p>
+
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Verified Humans</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">AI Bots Allowed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Anti-AI Monitoring</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="founding-members">
+            <h2>Founding Member Preorder</h2>
+            <p style="font-size: 1.3em; margin-bottom: 20px;">
+                Be one of the first 100 verified humans on the platform
+            </p>
+            <div style="margin: 20px 0;">
+                <span class="badge">Founding Member Badge</span>
+                <span class="badge">$14.99/mo (Save $5/mo Forever)</span>
+                <span class="badge">Early Access</span>
+                <span class="badge">Vote on Features</span>
+            </div>
+            <p style="font-size: 1.1em; margin-top: 20px;">
+                Regular price: $19.99/mo - Lock in founding member pricing today!
+            </p>
+        </div>
+
+        <div class="cta-section">
+            <h2 style="font-size: 2.5em; margin-bottom: 30px;">Ready to meet real humans?</h2>
+            <a href="https://checkout.square.site/merchant/ML3C7FMTQS5KX/order/H08ipiXrmHtAIAFmF7pT6k2AgM6YY" class="cta-button">Become a Founding Member</a>
+            <p style="margin-top: 20px; opacity: 0.9;">App launches Q1 2026 - Secure your founding member spot now</p>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 You And I, Not AI</p>
+            <p style="margin-top: 10px;">Operated by Trash or Treasure Online Recycler LLC</p>
+            <p style="margin-top: 15px;">
+                <a href="/terms.html" style="color: #f5576c; margin: 0 10px;">Terms of Service</a> |
+                <a href="/privacy.html" style="color: #f5576c; margin: 0 10px;">Privacy Policy</a> |
+                <a href="/moderation.html" style="color: #f5576c; margin: 0 10px;">Content Moderation</a>
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+{{!-- New Match Notification Email Template --}}
+{{#> base subject="You Have a New Match! " + match.firstName + " Likes You Too"}}
+
+<div class="text-center">
+    <h1>It's a Match! &#128150;</h1>
+    <p>Great news, {{user.firstName}}! You and <strong>{{match.firstName}}</strong> have both liked each other.</p>
+</div>
+
+<!-- Match Preview Card -->
+<div class="card card-highlight text-center" style="padding: 32px;">
+    <!-- Blurred Photo Placeholder -->
+    <div style="width: 120px; height: 120px; margin: 0 auto 20px; border-radius: 50%; overflow: hidden; background: linear-gradient(135deg, #e91e63 0%, #ff5722 100%); position: relative;">
+        {{#if match.photoUrl}}
+        <img src="{{match.photoUrl}}" alt="{{match.firstName}}" style="width: 100%; height: 100%; object-fit: cover; {{#unless user.isPremium}}filter: blur(8px);{{/unless}}" />
+        {{else}}
+        <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 48px; font-weight: 600;">
+            {{match.firstInitial}}
+        </div>
+        {{/if}}
+    </div>
+
+    <h2 style="margin-bottom: 8px;">{{match.firstName}}, {{match.age}}</h2>
+    <p class="text-muted" style="margin-bottom: 0;">
+        {{match.location}}
+    </p>
+</div>
+
+<!-- Quick Stats -->
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 24px 0;">
+    <tr>
+        <td width="33%" class="text-center" style="padding: 16px;">
+            <div style="font-size: 24px; color: #e91e63; font-weight: 700;">{{match.compatibilityScore}}%</div>
+            <div class="text-muted text-small">Compatibility</div>
+        </td>
+        <td width="33%" class="text-center" style="padding: 16px; border-left: 1px solid #eaeaec; border-right: 1px solid #eaeaec;">
+            <div style="font-size: 24px; color: #e91e63; font-weight: 700;">{{match.sharedInterests}}</div>
+            <div class="text-muted text-small">Shared Interests</div>
+        </td>
+        <td width="33%" class="text-center" style="padding: 16px;">
+            <div style="font-size: 24px; color: #e91e63; font-weight: 700;">{{match.distance}}</div>
+            <div class="text-muted text-small">Away</div>
+        </td>
+    </tr>
+</table>
+
+<!-- Shared Interests Preview -->
+{{#if match.interests}}
+<div class="card" style="margin-bottom: 24px;">
+    <p style="margin-bottom: 12px; color: #1a1a2e;"><strong>Things you both love:</strong></p>
+    <div>
+        {{#each match.interests}}
+        <span style="display: inline-block; background-color: #fff; border: 1px solid #e91e63; color: #e91e63; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px 4px 4px 0;">{{this}}</span>
+        {{/each}}
+    </div>
+</div>
+{{/if}}
+
+<div class="text-center">
+    <a href="{{siteUrl}}/matches/{{match.id}}" class="btn-primary">View Match & Start Chatting</a>
+</div>
+
+<div class="divider"></div>
+
+<!-- Tips Section -->
+<div style="background-color: #f9f9fb; border-radius: 8px; padding: 20px; margin-top: 20px;">
+    <p style="margin: 0; color: #51545e; font-size: 14px;">
+        <strong style="color: #1a1a2e;">&#128161; Conversation Starter:</strong><br>
+        Try asking {{match.firstName}} about {{#if match.interests}}{{match.interests.[0]}}{{else}}their favorite weekend activity{{/if}} - it's a great way to break the ice!
+    </p>
+</div>
+
+<p class="text-muted text-small text-center" style="margin-top: 24px;">
+    Don't wait too long! Matches that start chatting within 24 hours are 3x more likely to meet up.
+</p>
+
+{{/base}}

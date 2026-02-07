@@ -1,0 +1,72 @@
+{
+  "version": "Gospel V1.4.1 SURVIVAL MODE",
+  "network": "base-mainnet",
+  "chainId": 8453,
+  "contracts": {
+    "charityRouter": {
+      "type": "immutable",
+      "description": "AI Platform revenue - permanently locked to charity",
+      "allocation": {
+        "charity": 10000,
+        "founder": 0,
+        "dao": 0
+      },
+      "notes": "100% to verified pediatric charities - IMMUTABLE"
+    },
+    "datingRouter": {
+      "type": "uups-upgradeable",
+      "description": "Dating App revenue - survival mode enabled",
+      "phases": {
+        "survival": {
+          "active": true,
+          "founder": 10000,
+          "dao": 0,
+          "charity": 0,
+          "notes": "100% to founder during survival mode"
+        },
+        "transition": {
+          "active": false,
+          "minScheduleDelay": 604800,
+          "maxScheduleDelay": 2592000,
+          "delayDescription": "7-30 days mandatory waiting period",
+          "requirements": [
+            "Deploy Gnosis Safe multisig",
+            "Deploy Timelock controller",
+            "Schedule split with valid parameters",
+            "Wait minimum delay period",
+            "Apply split after delay"
+          ]
+        },
+        "permanent": {
+          "active": false,
+          "founderMaxBps": 1000,
+          "founderMaxPercent": "10%",
+          "irreversible": true,
+          "notes": "Once activated, founder can NEVER exceed 10%"
+        }
+      }
+    }
+  },
+  "roles": {
+    "DEFAULT_ADMIN_ROLE": {
+      "holder": "FOUNDER_WALLET",
+      "description": "Full administrative control"
+    },
+    "GOVERNOR_ROLE": {
+      "holder": "FOUNDER_WALLET",
+      "description": "Can schedule and apply splits",
+      "futureHolder": "DAO_SAFE + TIMELOCK"
+    },
+    "UPGRADER_ROLE": {
+      "holder": "FOUNDER_WALLET",
+      "description": "Can upgrade UUPS contracts"
+    }
+  },
+  "addresses": {
+    "charityRouter": "0x9855B75061D4c841791382998f0CE8B2BCC965A4",
+    "datingRouter": "TO_BE_DEPLOYED",
+    "daoSafe": "TO_BE_DEPLOYED",
+    "timelock": "TO_BE_DEPLOYED"
+  },
+  "mission": "Until no kid is in need"
+}

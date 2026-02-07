@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome, Founding Member! - AI Solutions</title>
+    <meta name="description" content="Thank you for becoming a Founding Member. You're now part of the AI Revolution.">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #141413 0%, #1a1a1a 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .success-icon {
+            font-size: 100px;
+            margin-bottom: 30px;
+            animation: bounce 2s ease infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #CC785C, #078EFA);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            font-size: 1.5em;
+            color: #20808D;
+            margin-bottom: 40px;
+        }
+
+        .info-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid #CC785C;
+            border-radius: 16px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+
+        .info-box h2 {
+            color: #CC785C;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+
+        .info-box p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: #ccc;
+            margin-bottom: 15px;
+        }
+
+        .charity-impact {
+            background: rgba(32, 128, 141, 0.2);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        .charity-impact .amount {
+            font-size: 3em;
+            color: #20808D;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .charity-impact .label {
+            font-size: 1.3em;
+            color: #999;
+        }
+
+        .next-steps {
+            text-align: left;
+            margin: 40px 0;
+        }
+
+        .next-steps h3 {
+            color: #078EFA;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .next-steps ul {
+            list-style: none;
+        }
+
+        .next-steps li {
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 1.1em;
+        }
+
+        .next-steps li:before {
+            content: '→ ';
+            color: #CC785C;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            border-radius: 8px;
+            font-size: 1.2em;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #CC785C, #078EFA);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid #CC785C;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(204, 120, 92, 0.5);
+        }
+
+        .session-id {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.9em;
+            color: #20808D;
+            margin-top: 20px;
+            word-break: break-all;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .tagline {
+                font-size: 1.2em;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="success-icon">🎉</div>
+
+        <h1>WELCOME, FOUNDING MEMBER!</h1>
+        <div class="tagline">You're now part of the AI Revolution</div>
+
+        <div class="info-box">
+            <h2>Subscription Confirmed</h2>
+            <p>Thank you for becoming a Founding Member! Your subscription is now active and you have full access to our AI platform.</p>
+        </div>
+
+        <div class="next-steps">
+            <h3>What Happens Next?</h3>
+            <ul>
+                <li>Check your email for subscription confirmation and receipt</li>
+                <li>You'll receive access credentials to the AI platform within 24 hours</li>
+                <li>Monthly usage reports will be sent to your inbox</li>
+                <li>Join our exclusive Founding Members Discord community</li>
+                <li>Access your customer portal to manage your subscription anytime</li>
+            </ul>
+        </div>
+
+
+        <div class="cta-buttons">
+            <a href="https://jules-dashboard.pages.dev" class="btn btn-primary">Visit Dashboard</a>
+            <a href="/founding-members.html" class="btn btn-secondary">Invite Friends</a>
+        </div>
+
+        <div id="session-info" class="session-id"></div>
+    </div>
+
+    <script>
+        // Extract session ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const sessionId = urlParams.get('session_id');
+
+        if (sessionId) {
+            document.getElementById('session-info').innerHTML = `
+                <strong>Session ID:</strong> ${sessionId}
+            `;
+        }
+
+        // Celebration animation
+        window.addEventListener('load', () => {
+            console.log('✅ Founding Member subscription successful!');
+            console.log('🎯 Session ID:', sessionId);
+        });
+    </script>
+</body>
+</html>

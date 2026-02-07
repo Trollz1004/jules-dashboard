@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Does It All - AI-Powered Business Solutions</title>
+    <meta name="description" content="AI automation tools for businesses. Video generation, marketing automation, affiliate systems, and more.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+        header { text-align: center; padding: 40px 0; }
+        h1 { font-size: 3em; margin-bottom: 15px; background: linear-gradient(135deg, #00d4ff, #7b2cbf); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .tagline { font-size: 1.3em; opacity: 0.9; margin-bottom: 30px; }
+
+        .hero { background: rgba(255,255,255,0.05); border-radius: 20px; padding: 40px; margin: 30px 0; text-align: center; }
+        .hero h2 { font-size: 1.8em; margin-bottom: 15px; }
+
+        .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin: 40px 0; }
+        .product { background: rgba(255,255,255,0.08); border-radius: 15px; padding: 25px; transition: transform 0.3s; }
+        .product:hover { transform: translateY(-5px); }
+        .product h3 { color: #00d4ff; margin-bottom: 10px; }
+        .product .price { font-size: 1.5em; font-weight: bold; color: #7b2cbf; margin: 15px 0; }
+        .product a { display: inline-block; background: linear-gradient(135deg, #00d4ff, #7b2cbf); color: white; padding: 12px 25px; border-radius: 25px; text-decoration: none; font-weight: 600; }
+
+        /* SMS OPT-IN FORM - TWILIO TFV COMPLIANT */
+        .sms-optin { background: rgba(0, 212, 255, 0.1); border: 2px solid #00d4ff; border-radius: 20px; padding: 40px; margin: 40px 0; }
+        .sms-optin h2 { color: #00d4ff; margin-bottom: 20px; text-align: center; }
+        .sms-optin p { text-align: center; margin-bottom: 25px; }
+
+        .optin-form { max-width: 500px; margin: 0 auto; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; }
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"] {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 1em;
+        }
+        .form-group input::placeholder { color: rgba(255,255,255,0.5); }
+
+        /* SMS CONSENT CHECKBOX - EXPLICIT & SEPARATE */
+        .consent-group { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; margin: 25px 0; }
+        .consent-group label { display: flex; align-items: flex-start; gap: 12px; cursor: pointer; font-size: 0.95em; line-height: 1.5; }
+        .consent-group input[type="checkbox"] { width: 22px; height: 22px; margin-top: 2px; flex-shrink: 0; accent-color: #00d4ff; }
+
+        .submit-btn { width: 100%; padding: 18px; background: linear-gradient(135deg, #00d4ff, #7b2cbf); color: white; border: none; border-radius: 10px; font-size: 1.1em; font-weight: 600; cursor: pointer; transition: opacity 0.3s; }
+        .submit-btn:hover { opacity: 0.9; }
+        .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .fine-print { font-size: 0.85em; opacity: 0.7; margin-top: 20px; text-align: center; }
+        .fine-print a { color: #00d4ff; }
+
+        footer { text-align: center; padding: 40px 20px; opacity: 0.7; }
+        footer a { color: #00d4ff; margin: 0 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AI Does It All</h1>
+            <p class="tagline">AI-Powered Automation for Modern Businesses</p>
+        </header>
+
+        <div class="hero">
+            <h2>Automate Your Business with AI</h2>
+            <p>From video generation to marketing automation, our AI tools help you scale faster.</p>
+        </div>
+
+        <div class="products">
+            <div class="product">
+                <h3>Claude Droid</h3>
+                <p>AI Video Generator - Scripts, voiceover, and rendering automated.</p>
+                <div class="price">$299</div>
+                <a href="https://ai-solutions.store">Learn More</a>
+            </div>
+            <div class="product">
+                <h3>Income Droid</h3>
+                <p>Monetized video automation with revenue tracking.</p>
+                <div class="price">$499</div>
+                <a href="https://ai-solutions.store">Learn More</a>
+            </div>
+            <div class="product">
+                <h3>Marketing Engine</h3>
+                <p>AI social media automation - 4 posts/day on autopilot.</p>
+                <div class="price">$199</div>
+                <a href="https://ai-solutions.store">Learn More</a>
+            </div>
+        </div>
+
+        <!-- TWILIO TFV COMPLIANT SMS OPT-IN FORM -->
+        <div class="sms-optin" id="sms-signup">
+            <h2>Get Account Notifications via SMS</h2>
+            <p>Sign up to receive account alerts, order updates, and service notifications via text message.</p>
+
+            <form class="optin-form" id="smsOptinForm" action="/api/sms/subscribe" method="POST">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" placeholder="Your name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567" required>
+                </div>
+
+                <!-- EXPLICIT SMS CONSENT - SEPARATE CHECKBOX -->
+                <div class="consent-group">
+                    <label>
+                        <input type="checkbox" id="smsConsent" name="smsConsent" required>
+                        <span><strong>I agree to receive SMS/text messages</strong> from AI Does It All at the phone number provided. Message types include: account notifications, order confirmations, service alerts, and support updates. Message frequency varies. Message and data rates may apply. Reply STOP to unsubscribe at any time.</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">Subscribe to SMS Notifications</button>
+
+                <p class="fine-print">
+                    By subscribing, you also agree to our <a href="/terms">Terms of Service</a> and <a href="/privacy">Privacy Policy</a>.<br>
+                    We will never share your phone number. Text HELP for help, STOP to cancel.
+                </p>
+            </form>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 AI Does It All</p>
+            <p>Operated by Trash or Treasure Online Recycler LLC</p>
+            <p style="margin-top: 15px;">
+                <a href="/terms">Terms</a> |
+                <a href="/privacy">Privacy</a> |
+                <a href="mailto:support@aidoesitall.website">Contact</a>
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Form validation - ensure SMS consent is checked
+        document.getElementById('smsOptinForm').addEventListener('submit', function(e) {
+            const smsConsent = document.getElementById('smsConsent');
+            if (!smsConsent.checked) {
+                e.preventDefault();
+                alert('Please check the SMS consent checkbox to subscribe to text notifications.');
+                return false;
+            }
+            // Form submits to /api/sms/subscribe
+        });
+    </script>
+</body>
+</html>

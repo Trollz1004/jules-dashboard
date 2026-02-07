@@ -1,0 +1,158 @@
+{
+  "contractName": "DatingRevenueRouter",
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        { "indexed": true, "internalType": "address", "name": "token", "type": "address" },
+        { "indexed": false, "internalType": "uint256", "name": "totalAmount", "type": "uint256" },
+        { "indexed": false, "internalType": "uint256", "name": "founderAmount", "type": "uint256" },
+        { "indexed": false, "internalType": "uint256", "name": "daoAmount", "type": "uint256" },
+        { "indexed": false, "internalType": "uint256", "name": "charityAmount", "type": "uint256" }
+      ],
+      "name": "Distribution",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        { "indexed": false, "internalType": "uint256", "name": "founderPct", "type": "uint256" },
+        { "indexed": false, "internalType": "uint256", "name": "daoPct", "type": "uint256" },
+        { "indexed": false, "internalType": "uint256", "name": "charityPct", "type": "uint256" },
+        { "indexed": false, "internalType": "uint256", "name": "effectiveAt", "type": "uint256" }
+      ],
+      "name": "SplitScheduled",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        { "indexed": false, "internalType": "uint256", "name": "founderPct", "type": "uint256" },
+        { "indexed": false, "internalType": "uint256", "name": "daoPct", "type": "uint256" },
+        { "indexed": false, "internalType": "uint256", "name": "charityPct", "type": "uint256" }
+      ],
+      "name": "SplitApplied",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        { "indexed": false, "internalType": "uint256", "name": "founderMaxBps", "type": "uint256" }
+      ],
+      "name": "PermanentActivated",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        { "internalType": "address", "name": "_usdcToken", "type": "address" },
+        { "internalType": "address", "name": "_founderWallet", "type": "address" },
+        { "internalType": "address", "name": "_daoWallet", "type": "address" },
+        { "internalType": "address", "name": "_charityWallet", "type": "address" }
+      ],
+      "name": "initialize",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getCurrentSplit",
+      "outputs": [
+        { "internalType": "uint256", "name": "founderPct", "type": "uint256" },
+        { "internalType": "uint256", "name": "daoPct", "type": "uint256" },
+        { "internalType": "uint256", "name": "charityPct", "type": "uint256" }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getPendingSplit",
+      "outputs": [
+        { "internalType": "uint256", "name": "founderPct", "type": "uint256" },
+        { "internalType": "uint256", "name": "daoPct", "type": "uint256" },
+        { "internalType": "uint256", "name": "charityPct", "type": "uint256" },
+        { "internalType": "uint256", "name": "effectiveAt", "type": "uint256" }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getSplitMode",
+      "outputs": [{ "internalType": "enum DatingRevenueRouter.SplitMode", "name": "", "type": "uint8" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "isPermanent",
+      "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "internalType": "uint256", "name": "_founderPct", "type": "uint256" },
+        { "internalType": "uint256", "name": "_daoPct", "type": "uint256" },
+        { "internalType": "uint256", "name": "_charityPct", "type": "uint256" },
+        { "internalType": "uint256", "name": "_delay", "type": "uint256" }
+      ],
+      "name": "scheduleSplit",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "applySplit",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [{ "internalType": "uint256", "name": "_founderMaxBps", "type": "uint256" }],
+      "name": "activatePermanentSplit",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [{ "internalType": "address", "name": "token", "type": "address" }],
+      "name": "distribute",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "MIN_SCHEDULE_DELAY",
+      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "MAX_SCHEDULE_DELAY",
+      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "GOVERNOR_ROLE",
+      "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecodeHash": "0x...",
+  "compiler": "solc-0.8.20",
+  "network": "base-mainnet",
+  "proxy": "UUPS"
+}

@@ -1,0 +1,107 @@
+{{!-- Welcome Email Template --}}
+{{#> base subject="Welcome to " + siteName + "! Let's Find Your Perfect Match"}}
+
+<h1>Welcome to {{siteName}}, {{user.firstName}}! &#127881;</h1>
+
+<p>We're thrilled to have you join our community of amazing singles looking for meaningful connections. Your journey to finding love starts right here!</p>
+
+<div class="card card-highlight">
+    <p style="margin: 0; font-size: 18px; color: #1a1a2e;">
+        <strong>Your account is ready!</strong><br>
+        <span class="text-muted">Start exploring and connecting with compatible matches today.</span>
+    </p>
+</div>
+
+<h2>Get Started in 3 Easy Steps</h2>
+
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 24px 0;">
+    <tr>
+        <td style="padding: 16px 0; border-bottom: 1px solid #eaeaec;">
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                <tr>
+                    <td width="48" valign="top">
+                        <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #e91e63 0%, #ff5722 100%); border-radius: 50%; text-align: center; line-height: 40px; color: #fff; font-weight: bold; font-size: 18px;">1</div>
+                    </td>
+                    <td valign="top">
+                        <strong style="color: #1a1a2e; font-size: 16px;">Complete Your Profile</strong>
+                        <p style="margin: 4px 0 0; color: #51545e; font-size: 14px;">Add photos and share what makes you unique. Profiles with photos get 10x more matches!</p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding: 16px 0; border-bottom: 1px solid #eaeaec;">
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                <tr>
+                    <td width="48" valign="top">
+                        <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #e91e63 0%, #ff5722 100%); border-radius: 50%; text-align: center; line-height: 40px; color: #fff; font-weight: bold; font-size: 18px;">2</div>
+                    </td>
+                    <td valign="top">
+                        <strong style="color: #1a1a2e; font-size: 16px;">Set Your Preferences</strong>
+                        <p style="margin: 4px 0 0; color: #51545e; font-size: 14px;">Tell us what you're looking for so we can suggest the best matches for you.</p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding: 16px 0;">
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                <tr>
+                    <td width="48" valign="top">
+                        <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #e91e63 0%, #ff5722 100%); border-radius: 50%; text-align: center; line-height: 40px; color: #fff; font-weight: bold; font-size: 18px;">3</div>
+                    </td>
+                    <td valign="top">
+                        <strong style="color: #1a1a2e; font-size: 16px;">Start Matching</strong>
+                        <p style="margin: 4px 0 0; color: #51545e; font-size: 14px;">Browse profiles, send likes, and start conversations with people who catch your eye.</p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<div class="text-center">
+    <a href="{{siteUrl}}/profile/edit" class="btn-primary">Complete Your Profile</a>
+</div>
+
+<div class="divider"></div>
+
+<h2>Pro Tips for Success</h2>
+
+<div class="card">
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+        <tr>
+            <td style="padding: 8px 0;">
+                <span style="color: #e91e63; font-size: 18px; margin-right: 12px;">&#10004;</span>
+                <span style="color: #51545e;">Use recent, high-quality photos that show your personality</span>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding: 8px 0;">
+                <span style="color: #e91e63; font-size: 18px; margin-right: 12px;">&#10004;</span>
+                <span style="color: #51545e;">Write a bio that's genuine and conversation-starting</span>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding: 8px 0;">
+                <span style="color: #e91e63; font-size: 18px; margin-right: 12px;">&#10004;</span>
+                <span style="color: #51545e;">Be specific about your interests and hobbies</span>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding: 8px 0;">
+                <span style="color: #e91e63; font-size: 18px; margin-right: 12px;">&#10004;</span>
+                <span style="color: #51545e;">Respond to messages within 24 hours for best results</span>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<p class="text-muted text-small text-center">
+    Need help? Our support team is here for you 24/7.<br>
+    <a href="{{siteUrl}}/help">Visit our Help Center</a> or reply to this email.
+</p>
+
+{{/base}}

@@ -1,0 +1,12 @@
+{
+  "generated": "2026-01-14T18:18:19.354Z",
+  "gospel": "V1.4.1 SURVIVAL MODE",
+  "network": "base-mainnet",
+  "chainId": 8453,
+  "wallets": {
+    "daoTreasury": "0xa87874d5320555c8639670645F1A2B4f82363a7c",
+    "datingRevenueWallet": "0xbe571f8392c28e2baa9a8b18E73B1D25bcFD0121",
+    "charityRevenueWallet": "0x222aEB4d88fd1963ffa27783d48d22C7b7EcF76B",
+    "opsWallet": "0xc043F5D516ee024d1dB812cb81fB64302b0Fe2B4"
+  }
+}

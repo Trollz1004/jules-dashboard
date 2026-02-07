@@ -1,0 +1,53 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# CLOUDFLARE WORKERS CONFIGURATION - Jules API
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# Deploy: npx wrangler deploy
+#
+# ═══════════════════════════════════════════════════════════════════════════════
+
+name = "jules-api"
+main = "src/worker.js"
+compatibility_date = "2024-12-01"
+node_compat = true
+
+# Account configuration (set via wrangler login or env)
+# account_id = ""
+
+# Routes
+routes = [
+  { pattern = "api.forthekids.org/*", zone_name = "forthekids.org" }
+]
+
+# KV Namespaces for caching
+# [[kv_namespaces]]
+# binding = "CACHE"
+# id = ""
+
+# D1 Database (Cloudflare's SQL)
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "forthekids-db"
+# database_id = ""
+
+# Environment variables
+[vars]
+NODE_ENV = "production"
+CORS_ORIGINS = "https://jules-dashboard.pages.dev,https://forthekids.org,https://youandinotai.com"
+
+# Secrets (set via wrangler secret put)
+# - SQUARE_ACCESS_TOKEN
+# - SQUARE_LOCATION_ID
+# - JWT_SECRET
+# - DATABASE_URL
+
+# Production environment
+[env.production]
+vars = { NODE_ENV = "production" }
+
+# Staging environment
+[env.staging]
+vars = { NODE_ENV = "staging" }
+routes = [
+  { pattern = "api-staging.forthekids.org/*", zone_name = "forthekids.org" }
+]

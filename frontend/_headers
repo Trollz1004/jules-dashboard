@@ -1,0 +1,27 @@
+# ═══════════════════════════════════════════════════════════════
+# YouAndINotAI Dating Platform - Security Headers
+# Royalty Deck of Hearts - youandinotai.com
+# Cloudflare Pages _headers file
+# ═══════════════════════════════════════════════════════════════
+
+/*
+  # HSTS - Force HTTPS (1 year, include subdomains, preload ready)
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+
+  # CSP - Content Security Policy (XSS prevention)
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://sandbox.web.squarecdn.com https://web.squarecdn.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://dao.youandinotai.com;
+
+  # X-Frame-Options - Prevent clickjacking
+  X-Frame-Options: SAMEORIGIN
+
+  # X-Content-Type-Options - Prevent MIME sniffing
+  X-Content-Type-Options: nosniff
+
+  # Referrer-Policy - Control referrer information
+  Referrer-Policy: strict-origin-when-cross-origin
+
+  # Permissions-Policy - Disable unnecessary browser features
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+
+  # X-XSS-Protection - Enable browser XSS filter (legacy, but doesn't hurt)
+  X-XSS-Protection: 1; mode=block

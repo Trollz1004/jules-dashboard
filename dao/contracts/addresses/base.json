@@ -1,0 +1,64 @@
+{
+  "network": "base-mainnet",
+  "chainId": 8453,
+  "deployedAt": "2026-01-14T12:00:00Z",
+  "gospel": "V1.4.1 SURVIVAL MODE",
+  "contracts": {
+    "CharityRouter100": {
+      "address": "0x9855B75061D4c841791382998f0CE8B2BCC965A4",
+      "type": "immutable",
+      "allocation": "100% to verified pediatric charities",
+      "basescan": "https://basescan.org/address/0x9855B75061D4c841791382998f0CE8B2BCC965A4",
+      "verified": true
+    },
+    "DatingRevenueRouter": {
+      "proxy": "0x1512012677fd2dA1Eb9a00DAEff17c56303d9614",
+      "implementation": "0x7c523c503Af2D4f60F2093e869884C7367A3d2b9",
+      "type": "uups-upgradeable",
+      "currentMode": "SURVIVAL",
+      "currentSplit": {
+        "founder": 10000,
+        "dao": 0,
+        "charity": 0
+      },
+      "basescan": "https://basescan.org/address/0x1512012677fd2dA1Eb9a00DAEff17c56303d9614",
+      "verified": true,
+      "deployedAt": "2026-01-17T06:12:00Z"
+    }
+  },
+  "tokens": {
+    "USDC": {
+      "address": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+      "symbol": "USDC",
+      "decimals": 6,
+      "basescan": "https://basescan.org/token/0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+    }
+  },
+  "wallets": {
+    "DAO_TREASURY": "0xa87874d5320555c8639670645F1A2B4f82363a7c",
+    "DATING_REVENUE_WALLET": "0xbe571f8392c28e2baa9a8b18E73B1D25bcFD0121",
+    "CHARITY_REVENUE_WALLET": "0x222aEB4d88fd1963ffa27783d48d22C7b7EcF76B",
+    "OPS_WALLET": "0xc043F5D516ee024d1dB812cb81fB64302b0Fe2B4",
+    "CHARITY_SAFE": "0x222aEB4d88fd1963ffa27783d48d22C7b7EcF76B",
+    "DAO_SAFE": "0xa87874d5320555c8639670645F1A2B4f82363a7c",
+    "FOUNDER_WALLET": "0xbe571f8392c28e2baa9a8b18E73B1D25bcFD0121"
+  },
+  "protocolOmega": {
+    "status": "IMMUTABLE",
+    "founder": "Joshua Coleman",
+    "split": {
+      "charity": 6000,
+      "infrastructure": 3000,
+      "familyTrust": 1000
+    },
+    "succession": {
+      "primary": "Founder's Brother & Niece",
+      "secondary": "Biological children (Grand-nieces/nephews)",
+      "fallback": "Reverts to 60% Pediatric Charity Fund"
+    }
+  },
+  "rpc": {
+    "mainnet": "https://mainnet.base.org",
+    "explorer": "https://basescan.org"
+  }
+}

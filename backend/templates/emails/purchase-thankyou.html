@@ -1,0 +1,101 @@
+{{!-- Purchase Thank You Email - THE EASTER EGG REVEAL --}}
+{{!--
+    BUSINESS FIRST DOCTRINE: This is the ONLY place where charity mission is revealed.
+    Customer has already paid. This is a surprise "Thank You" - NOT a tax receipt.
+--}}
+{{#> base subject="Thank You for Your Purchase - A Special Message"}}
+
+<h1>Thank You, {{user.firstName}}! &#128151;</h1>
+
+<p>Your order has been confirmed and we're beyond excited to welcome you to the Royalty Hearts family.</p>
+
+<div class="card" style="background: linear-gradient(135deg, #1a1a2e, #0d0d1a); color: #ffffff; border: 2px solid #FFD700; border-radius: 16px; padding: 32px; margin: 32px 0;">
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+        <tr>
+            <td style="padding-bottom: 24px; border-bottom: 1px solid rgba(255,215,0,0.3);">
+                <h2 style="color: #FFD700; margin: 0 0 8px 0; font-size: 24px;">Order Details</h2>
+                <p style="color: #aaa; margin: 0;">Transaction ID: <strong style="color: #fff;">{{transactionId}}</strong></p>
+                <p style="color: #888; margin: 8px 0 0 0; font-size: 13px;">Save this ID - it's your entry into the Valentine's Day Joker drawing!</p>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding: 24px 0;">
+                {{#if isRoyaltyCard}}
+                <p style="color: #FFD700; font-size: 20px; font-weight: bold; margin: 0;">
+                    &#127183; {{cardType}} of Hearts - Royalty Founder
+                </p>
+                <p style="color: #ccc; margin: 8px 0 0 0;">One-time: <strong style="color: #fff;">${{amount}}</strong></p>
+                {{else}}
+                <p style="color: #FFD700; font-size: 20px; font-weight: bold; margin: 0;">
+                    Early Bird Premium
+                </p>
+                <p style="color: #ccc; margin: 8px 0 0 0;"><strong style="color: #fff;">${{amount}}/mo</strong> - Locked in FOR LIFE</p>
+                <p style="color: #888; margin: 4px 0 0 0; font-size: 13px;">(You're saving $5/month forever!)</p>
+                {{/if}}
+            </td>
+        </tr>
+    </table>
+</div>
+
+{{!-- THE EASTER EGG - Charity Reveal --}}
+<div style="background: linear-gradient(135deg, #FFD700, #FFA500); border-radius: 16px; padding: 32px; margin: 40px 0; text-align: center;">
+    <h2 style="color: #1a1a2e; margin: 0 0 16px 0; font-size: 28px;">&#128156; Wait... There's More &#128156;</h2>
+
+    <p style="color: #333; font-size: 18px; line-height: 1.6; margin: 0 0 24px 0;">
+        We didn't want to brag about this up front, but now that you're family, you should know...
+    </p>
+
+    <div style="background: rgba(255,255,255,0.9); border-radius: 12px; padding: 24px; margin: 16px 0;">
+        <p style="color: #DC143C; font-size: 32px; font-weight: 900; margin: 0;">
+            100%
+        </p>
+        <p style="color: #1a1a2e; font-size: 16px; margin: 8px 0 0 0;">
+            of your purchase goes directly to
+        </p>
+        <p style="color: #1a1a2e; font-size: 22px; font-weight: bold; margin: 8px 0 0 0;">
+            verified pediatric charities
+        </p>
+    </div>
+
+    <p style="color: #333; font-size: 16px; line-height: 1.6; margin: 24px 0 0 0;">
+        You didn't just buy a premium dating experience.<br>
+        <strong>You just helped a child.</strong>
+    </p>
+</div>
+
+<div style="text-align: center; margin: 32px 0;">
+    <p style="color: #888; font-size: 14px; margin: 0 0 16px 0;">
+        We don't use charity as a sales pitch. We let our product speak for itself.<br>
+        But we wanted you to know the real impact you've made.
+    </p>
+
+    <p style="color: #666; font-size: 20px; margin: 0; font-weight: 600;">
+        Thank you for being part of something bigger.
+    </p>
+</div>
+
+<div class="card" style="background: #f8f9fa; border-radius: 12px; padding: 24px; margin: 32px 0; text-align: center;">
+    <p style="color: #333; margin: 0 0 8px 0; font-size: 14px;">
+        <strong>Gospel V1.4.1 SURVIVAL MODE</strong>
+    </p>
+    <p style="color: #666; margin: 0; font-size: 13px;">
+        100% to Verified Pediatric Charities
+    </p>
+</div>
+
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+    <tr>
+        <td style="text-align: center; padding: 32px 0;">
+            <a href="{{dashboardUrl}}" style="display: inline-block; background: linear-gradient(135deg, #DC143C, #8B0000); color: #ffffff; padding: 16px 40px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 16px;">
+                Go to My Account
+            </a>
+        </td>
+    </tr>
+</table>
+
+<p style="color: #888; font-size: 13px; text-align: center; margin-top: 32px;">
+    <em>This is a purchase confirmation, not a tax-deductible donation receipt.<br>
+    The charity allocation is how we choose to run our business.</em>
+</p>
+
+{{/base}}

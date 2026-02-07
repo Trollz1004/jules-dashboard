@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="x-apple-disable-message-reformatting">
+    <meta name="color-scheme" content="light dark">
+    <meta name="supported-color-schemes" content="light dark">
+    <title>{{subject}}</title>
+
+    <!--[if mso]>
+    <noscript>
+        <xml>
+            <o:OfficeDocumentSettings>
+                <o:PixelsPerInch>96</o:PixelsPerInch>
+            </o:OfficeDocumentSettings>
+        </xml>
+    </noscript>
+    <![endif]-->
+
+    <style>
+        /* Reset styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Dark mode support */
+        :root {
+            color-scheme: light dark;
+            supported-color-schemes: light dark;
+        }
+
+        /* Base styles */
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100% !important;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            background-color: #f4f4f7;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        table {
+            border-collapse: collapse;
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+        }
+
+        img {
+            border: 0;
+            height: auto;
+            line-height: 100%;
+            outline: none;
+            text-decoration: none;
+            -ms-interpolation-mode: bicubic;
+        }
+
+        /* Container */
+        .email-wrapper {
+            width: 100%;
+            background-color: #f4f4f7;
+            padding: 20px 0;
+        }
+
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Header */
+        .email-header {
+            background: linear-gradient(135deg, #e91e63 0%, #ff5722 100%);
+            padding: 32px 40px;
+            text-align: center;
+        }
+
+        .logo {
+            max-width: 180px;
+            height: auto;
+        }
+
+        .logo-text {
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            text-decoration: none;
+        }
+
+        .logo-heart {
+            display: inline-block;
+            margin-right: 8px;
+        }
+
+        /* Body */
+        .email-body {
+            padding: 40px;
+        }
+
+        .email-body h1 {
+            color: #1a1a2e;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.3;
+        }
+
+        .email-body h2 {
+            color: #1a1a2e;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .email-body p {
+            color: #51545e;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .email-body a {
+            color: #e91e63;
+            text-decoration: none;
+        }
+
+        .email-body a:hover {
+            text-decoration: underline;
+        }
+
+        /* Primary CTA Button */
+        .btn-primary {
+            display: inline-block;
+            background: linear-gradient(135deg, #e91e63 0%, #ff5722 100%);
+            color: #ffffff !important;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 14px 32px;
+            border-radius: 50px;
+            margin: 16px 0;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            text-decoration: none;
+            transform: scale(1.02);
+        }
+
+        /* Secondary Button */
+        .btn-secondary {
+            display: inline-block;
+            background-color: #f4f4f7;
+            color: #51545e !important;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            border: 1px solid #dedede;
+        }
+
+        /* Card styles */
+        .card {
+            background-color: #f9f9fb;
+            border-radius: 8px;
+            padding: 24px;
+            margin: 20px 0;
+        }
+
+        .card-highlight {
+            background: linear-gradient(135deg, rgba(233, 30, 99, 0.1) 0%, rgba(255, 87, 34, 0.1) 100%);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+        }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background-color: #eaeaec;
+            margin: 24px 0;
+        }
+
+        /* Footer */
+        .email-footer {
+            background-color: #f9f9fb;
+            padding: 32px 40px;
+            text-align: center;
+            border-top: 1px solid #eaeaec;
+        }
+
+        .footer-text {
+            color: #9a9ea6;
+            font-size: 13px;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .social-links {
+            margin: 20px 0;
+        }
+
+        .social-link {
+            display: inline-block;
+            margin: 0 8px;
+        }
+
+        .social-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #dedede;
+        }
+
+        .footer-links {
+            margin: 16px 0;
+        }
+
+        .footer-links a {
+            color: #9a9ea6;
+            font-size: 12px;
+            text-decoration: none;
+            margin: 0 12px;
+        }
+
+        .footer-links a:hover {
+            color: #e91e63;
+            text-decoration: underline;
+        }
+
+        .unsubscribe-text {
+            color: #b0b3b8;
+            font-size: 11px;
+            margin-top: 16px;
+        }
+
+        .unsubscribe-text a {
+            color: #b0b3b8;
+            text-decoration: underline;
+        }
+
+        /* Utility classes */
+        .text-center {
+            text-align: center;
+        }
+
+        .text-muted {
+            color: #9a9ea6;
+        }
+
+        .text-small {
+            font-size: 14px;
+        }
+
+        .mt-0 { margin-top: 0; }
+        .mb-0 { margin-bottom: 0; }
+        .mt-20 { margin-top: 20px; }
+        .mb-20 { margin-bottom: 20px; }
+
+        /* Dark Mode Styles */
+        @media (prefers-color-scheme: dark) {
+            body,
+            .email-wrapper {
+                background-color: #1a1a2e !important;
+            }
+
+            .email-container {
+                background-color: #16213e !important;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            }
+
+            .email-body h1,
+            .email-body h2 {
+                color: #ffffff !important;
+            }
+
+            .email-body p {
+                color: #c1c1c6 !important;
+            }
+
+            .card {
+                background-color: #1a1a2e !important;
+            }
+
+            .card-highlight {
+                background: linear-gradient(135deg, rgba(233, 30, 99, 0.2) 0%, rgba(255, 87, 34, 0.2) 100%) !important;
+            }
+
+            .email-footer {
+                background-color: #1a1a2e !important;
+                border-top-color: #2d2d44 !important;
+            }
+
+            .divider {
+                background-color: #2d2d44 !important;
+            }
+
+            .btn-secondary {
+                background-color: #2d2d44 !important;
+                border-color: #3d3d5c !important;
+                color: #c1c1c6 !important;
+            }
+        }
+
+        /* Mobile Responsive */
+        @media only screen and (max-width: 600px) {
+            .email-container {
+                width: 100% !important;
+                margin: 0 !important;
+                border-radius: 0 !important;
+            }
+
+            .email-header {
+                padding: 24px 20px !important;
+            }
+
+            .email-body {
+                padding: 24px 20px !important;
+            }
+
+            .email-footer {
+                padding: 24px 20px !important;
+            }
+
+            .email-body h1 {
+                font-size: 22px !important;
+            }
+
+            .btn-primary {
+                display: block !important;
+                width: 100% !important;
+            }
+
+            .hide-mobile {
+                display: none !important;
+            }
+
+            .stack-mobile {
+                display: block !important;
+                width: 100% !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="email-wrapper">
+        <!--[if mso]>
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" align="center">
+        <tr>
+        <td>
+        <![endif]-->
+
+        <table class="email-container" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+            <!-- Header -->
+            <tr>
+                <td class="email-header">
+                    <a href="{{siteUrl}}" class="logo-text">
+                        <span class="logo-heart">&#10084;</span>
+                        {{siteName}}
+                    </a>
+                </td>
+            </tr>
+
+            <!-- Body Content -->
+            <tr>
+                <td class="email-body">
+                    {{> @partial-block }}
+                </td>
+            </tr>
+
+            <!-- Footer -->
+            <tr>
+                <td class="email-footer">
+                    <!-- Social Links -->
+                    <div class="social-links">
+                        <a href="{{socialLinks.facebook}}" class="social-link" title="Facebook">
+                            <img src="{{assetsUrl}}/icons/facebook.png" alt="Facebook" width="32" height="32" class="social-icon">
+                        </a>
+                        <a href="{{socialLinks.twitter}}" class="social-link" title="Twitter">
+                            <img src="{{assetsUrl}}/icons/twitter.png" alt="Twitter" width="32" height="32" class="social-icon">
+                        </a>
+                        <a href="{{socialLinks.instagram}}" class="social-link" title="Instagram">
+                            <img src="{{assetsUrl}}/icons/instagram.png" alt="Instagram" width="32" height="32" class="social-icon">
+                        </a>
+                    </div>
+
+                    <!-- Footer Links -->
+                    <div class="footer-links">
+                        <a href="{{siteUrl}}/help">Help Center</a>
+                        <a href="{{siteUrl}}/privacy">Privacy Policy</a>
+                        <a href="{{siteUrl}}/terms">Terms of Service</a>
+                        <a href="{{siteUrl}}/contact">Contact Us</a>
+                    </div>
+
+                    <!-- Company Info -->
+                    <p class="footer-text">
+                        {{companyName}}<br>
+                        {{companyAddress}}
+                    </p>
+
+                    <!-- Unsubscribe -->
+                    <p class="unsubscribe-text">
+                        You're receiving this email because you signed up for {{siteName}}.<br>
+                        <a href="{{unsubscribeUrl}}?token={{unsubscribeToken}}&type={{emailType}}">Unsubscribe</a> |
+                        <a href="{{siteUrl}}/settings/notifications">Manage Preferences</a>
+                    </p>
+                </td>
+            </tr>
+        </table>
+
+        <!--[if mso]>
+        </td>
+        </tr>
+        </table>
+        <![endif]-->
+    </div>
+</body>
+</html>

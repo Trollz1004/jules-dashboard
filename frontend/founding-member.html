@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Founding Member - AI Solutions | Lifetime Pro Access</title>
+    <meta name="description" content="Join the first 100 Founding Members. $99 one-time for lifetime Pro access.">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Founding Member - AI Solutions">
+    <meta property="og:description" content="Limited to first 100 members. $99 one-time = Lifetime Pro access.">
+    <meta property="og:image" content="https://aidoesitall.website/images/founding-member-og.png">
+    <meta property="og:url" content="https://aidoesitall.website/founding-member">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --void-dark: #141413;
+            --coral: #CC785C;
+            --blue: #078EFA;
+            --teal: #20808D;
+            --gold: #F4B400;
+            --text-light: #E8E8E8;
+            --text-dim: #A0A0A0;
+            --green: #4CAF50;
+            --yellow: #FFC107;
+            --red: #F44336;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--void-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 80px 20px 60px;
+            background: linear-gradient(180deg, #1a1a19 0%, var(--void-dark) 100%);
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--coral) 0%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .subtitle {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: var(--text-dim);
+            margin-bottom: 10px;
+        }
+
+        .hero .gospel-badge {
+            display: inline-block;
+            background: rgba(204, 120, 92, 0.1);
+            border: 2px solid var(--coral);
+            border-radius: 30px;
+            padding: 10px 30px;
+            margin: 20px 0 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        /* Counter Widget */
+        .counter-section {
+            background: linear-gradient(135deg, rgba(204, 120, 92, 0.1) 0%, rgba(7, 142, 250, 0.1) 100%);
+            border: 2px solid var(--coral);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            margin: 40px auto;
+            max-width: 600px;
+        }
+
+        .counter-display {
+            font-size: 5rem;
+            font-weight: 900;
+            margin: 20px 0;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .spots-remaining {
+            color: var(--green);
+        }
+
+        .spots-remaining.warning {
+            color: var(--yellow);
+        }
+
+        .spots-remaining.critical {
+            color: var(--red);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        .total-spots {
+            color: var(--text-dim);
+            font-size: 3rem;
+        }
+
+        .urgency-message {
+            font-size: 1.3rem;
+            margin: 20px 0;
+            font-weight: 600;
+        }
+
+        .price-warning {
+            color: var(--text-dim);
+            font-size: 1rem;
+            margin-bottom: 30px;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            background: linear-gradient(135deg, var(--coral) 0%, var(--gold) 100%);
+            color: var(--void-dark);
+            border: none;
+            padding: 20px 50px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(204, 120, 92, 0.4);
+        }
+
+        .cta-button:active {
+            transform: translateY(-1px);
+        }
+
+        /* Value Proposition */
+        .value-section {
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .value-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: var(--blue);
+        }
+
+        .value-math {
+            background: rgba(7, 142, 250, 0.1);
+            border: 2px solid var(--blue);
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+            font-family: 'JetBrains Mono', monospace;
+            text-align: left;
+        }
+
+        .value-math .line {
+            font-size: 1.2rem;
+            margin: 15px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .value-math .highlight {
+            color: var(--gold);
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        /* Gospel Allocation */
+        .gospel-section {
+            background: rgba(32, 128, 141, 0.05);
+            padding: 80px 20px;
+        }
+
+        .gospel-breakdown {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--void-dark);
+            border: 2px solid var(--teal);
+            border-radius: 15px;
+            padding: 40px;
+        }
+
+        .gospel-breakdown h3 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: var(--teal);
+        }
+
+        .allocation-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            margin: 15px 0;
+            background: rgba(32, 128, 141, 0.1);
+            border-radius: 10px;
+            border-left: 4px solid var(--teal);
+        }
+
+        .allocation-item.infrastructure {
+            border-left-color: var(--blue);
+            background: rgba(7, 142, 250, 0.1);
+        }
+
+        .allocation-item.founder {
+            border-left-color: var(--gold);
+            background: rgba(244, 180, 0, 0.1);
+        }
+
+        .allocation-amount {
+            font-size: 2rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Benefits Grid */
+        .benefits-section {
+            padding: 80px 20px;
+        }
+
+        .benefits-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            color: var(--coral);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .benefit-card {
+            background: rgba(204, 120, 92, 0.05);
+            border: 2px solid rgba(204, 120, 92, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--coral);
+        }
+
+        .benefit-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--coral);
+        }
+
+        .benefit-card ul {
+            list-style: none;
+        }
+
+        .benefit-card li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .benefit-card li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--coral);
+            font-weight: bold;
+        }
+
+        /* Impact Calculator */
+        .impact-section {
+            background: rgba(244, 180, 0, 0.05);
+            padding: 80px 20px;
+        }
+
+        .impact-calculator {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--void-dark);
+            border: 2px solid var(--gold);
+            border-radius: 15px;
+            padding: 40px;
+        }
+
+        .impact-calculator h3 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: var(--gold);
+        }
+
+        .impact-tree {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            line-height: 2;
+        }
+
+        .impact-item {
+            margin-left: 20px;
+            color: var(--text-dim);
+        }
+
+        .impact-amount {
+            color: var(--coral);
+            font-weight: 700;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 80px 20px;
+        }
+
+        .faq-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            color: var(--blue);
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: rgba(7, 142, 250, 0.05);
+            border: 2px solid rgba(7, 142, 250, 0.3);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .faq-item h4 {
+            font-size: 1.3rem;
+            color: var(--blue);
+            margin-bottom: 15px;
+        }
+
+        .faq-item p {
+            color: var(--text-dim);
+            line-height: 1.8;
+        }
+
+        /* Social Proof */
+        .social-proof-section {
+            padding: 80px 20px;
+            background: rgba(204, 120, 92, 0.03);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 40px auto 0;
+        }
+
+        .testimonial-card {
+            background: var(--void-dark);
+            border: 2px solid var(--coral);
+            border-radius: 15px;
+            padding: 30px;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            color: var(--text-light);
+        }
+
+        .testimonial-author {
+            color: var(--coral);
+            font-weight: 600;
+        }
+
+        /* Footer CTA */
+        .footer-cta {
+            background: linear-gradient(135deg, rgba(204, 120, 92, 0.2) 0%, rgba(244, 180, 0, 0.2) 100%);
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .footer-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-cta p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            color: var(--text-dim);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .counter-display {
+                font-size: 3rem;
+            }
+
+            .total-spots {
+                font-size: 2rem;
+            }
+
+            .value-math .line {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .allocation-item {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Loading State */
+        .loading {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        /* Success Message */
+        .success-message {
+            background: rgba(76, 175, 80, 0.2);
+            border: 2px solid var(--green);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>BE A FOUNDING MEMBER</h1>
+            <p class="subtitle">Get Lifetime Access. Make History.</p>
+        </div>
+    </section>
+
+    <!-- Counter Widget -->
+    <section class="container">
+        <div class="counter-section">
+            <h2>Founding Member Spots Remaining</h2>
+            <div class="counter-display">
+                <span class="spots-remaining" id="spotsRemaining">87</span>
+                <span class="total-spots">/ 100</span>
+            </div>
+            <p class="urgency-message">Only <strong id="urgencyCount">87</strong> spots left at $99!</p>
+            <p class="price-warning">Price increases to $49/month after founding period</p>
+            <button class="cta-button" onclick="scrollToCheckout()">Claim Your Spot Now</button>
+        </div>
+    </section>
+
+    <!-- Value Proposition -->
+    <section class="value-section">
+        <div class="container">
+            <h2>The Math That Matters</h2>
+            <div class="value-math">
+                <div class="line">
+                    <span>Regular Pro Plan:</span>
+                    <span>$49/month = $588/year</span>
+                </div>
+                <div class="line">
+                    <span>Founding Member:</span>
+                    <span class="highlight">$99 one-time (LIFETIME)</span>
+                </div>
+                <div class="line">
+                    <span>Your Savings:</span>
+                    <span>$588 every single year</span>
+                </div>
+                <div class="line">
+                    <span>10-Year Value:</span>
+                    <span class="highlight">$5,880+</span>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 30px; font-size: 1.2rem; color: var(--text-dim);">
+                Plus: You get all future features automatically.
+            </p>
+        </div>
+    </section>
+
+
+    <!-- Benefits -->
+    <section class="benefits-section">
+        <div class="container">
+            <h2>What You Get as a Founding Member</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <h3>1. Lifetime Pro Access</h3>
+                    <ul>
+                        <li>Unlimited AI requests (Claude, GPT-4, Gemini)</li>
+                        <li>Priority processing (zero wait times)</li>
+                        <li>API access for developers</li>
+                        <li>All future features automatically included</li>
+                        <li>Never pay subscription fees again</li>
+                    </ul>
+                </div>
+
+                <div class="benefit-card">
+                    <h3>2. Founding Recognition</h3>
+                    <ul>
+                        <li>Name on permanent Founder Wall</li>
+                        <li>Founding Member badge (FM001-FM100)</li>
+                        <li>Listed in platform credits</li>
+                        <li>Exclusive social media badge</li>
+                        <li>Recognition in all impact reports</li>
+                    </ul>
+                </div>
+
+                <div class="benefit-card">
+                    <h3>3. Exclusive Access</h3>
+                    <ul>
+                        <li>Direct line to founder Joshua Coleman</li>
+                        <li>Monthly Founding Members AMA sessions</li>
+                        <li>Private Discord channel</li>
+                        <li>Voice in platform roadmap decisions</li>
+                        <li>Beta access to all new features</li>
+                    </ul>
+                </div>
+
+                <div class="benefit-card">
+                    <h3>4. Impact Transparency</h3>
+                    <ul>
+                        <li>Quarterly reports showing YOUR impact</li>
+                        <li>Blockchain-verified allocation proof</li>
+                        <li>Personal impact dashboard</li>
+                        <li>Digital certificate of impact</li>
+                        <li>Real-time community metrics</li>
+                    </ul>
+                </div>
+
+                <div class="benefit-card">
+                    <h3>5. Founding Perks</h3>
+                    <ul>
+                        <li>Custom profile badge</li>
+                        <li>Priority 24-hour support guarantee</li>
+                        <li>Exclusive merchandise (t-shirt, stickers)</li>
+                        <li>Annual Founding Members virtual event</li>
+                        <li>Locked-in benefits for life</li>
+                    </ul>
+                </div>
+
+                <div class="benefit-card" style="background: linear-gradient(135deg, rgba(244, 180, 0, 0.1) 0%, rgba(204, 120, 92, 0.1) 100%); border-color: var(--gold);">
+                    <h3 style="color: var(--gold);">Total Value</h3>
+                    <div style="font-size: 2.5rem; font-weight: 900; color: var(--gold); text-align: center; margin: 20px 0;">
+                        $5,880+
+                    </div>
+                    <p style="text-align: center; color: var(--text-dim);">
+                        Lifetime savings over 10 years
+                    </p>
+                    <p style="text-align: center; font-size: 1.5rem; font-weight: 700; color: var(--coral); margin-top: 20px;">
+                        Your Investment: $99
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Social Proof -->
+    <section class="social-proof-section">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 20px; color: var(--coral);">
+                Join <span id="memberCount">13</span> Founding Members
+            </h2>
+            <p style="text-align: center; color: var(--text-dim); margin-bottom: 40px;">
+                Real people building something that matters
+            </p>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">
+                        "Best $99 I ever spent. Lifetime Pro access for less than 2 months
+                        of the regular subscription. The ROI alone is insane."
+                    </p>
+                    <p class="testimonial-author">— Sarah K., Software Engineer, FM012</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-text">
+                        "Incredible value. Unlimited AI access, priority support, and all
+                        future features included. This is the smartest investment I've made
+                        in my workflow this year."
+                    </p>
+                    <p class="testimonial-author">— Michael T., Entrepreneur, FM002</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-text">
+                        "The API access alone is worth more than $99. Getting lifetime access
+                        to all their AI models at this price is absolutely unprecedented."
+                    </p>
+                    <p class="testimonial-author">— David K., Blockchain Developer, FM027</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <h4>What is a "Founding Member"?</h4>
+                    <p>Founding Members are the first 100 people who join Royalty Hearts. You get lifetime Pro access for a one-time $99 payment, plus exclusive benefits forever.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>What happens after 100 spots are filled?</h4>
+                    <p>The Founding Member program closes permanently. Future members will pay $49/month for Pro access without the founding benefits.</p>
+                </div>
+
+
+                <div class="faq-item">
+                    <h4>Is this a one-time payment or subscription?</h4>
+                    <p>One-time payment of $99 for LIFETIME access. Never pay again.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>What if I'm not satisfied?</h4>
+                    <p>30-day money-back guarantee, no questions asked. If you're not happy, we'll refund your $99 in full.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>What's included in "Lifetime Pro Access"?</h4>
+                    <p>Everything: Unlimited AI requests (Claude, GPT-4, Gemini), priority processing, API access, all current features, all future features automatically, no additional fees ever.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer CTA -->
+    <section class="footer-cta" id="checkout">
+        <div class="container">
+            <h2>Ready to Join the First 100?</h2>
+            <p>
+                <span id="footerSpotsRemaining">87</span> spots remaining<br>
+                Once you join, you'll get instant lifetime Pro access
+            </p>
+
+            <div class="success-message" id="successMessage">
+                <h3 style="color: var(--green); margin-bottom: 10px;">Payment Successful!</h3>
+                <p>Check your email for account setup instructions.</p>
+            </div>
+
+            <div style="max-width: 500px; margin: 0 auto;">
+                <button class="cta-button" onclick="initiateCheckout()" id="checkoutButton" style="width: 100%; margin-bottom: 20px;">
+                    Claim Your Founding Member Spot - $99
+                </button>
+                <p style="color: var(--text-dim); font-size: 0.9rem;">
+                    💳 Secure payment via Square<br>
+                    🔒 30-day money-back guarantee<br>
+                    ✓ Instant access upon payment
+                </p>
+                <p style="margin-top: 20px; font-size: 0.85rem; color: var(--text-dim);">
+                    By purchasing, you agree to our Terms of Service.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: var(--void-dark); padding: 40px 20px; text-align: center; border-top: 1px solid rgba(255,255,255,0.1);">
+        <p style="color: var(--text-dim); margin-bottom: 10px;">
+            Trash or Treasure Online Recycler LLC | EIN: 33-4655313
+        </p>
+    </footer>
+
+    <script>
+        // Configuration
+        const API_BASE = 'https://dao.youandinotai.com'; // Update with actual API URL
+
+        // Update counter in real-time
+        async function updateCounter() {
+            try {
+                const response = await fetch(`${API_BASE}/api/founding-members/count`);
+                const data = await response.json();
+
+                const spotsRemaining = 100 - data.count;
+                updateCounterDisplay(spotsRemaining);
+            } catch (error) {
+                console.error('Error fetching counter:', error);
+                // Fallback to default if API unavailable
+                updateCounterDisplay(87);
+            }
+        }
+
+        function updateCounterDisplay(spotsRemaining) {
+            const counterElements = document.querySelectorAll('.spots-remaining');
+            const urgencyElements = document.querySelectorAll('#urgencyCount, #footerSpotsRemaining');
+
+            counterElements.forEach(el => {
+                el.textContent = spotsRemaining;
+
+                // Update color based on availability
+                el.classList.remove('warning', 'critical');
+                if (spotsRemaining <= 10) {
+                    el.classList.add('critical');
+                } else if (spotsRemaining <= 25) {
+                    el.classList.add('warning');
+                }
+            });
+
+            urgencyElements.forEach(el => {
+                el.textContent = spotsRemaining;
+            });
+
+            // Update member count (inverse of spots remaining)
+            const memberCount = 100 - spotsRemaining;
+            const memberCountEl = document.getElementById('memberCount');
+            if (memberCountEl) {
+                memberCountEl.textContent = memberCount;
+            }
+
+            // Update urgency message
+            const urgencyMessage = document.querySelector('.urgency-message');
+            if (spotsRemaining <= 5) {
+                urgencyMessage.innerHTML = '<strong style="color: var(--red);">FINAL ' + spotsRemaining + ' SPOTS EVER!</strong>';
+            } else if (spotsRemaining <= 10) {
+                urgencyMessage.innerHTML = '<strong>LAST ' + spotsRemaining + ' FOUNDING MEMBER SPOTS!</strong>';
+            } else if (spotsRemaining <= 25) {
+                urgencyMessage.innerHTML = 'Only <strong>' + spotsRemaining + '</strong> spots left - act fast!';
+            } else {
+                urgencyMessage.innerHTML = 'Only <strong>' + spotsRemaining + '</strong> spots left at $99!';
+            }
+        }
+
+        // Initiate checkout
+        async function initiateCheckout() {
+            const button = document.getElementById('checkoutButton');
+            button.classList.add('loading');
+            button.textContent = 'Processing...';
+
+            try {
+                // Create checkout session
+                const response = await fetch(`${API_BASE}/api/founding-members/checkout`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        // Email and name will be collected in Square checkout
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.checkout_url) {
+                    // Redirect to Square checkout
+                    window.location.href = data.checkout_url;
+                } else if (data.error) {
+                    alert(data.error);
+                    button.classList.remove('loading');
+                    button.textContent = 'Claim Your Founding Member Spot - $99';
+                }
+            } catch (error) {
+                console.error('Checkout error:', error);
+                alert('Error initiating checkout. Please try again.');
+                button.classList.remove('loading');
+                button.textContent = 'Claim Your Founding Member Spot - $99';
+            }
+        }
+
+        // Scroll to checkout
+        function scrollToCheckout() {
+            document.getElementById('checkout').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Check for success parameter in URL
+        function checkPaymentSuccess() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('success') === 'true') {
+                document.getElementById('successMessage').classList.add('show');
+                document.getElementById('checkoutButton').style.display = 'none';
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCounter();
+            checkPaymentSuccess();
+
+            // Update counter every 30 seconds
+            setInterval(updateCounter, 30000);
+        });
+
+        // WebSocket for real-time updates (optional enhancement)
+        /*
+        const ws = new WebSocket('wss://dao.youandinotai.com/ws');
+        ws.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+            if (data.type === 'founding-member-joined') {
+                updateCounterDisplay(data.spotsRemaining);
+            }
+        };
+        */
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+</body>
+</html>
